@@ -31,7 +31,6 @@ div[class^="category-title-header"] {
       background-image: none;
   }
   
-  
 
      
   .category-title-contents {
@@ -41,12 +40,18 @@ div[class^="category-title-header"] {
       width: 1.1em;
       margin-right: 0.25em;
     }
-    a:link, a:visited {
+
+  }
+  .category-title-name {
+      @if($show_category_name =="false"){
+        display:none;
+      }
+      a:link, a:visited {
         color: inherit;
-    }
-    h1 {
-      display: inline;
-    }
+      }
+      h1 {
+        display: inline;
+      }      
   }
   .category-title-description {
     padding-top: 0.5em;
@@ -54,8 +59,11 @@ div[class^="category-title-header"] {
     a,
     a:visited {
       color: inherit;
-      /*text-decoration: underline;*/
     }
+    @if($show_category_description =="false"){
+        display:none;
+    }    
+    
   }
   a.parent-box-link {
       @if ($show_parent_category_name == "false"){
@@ -96,15 +104,3 @@ div[class^="category-title-header"] {
     height: auto;       
     display: inline-block;
 }
-
-div.category-breadcrumb .badge-category-bg {
-    flex: 0 0 auto;
-    width: 9px;
-    height: 9px;
-    margin-right: 5px;
-    display: inline-block;
-}
-
-
-
-
