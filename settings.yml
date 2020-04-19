@@ -24,7 +24,7 @@ show_category_logo:
 show_site_logo:
   type: bool
   default: true
-  description: 'Show the small site logo if a logo isn't set.'  
+  description: 'Show the small site logo if a logo isn't set'  
   
 align_logo:
   type: enum
@@ -42,7 +42,7 @@ size_logo:
   - small
   - normal
   - original
-  description: 'Poistion of the logo within the header. Center display the logo at the top above the text'    
+  description: 'Position of the logo within the header. Center display the logo at the top above the text'    
   
 header_border_style:
   type: enum
@@ -109,5 +109,5 @@ show_mobile:
 
 category_exceptions:
   type: list
-  default: "" 
-  description: "Headers will not show for these categories"
+  default: '' 
+  description: 'Headers will not show for these categories'
