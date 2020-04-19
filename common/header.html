@@ -13,12 +13,7 @@
 
           const controller = container.lookup('controller:navigation/category');
           category = controller.get("category");
-          const siteSettings = Discourse.SiteSettings
-          //for (var namex in category.uploaded_background) {
-          //     console.log("Property: " + namex);
-          //}
-          // console.log("value=" + category.uploaded_background.url);
-          
+          const siteSettings = Discourse.SiteSettings;
 
           const isException = category && settings.category_exceptions.split("|").includes(category.name);
 
@@ -26,18 +21,12 @@
               const hideMobile = (!settings.show_mobile && this.site.mobileView) ? "true" : hideMobile;
               const subCat = (!settings.show_subcategory && category.parentCategory) ? "true" : subCat;
               const noDesc = (settings.show_if_no_category_description && !category.description_text) ? "true" : noDesc;
-              const $category_border = "true"; //(settings.category_border=="box") ? "true" : "false";
-              const $category_background = "false"; //(settings.category_background=="category") ? "true" : "false";
+              const $category_border = (settings.header_border_style=="box") ? "true" : "false";
+              const $category_background = (settings.header_background_color=="category") ? "true" : "false";
               
               if(!isException && !noDesc && !subCat && !hideMobile) {
                   $("body").addClass("category-header");
                   //list-controls
-                  
-                  function ifShowCategories(){
-                    if (category) {
-                        return h('a.parent-box-link',{"attributes" : {"href" : "/categories"}}, h('h1', "Categories" + ": "));
-                    }
-                  }                
                   
                   function ifParentCategory(){
                     if (category.parentCategory) {
@@ -53,7 +42,6 @@
                   
                   function logoImg() {
                      if(category.uploaded_logo){
-                        //$('.category-heading').hide();
                         return [h('img',{"attributes" : {"src" : category.uploaded_logo.url}})];
                      } else if (category.parentCategory && category.parentCategory.uploaded_logo) {
                         return [h('img',{"attributes" : {"src" : category.parentCategory.uploaded_logo.url}})];                        
@@ -68,17 +56,6 @@
                       }
                   }
                   
-                  function ifCatBreadcrum() {
-                      if(!category){
-                          return h('div.category-breadcrumb',[
-                          //h('span.badge-category-bg', {"attributes" : {"style" : "background-color: " + $quaternary + ";"}}),
-                          ifShowCategories(),
-                          ifParentCategory(),
-                          h('h1', category.name)
-                          ])
-                      }
-                  }
-                  
                   function getHeaderStyle() {
                       let headerStyle = "";
                       if($category_border == "true"){
@@ -88,19 +65,12 @@
                         headerStyle += "background-color: #" + category.color + "; color: #" + category.text_color + ";"
                       }
                       if(category.uploaded_background){
-                        headerStyle += "background-image: url(" + category.uploaded_background.url + ");" 
-                        if(settings.background_size=="cover"){
-                           headerStyle += "background-size: cover;"  
-                        } else if (settings.background_size=="contain"){
-                           headerStyle += "background-size: contain;" 
-                        } else if (settings.background_size=="resize"){
-                           headerStyle += "background-size: 100% 100%;"  
-                        }
+                          if(settings.header_background_image != "outside"){
+                                headerStyle += "background-image: url(" + category.uploaded_background.url + ");" 
+                         }
                       }
                       return headerStyle;
                   }
-
-                  //$('section.category-heading > p').prepend('<h2>' + categoryName + '</h2>');
                   
                   return h('div.category-title-header' + " .category-banner-" + category.slug, {
                       "attributes" : {
@@ -109,11 +79,9 @@
                   }, h('div.category-title-contents', [ 
                   h('div.category-logo.aspect-image', logoImg()), 
                   ifProtected(),
-                  //ifShowCategories(),
                   ifParentCategory(),
                   h('h1', category.name),
-                  h('div.category-title-description',catDesc()),
-                  ifCatBreadcrum(),
+                  h('div.category-title-description',catDesc())
                   ]),
                   );
               }
@@ -132,9 +100,7 @@
 </script>
 <script type="text/x-handlebars" 
   type="text/x-handlebars"
-  data-template-name="/connectors/above-main-container/category-header-widget" 
-  //data-template-name="/connectors/category-navigation/category-header-widget" 
-  //data-template-name="/connectors/above-site-header/category-header-widget"
+  data-template-name="/connectors/above-main-container/category-header-widget"
 >
   {{mount-widget widget="category-header-widget"}}
 </script>
