@@ -8,7 +8,8 @@ show_category_description:
   
 align_text:
   default: left
-  enum:
+  type: enum
+  choices:
   - left
   - center
   - right     
@@ -23,7 +24,8 @@ show_site_logo:
   
 align_logo:
   default: left
-  enum:
+  type: enum
+  choices:
   - left
   - center
   - right
@@ -31,7 +33,8 @@ align_logo:
   
 size_logo:
   default: normal
-  enum:
+  type: enum
+  choices:
   - small
   - normal
   - original
@@ -39,14 +42,16 @@ size_logo:
   
 header_border_style:
 default: box
-  enum:
+  type: enum
+  choices:
   - none
   - box
   description: 'Set whether to display the header in a box, similar in style to the default subcategpory boxes with a left border color.'
   
 header_background_color:
   default: none
-  enum:
+  type: enum
+  choices:
   - none
   - category
   - theme
@@ -54,7 +59,8 @@ header_background_color:
   
 header_background_opacity:
   default: 25%
-  enum:
+  type: enum
+  choices:
   - 10%
   - 25%
   - 50%
@@ -64,7 +70,8 @@ header_background_opacity:
   
 header_background_image:
   default: contain
-  enum:
+  type: enum
+  choices:
   - cover
   - contain
   - resize
