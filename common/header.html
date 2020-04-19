@@ -78,9 +78,11 @@
                       }
                   }, h('div.category-title-contents', [ 
                   h('div.category-logo.aspect-image', logoImg()), 
+                  h('div.category-title-name', [
                   ifProtected(),
                   ifParentCategory(),
-                  h('h1', category.name),
+                  h('h1', category.name)
+                  ]),
                   h('div.category-title-description',catDesc())
                   ]),
                   );
