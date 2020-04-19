@@ -2,4 +2,9 @@ show_category_name:
   type: bool
   default: true
   description: 'Show category the category name heading'
-
+  
+show_category_description: 
+  type: bool
+  default: true
+  description: 'Show first paragraph of the category description text\nThis is take from the about this category Topic'
+  
