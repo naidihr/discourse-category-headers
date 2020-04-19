@@ -6,7 +6,7 @@ show_category_name:
 show_category_description: 
   type: bool
   default: true
-  description: 'Show first paragraph of the category description text\nThis is take from the about this category Topic'
+  description: 'Show first paragraph of the category description text/nThis is take from the about this category Topic'
   
 align_text:
   type: enum
