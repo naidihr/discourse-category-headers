@@ -49,8 +49,8 @@ header_border_style:
   type: enum
   default: box  
   choices:
-  - none
   - box
+  - none
   description: 'Set whether to display the header in a box, similar in style to the default subcategory box with a left border colour'
   
    
