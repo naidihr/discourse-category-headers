@@ -87,8 +87,13 @@ div[class^="category-title-header"] {
     @if($position_logo == "top"){
         float: none;
         max-width: 100%;
-    } @else {
+        margin: 0 0 0.25em 0;
+    } @else if ($position_logo == "left"){
         float: $position_logo;
+        margin: 0 0.5em 0.25em 0;
+    } @else if ($position_logo == "right"){
+        float: $position_logo;
+        margin: 0 0 0.25em 0.5em;  
     }
     @if($size_logo == "standard"){
         max-height: 150px;
