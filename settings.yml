@@ -52,3 +52,25 @@ header_border_style:
   - none
   - box
   description: 'Set whether to display the header in a box, similar in style to the default subcategory box with a left border colour'
+  
+   
+header_background_color:
+  type: enum
+  default: none  
+  choices:
+  - none
+  - category
+  - theme
+  description: 'Set the background color to your header<br>Category: sets it to the category background color<br>Theme: uses you theme primary color settings'
+  
+header_background_opacity:
+  type: enum
+  default: 25%  
+  choices:
+  - 10%
+  - 25%
+  - 50%
+  - 75%
+  - 100%
+  description: 'Set the background color opacity. 100% is full color. A lesser percent allows the color to adjust to light and dark themes' 
+  
