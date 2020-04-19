@@ -33,17 +33,17 @@ position_logo:
   choices:
   - left
   - right
-  - above
-  description: 'Position of the logo within the header. Above displays the logo above the text'  
+  - top
+  description: 'Position of the logo within the header. Top displays the logo above the text'  
   
 size_logo:
   type: enum
-  default: normal  
+  default: standard  
   choices:
-  - small
-  - normal
+  - standard
+  - small  
   - original
-  description: 'Position of the logo within the header. Center display the logo at the top above the text'    
+  description: 'Position of the logo within the header.<br>Small is 40px high similar to a suncategory box logo<br>Standard is 150px high<br>Original is the size of the image uploaded'    
   
 header_border_style:
   type: enum
@@ -52,7 +52,6 @@ header_border_style:
   - box
   - none
   description: 'Set whether to display the header in a box, similar in style to the default subcategory box with a left border colour'
-  
    
 header_background_color:
   type: enum
@@ -62,17 +61,6 @@ header_background_color:
   - category
   - theme
   description: 'Set the background color to your header<br>Category: sets it to the category background color<br>Theme: uses you theme primary color settings'
-  
-header_background_opacity:
-  type: enum
-  default: 25%  
-  choices:
-  - 10%
-  - 25%
-  - 50%
-  - 75%
-  - 100%
-  description: 'Set the background color opacity. 100% is full color. A lesser percent allows the color to adjust to light and dark themes' 
   
 header_background_image:
   type: enum
