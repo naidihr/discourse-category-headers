@@ -74,3 +74,45 @@ header_background_opacity:
   - 100%
   description: 'Set the background color opacity. 100% is full color. A lesser percent allows the color to adjust to light and dark themes' 
   
+header_background_image:
+  type: enum
+  default: contain  
+  choices:
+  - cover
+  - contain
+  - resize
+  - outside
+  description: 'Applies if you have uploaded a category background image\nCover, contain and resize display the background in the header\n Outside is the Discourse default displaying it outside the header.'
+
+show_subcategory: 
+  type: bool
+  default: true
+  description: 'Show header for subcategories'  
+  
+show_parent_category_name: 
+  type: bool
+  default: true
+  description: 'Show parent category as a breadcrum on subcategory headers\nDisplays as Parent Category Name: Subcategory Name\nThe parent category name is clickable as a link to the parent catgeory page'    
+  
+show_parent_category_logo:
+  type: bool
+  default: true
+  description: 'Show the parent category logo in subcategories if a logo is not set. Otherwise defaults to site logo or none'
+  
+hide_if_no_category_description: 
+  type: bool
+  default: false
+  description: 'Hide header if category description is not set'  
+
+show_mobile: 
+  type: bool
+  default: true
+  description: 'Show category header on mobile devices'
+
+category_exceptions:
+  type: list
+  default: '' 
+  description: 'Headers will not show for these categories'
+
+
+
