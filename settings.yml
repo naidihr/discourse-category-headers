@@ -92,12 +92,12 @@ show_subcategory:
 show_parent_category_name: 
   type: bool
   default: true
-  description: 'Show parent category as a breadcrum on subcategory headers<br>Displays as Parent Category Name: Subcategory Name<br>The parent category name is clickable as a link to the parent catgeory page'    
+  description: 'Show parent category on subcategory headers'    
   
 show_parent_category_logo:
   type: bool
   default: true
-  description: 'Show the parent category logo in subcategories if a logo is not set. Otherwise defaults to site logo or none'
+  description: 'Show parent logo in subcategories where a logo is not set'
   
 hide_if_no_category_description: 
   type: bool
