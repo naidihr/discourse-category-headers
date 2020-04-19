@@ -99,10 +99,10 @@ show_parent_category_logo:
   default: true
   description: 'Show parent logo in subcategories where a logo is not set'
   
-hide_if_no_category_description: 
+show_if_no_category_description: 
   type: bool
-  default: false
-  description: 'Hide header if category description is not set'  
+  default: true
+  description: 'Show header if category description is not set'  
 
 show_mobile: 
   type: bool
