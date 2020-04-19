@@ -11,7 +11,7 @@ div[class^="category-title-header"] {
   display: block;
   /*margin-top: 60px;*/
   margin-bottom: 20px;
-  text-align: $align_contents;
+  text-align: $align_text;
   width: 100%;
   justify-content: center;
   overflow: hidden;  
@@ -67,11 +67,11 @@ div[class^="category-title-header"] {
 }
 
 .category-header-widget .category-logo.aspect-image {
-    @if($align_logo == "center"){
-        $align_logo: none;
+    @if($position_logo == "center"){
+        float: none;
         max-width: 100%;
     } @else {
-    float: $align_logo;
+    float: $position_logo;
     }
 }
 
