@@ -1,7 +1,3 @@
-$header_border_style: "box";
-$header_background_color: "banner";
-$header_background_opacity: "100%";
-
 div[class^="category-title-header"] {
     display: none;
 }
@@ -9,7 +5,6 @@ div[class^="category-title-header"] {
 .category-header div[class^="category-title-header"] {
   box-sizing: border-box;
   display: block;
-  /*margin-top: 60px;*/
   margin-bottom: 20px;
   text-align: $align_text;
   width: 100%;
@@ -23,11 +18,22 @@ div[class^="category-title-header"] {
   }
   
   @if ($header_background_color == "theme"){
-    $header_background_color: $primary_very_low;   
-    background: $header_background_color;    
-  }   
-
+    background: $primary_very_low;   
+  }
   
+  @if($header_background_image == "cover"){
+      background-size: cover; 
+  } @else if ($header_background_image == "contain"){
+      background-size: contain;
+  } @else if ($header_background_image =="resize"){
+      background-size: 100% 100%;  
+  } @else {
+      background-image: none;
+  }
+  
+  
+
+     
   .category-title-contents {
     padding: 20px;
     svg {
@@ -36,7 +42,7 @@ div[class^="category-title-header"] {
       margin-right: 0.25em;
     }
     a:link, a:visited {
-        color: $primary;
+        color: inherit;
     }
     h1 {
       display: inline;
@@ -45,20 +51,23 @@ div[class^="category-title-header"] {
   .category-title-description {
     padding-top: 0.5em;
     font-size: 1.1em;
-    @if ($header_background_color != "category"){
-        color: $primary-high;
-    }
     a,
     a:visited {
       color: inherit;
-      text-decoration: underline;
+      /*text-decoration: underline;*/
     }
   }
-}
-.category-header {
-  #main-outlet {
-    /*padding-top: 20px;*/
+  a.parent-box-link {
+      @if ($show_parent_category_name == "false"){
+        display: none;
+      }
   }
+}
+
+@if($header_background_image != "outside"){
+    body {
+        background-image: none;
+    }
 }
 
 
@@ -66,20 +75,25 @@ div[class^="category-title-header"] {
     display: none;
 }
 
-.category-header-widget .category-logo.aspect-image {
-    @if($position_logo == "center"){
+.category-header-widget .category-logo.aspect-image, .category-header-widget .category-logo.aspect-image > img {
+    @if($position_logo == "top"){
         float: none;
         max-width: 100%;
     } @else {
-    float: $position_logo;
+        float: $position_logo;
     }
+    @if($size_logo == "standard"){
+        max-height: 150px;
+    } @else if ($size_logo == "small"){
+        max-height: 40px;
+    } @else {
+        max-height: 2000px;
+    }    
 }
 
 .category-header-widget .category-logo.aspect-image > img {
-    max-height: 150px !important;
-    max-width: 150px !important;
     width: auto;
-    height: auto;
+    height: auto;       
     display: inline-block;
 }
 
@@ -91,7 +105,6 @@ div.category-breadcrumb .badge-category-bg {
     display: inline-block;
 }
 
-body.category-test-admin {
-    background-image: none;
-}
+
+
 
