@@ -32,8 +32,8 @@ align_logo:
   default: left  
   choices:
   - left
+  - center
   - right
-  - none
   description: 'Position of the logo within the header. None displays the logo above the text'  
   
 size_logo:
