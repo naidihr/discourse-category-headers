@@ -27,7 +27,7 @@ show_site_logo:
   default: true
   description: 'Show the small site logo if a logo is not set'  
   
-float_logo:
+align_logo:
   type: enum
   default: left  
   choices:
