@@ -66,7 +66,7 @@ div[class^="category-title-header"] {
 
 @if($header_background_image != "outside"){
     body {
-        background-image: none;
+        background-image: none !important;
     }
 }
 
