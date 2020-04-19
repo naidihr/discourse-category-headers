@@ -1,0 +1,54 @@
+background_color:
+  default: none
+  enum:
+  - none
+  - theme
+  - category
+  description: 'Set the background color to your theme color settings or category color settings'
+  
+ background_image:
+  default: none
+  enum:
+  - cover
+  - contain
+  - resize
+  - outside
+  - screen
+  description: 'If you have uploaded a category background image in your category\nThe first 3 display the background in the header\n The last 2 display it outside the header' 
+  
+
+show_category_name
+  default: true
+  description: 'Show category the category name heading'
+
+show_category_description: 
+  default: true
+  description: 'Show first paragraph of the category description text\nThis is take from the about this category Topic'
+  
+align_text:
+  default: left
+  enum:
+  - left
+  - center
+  - right   
+
+show_subcategory: 
+  default: true
+  description: 'Show header for subcategories'  
+  
+show_parent_category_name: 
+  default: true
+  description: 'Show parent category: subcategory name\nThe parent category name includes is clickable as a link'    
+  
+hide_if_no_category_description: 
+  default: false
+  description: 'Hide header if category description is not set'  
+
+show_mobile: 
+  default: true
+  description: 'Show category header on mobile devices'
+
+exceptions:
+  default: ""
+  type: list
+  description: "Headers will not show for these categories"
