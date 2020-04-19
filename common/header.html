@@ -20,12 +20,12 @@
           // console.log("value=" + category.uploaded_background.url);
           
 
-          const isException = category && settings.exceptions.split("|").includes(category.name);
+          const isException = category && settings.category_exceptions.split("|").includes(category.name);
 
           if(/^\/c\//.test(path)) {
               const hideMobile = (!settings.show_mobile && this.site.mobileView) ? "true" : hideMobile;
               const subCat = (!settings.show_subcategory && category.parentCategory) ? "true" : subCat;
-              const noDesc = (settings.hide_if_no_description && !category.description_text) ? "true" : noDesc;
+              const noDesc = (settings.show_if_no_category_description && !category.description_text) ? "true" : noDesc;
               const $category_border = "true"; //(settings.category_border=="box") ? "true" : "false";
               const $category_background = "false"; //(settings.category_background=="category") ? "true" : "false";
               
@@ -46,7 +46,7 @@
                   }
 
                   function catDesc() {
-                      if(settings.show_description) {
+                      if(settings.show_category_description) {
                           return h('div.cooked', {innerHTML: category.description});
                       }
                   }
