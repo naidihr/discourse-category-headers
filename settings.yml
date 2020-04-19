@@ -1,4 +1,4 @@
-show_category_name
+show_category_name:
   default: true
   description: 'Show category the category name heading'
 
@@ -81,7 +81,7 @@ show_parent_category_name:
   
 show_parent_category_logo:
   default: true
-  description: 'Show the parent category logo in subcaetgories if a logo isn't set'
+  description: 'Show the parent category logo in subcategories if a logo isn't set. Otherwise defaults to site logo or none.'
   
 hide_if_no_category_description: 
   default: false
