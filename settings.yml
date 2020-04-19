@@ -32,9 +32,9 @@ position_logo:
   default: left  
   choices:
   - left
-  - center
   - right
-  description: 'Position of the logo within the header. None displays the logo above the text'  
+  - above
+  description: 'Position of the logo within the header. Above displays the logo above the text'  
   
 size_logo:
   type: enum
