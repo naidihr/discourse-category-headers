@@ -36,3 +36,19 @@ align_logo:
   - right
   description: 'Position of the logo within the header. Center display the logo at the top above the text'  
   
+size_logo:
+  type: enum
+  default: normal  
+  choices:
+  - small
+  - normal
+  - original
+  description: 'Position of the logo within the header. Center display the logo at the top above the text'    
+  
+header_border_style:
+  type: enum
+  default: box  
+  choices:
+  - none
+  - box
+  description: 'Set whether to display the header in a box, similar in style to the default subcategory box with a left border colour'
