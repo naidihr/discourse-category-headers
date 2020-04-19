@@ -8,7 +8,7 @@ show_category_description:
   default: true
   description: 'Show first paragraph of the category description text<br>This is taken from the about this category Topic'
   
-align_contents:
+align_text:
   type: enum
   default: left  
   choices:
