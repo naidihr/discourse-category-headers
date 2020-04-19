@@ -1,7 +1,6 @@
 $header_border_style: "box";
 $header_background_color: "banner";
 $header_background_opacity: "100%";
-$align_text: "left";
 
 div[class^="category-title-header"] {
     display: none;
@@ -12,7 +11,7 @@ div[class^="category-title-header"] {
   display: block;
   /*margin-top: 60px;*/
   margin-bottom: 20px;
-  text-align: $align_text;
+  text-align: $align_contents;
   width: 100%;
   justify-content: center;
   overflow: hidden;  
@@ -67,8 +66,16 @@ div[class^="category-title-header"] {
     display: none;
 }
 
+.category-header-widget .category-logo.aspect-image {
+    @if($align_logo == "center"){
+        $align_logo: none;
+        max-width: 100%;
+    } @else {
+    float: $align_logo;
+    }
+}
 
-.category-logo.aspect-image > img {
+.category-header-widget .category-logo.aspect-image > img {
     max-height: 150px !important;
     max-width: 150px !important;
     width: auto;
