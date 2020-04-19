@@ -82,7 +82,7 @@ header_background_image:
   - contain
   - resize
   - outside
-  description: 'Applies if you have uploaded a category background image\nCover, contain and resize display the background in the header\n Outside is the Discourse default displaying it outside the header.'
+  description: 'Applies if you have uploaded a category background image<br>Cover, contain and resize display the background in the header<br>Outside is the Discourse default displaying it outside the header.'
 
 show_subcategory: 
   type: bool
