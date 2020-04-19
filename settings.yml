@@ -8,7 +8,7 @@ show_category_description:
   default: true
   description: 'Show first paragraph of the category description text<br>This is taken from the about this category Topic'
   
-align_text:
+align_contents:
   type: enum
   default: left  
   choices:
@@ -27,14 +27,14 @@ show_site_logo:
   default: true
   description: 'Show the small site logo if a logo is not set'  
   
-align_logo:
+float_logo:
   type: enum
   default: left  
   choices:
   - left
-  - center
   - right
-  description: 'Position of the logo within the header. Center display the logo at the top above the text'  
+  - none
+  description: 'Position of the logo within the header. None displays the logo above the text'  
   
 size_logo:
   type: enum
