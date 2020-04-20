@@ -79,8 +79,15 @@ div[class^="category-title-header"] {
     }
 }
 
+/*Hide the default Discourse category heading*/
 .category-heading {
     display: none;
+}
+
+.category-header-widget svg.d-icon-lock{
+     @if ($show_lock_ico == "false"){
+         display:none;
+     }
 }
 
 .category-header-widget .category-logo.aspect-image, .category-header-widget .category-logo.aspect-image > img {
