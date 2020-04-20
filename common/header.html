@@ -15,7 +15,7 @@
           category = controller.get("category");
           const siteSettings = Discourse.SiteSettings;
 
-          const isException = category && settings.category_exceptions.split("|").includes(category.name);
+          const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
 
           if(/^\/c\//.test(path)) {
               const hideMobile = (!settings.show_mobile && this.site.mobileView) ? "true" : hideMobile;
