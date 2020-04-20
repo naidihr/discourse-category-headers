@@ -10,7 +10,7 @@ The default core Discourse category header is displayed on the category page abo
 * <b>show parent category name: </b>Prefix the parent category name on the subcategory headers
 * <b>show category logo: </b>Show the category logo image within the header
 * <b>show parent category logo: </b>Show the parent category logo when a subcategory logo is not set
-* <b>show site logo: * <b>Show the small site logo if a category logo is not set
+* <b>show site logo: <b>Show the small site logo if a category logo is not set
 * <b>position logo: </b>Position of the logo within the header. Left and right display the logo inline with the text. Top displays the logo above aligned with the text
 * <b>size logo: </b>Position of the logo within the header. Small is 40px high similar to a suncategory box logo. Standard is 150px high. Original is the size of the image uploaded
 * <b>header style: </b>Set the header style to either: Box, style as a box with the category background color as the left border Banner, set the header background to the category background color and text to the forground color None, no styling
