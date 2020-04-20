@@ -26,17 +26,31 @@ text_align:
   - center
   - right     
   description: 'Alignment of the text within the category header'  
- 
+  
+show_subcategory_header: 
+  type: bool
+  default: true
+  description: 'Show header for subcategories'  
+  
+show_parent_category_name: 
+  type: bool
+  default: true
+  description: 'Prefix the parent category name on the subcategory headers'    
   
 show_category_logo:
   type: bool
   default: true
   description: 'Show the category logo image within the header'
   
+show_parent_category_logo:
+  type: bool
+  default: true
+  description: 'Show the parent category logo when a subcategory logo is not set'    
+  
 show_site_logo:
   type: bool
   default: true
-  description: 'Show the small site logo if a logo is not set'  
+  description: 'Show the small site logo if a category logo is not set'  
   
 position_logo:
   type: enum
@@ -75,21 +89,6 @@ header_background_image:
   - resize
   - outside
   description: 'Applies if you have uploaded a category background image<br>Contain, cover and resize display the background within the header<br>Outside is the Discourse default displaying it outside the header.'
-
-show_subcategory_header: 
-  type: bool
-  default: true
-  description: 'Show header for subcategories'  
-  
-show_parent_category_name: 
-  type: bool
-  default: true
-  description: 'Prefix the parent category name on the subcategory headers'    
-  
-show_parent_category_logo:
-  type: bool
-  default: true
-  description: 'Show parent category logo in when a subcategory logo is not set'
   
 show_mobile: 
   type: bool
