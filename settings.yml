@@ -45,7 +45,7 @@ position_logo:
   - left
   - right
   - top
-  description: 'Position of the logo within the header. Top displays the logo above the text'  
+  description: 'Position of the logo within the header. Left and right display the logo inline with the text<br>Top displays the logo above aligned with the the text'  
   
 size_logo:
   type: enum
