@@ -96,7 +96,7 @@ show_mobile:
   default: true
   description: 'Show category header on mobile devices'
   
-force_mobile_alignment  
+force_mobile_alignment:  
   type: bool
   default: true
   description: 'Force mobile alignment of logo-text to the top-centre of the header'
