@@ -39,11 +39,11 @@
                   }
                   
                   function logoImg() {
-                     if(category.uploaded_logo){
+                     if(settings.show_category_logo && category.uploaded_logo){
                         return [h('img',{"attributes" : {"src" : category.uploaded_logo.url}})];
-                     } else if (category.parentCategory && category.parentCategory.uploaded_logo) {
+                     } else if (settings.show_category_logo && settings.show_parent_category_logo && category.parentCategory && category.parentCategory.uploaded_logo) {
                         return [h('img',{"attributes" : {"src" : category.parentCategory.uploaded_logo.url}})];                        
-                     } else if (siteSettings.logo_small) {
+                     } else if (settings.show_site_logo && siteSettings.logo_small) {
                         return [h('img',{"attributes" : {"src" : siteSettings.logo_small}})];
                      }
                   }
