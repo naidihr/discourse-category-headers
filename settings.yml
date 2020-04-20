@@ -6,7 +6,7 @@ show_category_name:
 show_category_description: 
   type: bool
   default: true
-  description: 'Show first paragraph of the category description text<br>This is taken from the About this category topic'
+  description: 'Show the category description text<br>This is the first paragraph of the "About this category" topic'
 
 description_text_size:
   type: enum
