@@ -39,7 +39,7 @@ show_parent_category_name:
   
 show_lock_icon:
   type: bool
-  default: false
+  default: true
   description: 'Show the lock icon on categories protected by permissions' 
   
 show_category_logo:
