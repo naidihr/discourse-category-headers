@@ -85,7 +85,7 @@ div[class^="category-title-header"] {
 }
 
 .category-header-widget svg.d-icon-lock{
-     @if ($show_lock_ico == "false"){
+     @if ($show_lock_icon == "false"){
          display:none;
      }
 }
