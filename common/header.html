@@ -20,9 +20,7 @@
           if(/^\/c\//.test(path)) {
               const hideMobile = (!settings.show_mobile && this.site.mobileView) ? "true" : hideMobile;
               const subCat = (!settings.show_subcategory && category.parentCategory) ? "true" : subCat;
-              const noDesc = (settings.show_if_no_category_description && !category.description_text) ? "true" : noDesc;
-              const $category_border = (settings.header_border_style=="box") ? "true" : "false";
-              const $category_background = (settings.header_background_color=="category") ? "true" : "false";
+              const noDesc = (!settings.hide_if_no_category_description && !category.description_text) ? "true" : noDesc;
               
               if(!isException && !noDesc && !subCat && !hideMobile) {
                   $("body").addClass("category-header");
@@ -58,10 +56,10 @@
                   
                   function getHeaderStyle() {
                       let headerStyle = "";
-                      if($category_border == "true"){
+                      if($header_style == "box"){
                         headerStyle += "border-left: 6px solid #" + category.color + ";"
                       }
-                      if($category_background == "true"){
+                      if($header_style == "banner"){
                         headerStyle += "background-color: #" + category.color + "; color: #" + category.text_color + ";"
                       }
                       if(category.uploaded_background){
