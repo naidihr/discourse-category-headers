@@ -56,10 +56,10 @@
                   
                   function getHeaderStyle() {
                       let headerStyle = "";
-                      if($header_style == "box"){
+                      if(settings.header_style == "box"){
                         headerStyle += "border-left: 6px solid #" + category.color + ";"
                       }
-                      if($header_style == "banner"){
+                      if(settings.header_style == "banner"){
                         headerStyle += "background-color: #" + category.color + "; color: #" + category.text_color + ";"
                       }
                       if(category.uploaded_background){
