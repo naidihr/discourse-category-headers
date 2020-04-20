@@ -2,7 +2,7 @@
 This theme component provides a number of enhancements and custom settings for the discourse category header.
 The default core Discourse category header is displayed on the category page above the navigation links. It is ONLY visible if a Category logo image is uploaded in the category settings. The logo then displays at the top of the page and the category description text adjacent to it. The category settings also allow for upload a Category background image, which is displayed as a background image over the whole page.
 ## The Discourse Category Header Theme Component provides the following enhancements as theme settings options.
-<b>show category name:</b> ** Show the category name in the header
+* <b>show category name:</b> ** Show the category name in the header
 **show category description: ** Show the category description text (the first paragraph of the "About this category" topic)
 **description text size:** Size of text within the category description
 **text align: ** Alignment of the text within the category header
