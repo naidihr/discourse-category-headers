@@ -47,6 +47,12 @@
                         return [h('img',{"attributes" : {"src" : siteSettings.logo_small}})];
                      }
                   }
+                  
+                  function ifParentProtected() {
+                      if(category.parentCategory && category.parentCategory.read_restricted) {
+                          return lockIcon;
+                      }
+                  }                  
 
                   function ifProtected() {
                       if(category.read_restricted) {
@@ -77,8 +83,9 @@
                   }, h('div.category-title-contents', [ 
                   h('div.category-logo.aspect-image', logoImg()), 
                   h('div.category-title-name', [
+                  ifParentProtected(),                      
+                  ifParentCategory(),                      
                   ifProtected(),
-                  ifParentCategory(),
                   h('h1', category.name)
                   ]),
                   h('div.category-title-description',catDesc())
