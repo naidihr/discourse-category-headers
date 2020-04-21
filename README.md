@@ -25,8 +25,8 @@ The default core Discourse category header is displayed on the category page abo
 -- Standard is 150px high. 
 -- Original is the size of the image uploaded
 * <b>header style:</b> Set the header style to either: 
--- Banner: set the header background to the category background color and text to the foreground color 
--- None: no styling
+<br>-- Banner: set the header background to the category background color and text to the foreground color 
+<br>-- None: no styling
 * <b>header background image:</b> Applies if you have uploaded a category background image 
 -- 'contain', 'cover' and 'resize' display the background within the header. 
 -- 'outside' is the Discourse default displaying it outside the header, over the whole page.
