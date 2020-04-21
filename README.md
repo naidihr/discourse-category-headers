@@ -19,7 +19,9 @@ The default core Discourse category header is displayed on the category page abo
 * <b>show category logo:</b> Show the category logo image within the header
 * <b>show parent category logo:</b> Show the parent category logo when a subcategory logo is not set
 * <b>show site logo:</b> Show the small site logo if a category logo is not set
-* <b>position logo:</b> Position of the logo within the header. Left and right display the logo inline with the text. Top displays the logo above aligned with the text
+* <b>position logo:</b> Position of the logo within the header.
+<br>-- 'left' and 'right' display the logo inline with the text. 
+<br>-- 'top' displays the logo above aligned with the text
 * <b>size logo:</b> Position of the logo within the header. 
 <br>-- Small is 50px high similar to a subcategory box logo. 
 <br>-- Standard is 150px high. 
