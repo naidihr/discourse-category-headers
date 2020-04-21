@@ -105,7 +105,7 @@ div[class^="category-title-header"] {
     @if($size_logo == "standard"){
         max-height: 150px;
     } @else if ($size_logo == "small"){
-        max-height: 40px;
+        max-height: 50px;
     } @else {
         max-height: 2000px;
     }    
