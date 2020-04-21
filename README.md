@@ -39,3 +39,4 @@ The default core Discourse category header is displayed on the category page abo
 * <b>hide category exceptions:</b> Headers will not show for these categories
 
 For further information, please see the instructions and screenshots on Discourse Meta.
+https://meta.discourse.org/t/discourse-category-headers-theme-component/148682
