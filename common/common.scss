@@ -60,7 +60,7 @@ div[class^="category-title-header"] {
       }       
     a,
     a:visited {
-      color: inherit;
+      /*color: inherit;*/
     }
     @if($show_category_description =="false"){
         display:none;
