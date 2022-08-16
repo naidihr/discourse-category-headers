@@ -13,14 +13,14 @@
 
           const controller = container.lookup('controller:navigation/category');
           category = controller.get("category");
-          const siteSettings = Discourse.SiteSettings;
+          const siteSettings = container.lookup('site-settings:main');
 
           const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
 
           if(/^\/c\//.test(path)) {
-              const hideMobile = (!settings.show_mobile && this.site.mobileView) ? "true" : hideMobile;
-              const subCat = (!settings.show_subcategory_header && category.parentCategory) ? "true" : subCat;
-              const noDesc = (!settings.hide_if_no_category_description && !category.description_text) ? "true" : noDesc;
+            const hideMobile = (!settings.show_mobile && this.site.mobileView) ? true : false;
+            const subCat = (!settings.show_subcategory_header && category.parentCategory) ? true : false;
+            const noDesc = (!settings.hide_if_no_category_description && !category.description_text) ? true : false;
               
               if(!isException && !noDesc && !subCat && !hideMobile) {
                   $("body").addClass("category-header");
