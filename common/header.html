@@ -1,5 +1,4 @@
 <script type="text/discourse-plugin" version="0.8">
-  const container = Discourse.__container__;
   const { h } = require('virtual-dom');
   const { iconNode } = require("discourse-common/lib/icon-library");
   let lockIcon = iconNode('lock');
@@ -11,9 +10,9 @@
           const path = window.location.pathname;
           let category;
 
-          const controller = container.lookup('controller:navigation/category');
+          const controller = api.container.lookup('controller:navigation/category');
           category = controller.get("category");
-          const siteSettings = Discourse.SiteSettings;
+          const siteSettings = this.siteSettings;
 
           const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
 
