@@ -10,8 +10,8 @@
           const path = window.location.pathname;
           let category;
 
-          const controller = api.container.lookup('controller:navigation/category');
-          category = controller.get("category");
+          const service = api.container.lookup('service:discovery');
+          category = service.get("category");
           const siteSettings = this.siteSettings;
 
           const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
