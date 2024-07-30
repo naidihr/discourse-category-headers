@@ -1,7 +1,7 @@
 <script type="text/discourse-plugin" version="0.8">
   const { h } = require('virtual-dom');
   const { iconNode } = require("discourse-common/lib/icon-library");
-  let lockIcon = iconNode('unlock-alt');
+  let lockIcon = settings.category_lock_icon || "lock";
 
   api.createWidget('category-header-widget', {
       tagName: 'span',
