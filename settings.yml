@@ -37,14 +37,14 @@ show_parent_category_name:
   default: true
   description: 'Prefix the parent category name on the subcategory headers'   
 
-category_lock_icon:
-  default: ""
-  description: 'Enter the name of a FontAwesome 5 icon to display instead of the lock icon next to private categories'
-
 show_lock_icon:
   type: bool
   default: true
   description: 'Show the lock icon on categories protected by permissions' 
+
+category_lock_icon:
+  default: ""
+  description: 'Enter the name of a FontAwesome 5 icon to display instead of the lock icon next to private categories'
   
 show_category_logo:
   type: bool
