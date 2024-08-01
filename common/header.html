@@ -1,7 +1,8 @@
 <script type="text/discourse-plugin" version="0.8">
   const { h } = require('virtual-dom');
   const { iconNode } = require("discourse-common/lib/icon-library");
-  let lockIcon = iconNode('lock');
+  let iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
+  let lockIcon = iconNode(iconName);
 
   api.createWidget('category-header-widget', {
       tagName: 'span',
