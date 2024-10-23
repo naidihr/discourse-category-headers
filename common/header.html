@@ -79,7 +79,7 @@
                   function aboutTopicUrl() {
                     if (category.topic_url) {
                       return h('div.category-about-url', [
-                        h('a', { "attributes": { "href": category.topic_url } }, "About this category")
+                        h('a', { "attributes": { "href": category.topic_url } }, "Read more about this category…")
                       ]);
                     }
                   }
@@ -125,11 +125,10 @@
 <style>
   .category-about-url {
     margin-top: 10px;
-    font-size: 0.9em;
-    text-align: right;
+    text-align: left;
   }
   .category-about-url a {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
   }
 </style>
