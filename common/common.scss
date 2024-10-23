@@ -116,3 +116,20 @@ div[class^="category-title-header"] {
     height: auto;       
     display: inline-block;
 }
+
+
+  .category-about-url {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: right;
+  }
+  .category-about-url a {
+    color: inherit;
+    text-decoration: underline;
+    padding: 5px 10px;  /* Added padding */
+    display: inline-block;  /* This ensures the padding is applied properly */
+  }
+  .category-about-url a:hover {
+    background-color: rgba(0, 0, 0, 0.05);  /* Optional: adds a subtle background on hover */
+    border-radius: 3px;  /* Optional: rounds the corners of the hover effect */
+  }
