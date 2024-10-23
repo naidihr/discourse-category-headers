@@ -76,21 +76,31 @@
                       return headerStyle;
                   }
                   
+                  function aboutTopicUrl() {
+                    if (category.topic_url) {
+                      return h('div.category-about-url', [
+                        h('a', { "attributes": { "href": category.topic_url } }, "About this category")
+                      ]);
+                    }
+                  }
+                  
                   return h('div.category-title-header' + " .category-banner-" + category.slug, {
                       "attributes" : {
                           "style" : getHeaderStyle()
                       }
-                  }, h('div.category-title-contents', [ 
-                  h('div.category-logo.aspect-image', logoImg()), 
-                  h('div.category-title-name', [
-                  ifParentProtected(),                      
-                  ifParentCategory(),                      
-                  ifProtected(),
-                  h('h1', category.name)
-                  ]),
-                  h('div.category-title-description',catDesc())
-                  ]),
-                  );
+                  }, [
+                    h('div.category-title-contents', [ 
+                      h('div.category-logo.aspect-image', logoImg()), 
+                      h('div.category-title-name', [
+                        ifParentProtected(),                      
+                        ifParentCategory(),                      
+                        ifProtected(),
+                        h('h1', category.name)
+                      ]),
+                      h('div.category-title-description', catDesc())
+                    ]),
+                    aboutTopicUrl()
+                  ]);
               }
           } else {
               $("body").removeClass("category-header");
@@ -111,3 +121,15 @@
 >
   {{mount-widget widget="category-header-widget"}}
 </script>
+
+<style>
+  .category-about-url {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: right;
+  }
+  .category-about-url a {
+    color: inherit;
+    text-decoration: underline;
+  }
+</style>
