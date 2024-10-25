@@ -77,9 +77,9 @@
                   }
                   
                   function aboutTopicUrl() {
-                    if (category.topic_url) {
+                    if (settings.show_read_more_link && category.topic_url) {
                       return h('div.category-about-url', [
-                        h('a', { "attributes": { "href": category.topic_url } }, "Read more about this category…")
+                        h('a', { "attributes": { "href": category.topic_url } }, settings.read_more_link_text)
                       ]);
                     }
                   }
