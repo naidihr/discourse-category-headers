@@ -5,8 +5,6 @@ The default core Discourse category header is displayed on the category page abo
 
 ## This theme component provides the following enhancements
 
-### This theme component provides the following enhancements
-
 ### Theme settings
 
 * <b>show category name:</b> Show the category name in the header
@@ -37,6 +35,15 @@ The default core Discourse category header is displayed on the category page abo
 * <b>force mobile alignment:</b> Force mobile alignment of logo-text to the top-centre of the header
 * <b>hide if no category description:</b> Hide header if category description is not set
 * <b>hide category exceptions:</b> Headers will not show for these categories
+* <b>show read more link:</b> Show a "Read more" link at the bottom of the category header
+* <b>read more link text:</b> Customize the text for the "Read more" link
+
+### New Features
+
+* <b>Read More Link:</b> An optional "Read more" link can now be added to the bottom of the category header. This link directs users to the full "About this category" topic.
+* <b>Customizable Link Text:</b> The text for the "Read more" link can be customized to suit your community's needs.
+
+These new features provide more flexibility in guiding users to additional category information and can be easily toggled on or off through the theme settings.
 
 For further information, please see the instructions and screenshots on Discourse Meta.
 https://meta.discourse.org/t/discourse-category-headers-theme-component/148682

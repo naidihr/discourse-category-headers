@@ -116,3 +116,25 @@ div[class^="category-title-header"] {
     height: auto;       
     display: inline-block;
 }
+
+// Update the category-about-url rules
+.category-about-url {
+  margin-top: 10px;
+  padding: 0 20px 20px; // Add padding to match the rest of the component
+  text-align: left;
+
+  @if($description_text_size == "smaller"){
+    font-size: $font-down-1;
+  } @else if($description_text_size == "normal"){
+    font-size: $font-0;
+  } @else if($description_text_size == "larger"){
+    font-size: $font-up-1;
+  } @else if($description_text_size == "largest") {
+    font-size: $font-up-2;          
+  }
+}
+
+// Remove the color override to use the default link color
+.category-about-url a {
+  text-decoration: none;
+}

@@ -76,21 +76,31 @@
                       return headerStyle;
                   }
                   
+                  function aboutTopicUrl() {
+                    if (settings.show_read_more_link && category.topic_url) {
+                      return h('div.category-about-url', [
+                        h('a', { "attributes": { "href": category.topic_url } }, settings.read_more_link_text)
+                      ]);
+                    }
+                  }
+                  
                   return h('div.category-title-header' + " .category-banner-" + category.slug, {
                       "attributes" : {
                           "style" : getHeaderStyle()
                       }
-                  }, h('div.category-title-contents', [ 
-                  h('div.category-logo.aspect-image', logoImg()), 
-                  h('div.category-title-name', [
-                  ifParentProtected(),                      
-                  ifParentCategory(),                      
-                  ifProtected(),
-                  h('h1', category.name)
-                  ]),
-                  h('div.category-title-description',catDesc())
-                  ]),
-                  );
+                  }, [
+                    h('div.category-title-contents', [ 
+                      h('div.category-logo.aspect-image', logoImg()), 
+                      h('div.category-title-name', [
+                        ifParentProtected(),                      
+                        ifParentCategory(),                      
+                        ifProtected(),
+                        h('h1', category.name)
+                      ]),
+                      h('div.category-title-description', catDesc())
+                    ]),
+                    aboutTopicUrl()
+                  ]);
               }
           } else {
               $("body").removeClass("category-header");
