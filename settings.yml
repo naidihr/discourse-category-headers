@@ -120,5 +120,14 @@ hide_category_exceptions:
   default: '' 
   description: 'Headers will not show for these categories'
 
+show_read_more_link:
+  type: bool
+  default: true
+  description: 'Show the "Read more" link at the bottom of the category header'
+
+read_more_link_text:
+  type: string
+  default: 'Read more about this category…'
+  description: 'Custom text for the "Read more" link'
 
 
