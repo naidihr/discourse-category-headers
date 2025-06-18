@@ -1,7 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 import { h }  from "virtual-dom";
 import { iconNode } from "discourse-common/lib/icon-library";
-import { tracked } from "@ember/tracking";
+import { tracked } from "@glimmer/tracking";
 import MountWidget from "discourse/components/mount-widget";
 
 export default apiInitializer((api) => {
