@@ -118,7 +118,7 @@ export default apiInitializer((api) => {
       });
   });
 
-  api.renderInOutlet("",
+  api.renderInOutlet("above-main-container",
     <template>
       <MountWidget
       @widget="category-header-widget"
