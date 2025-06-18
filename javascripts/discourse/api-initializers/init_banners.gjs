@@ -2,6 +2,7 @@ import { apiInitializer } from "discourse/lib/api";
 import { h }  from "virtual-dom";
 import { iconNode } from "discourse-common/lib/icon-library";
 import { tracked } from "@ember/tracking";
+import MountWidget from "discourse/components/mount-widget";
 
 export default apiInitializer((api) => {
   @tracked iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
@@ -109,13 +110,21 @@ export default apiInitializer((api) => {
               document.body.classList.remove("category-header");
           }
       }
-  }),
+  });
+
   api.decorateWidget('category-header-widget:after', helper => {
       helper.widget.appEvents.on('page:changed', () => {
           helper.widget.scheduleRerender();
       });
   });
-  
+
+  api.renderInOutlet("",
+    <template>
+      <MountWidget
+      @widget="category-header-widget"
+      />
+    </template>
+  );
 });
 
   
