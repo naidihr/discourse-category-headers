@@ -6,7 +6,7 @@ import MountWidget from "discourse/components/mount-widget";
 
 export default apiInitializer((api) => {
   @tracked iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-  @tracked lockIcon = iconNode(iconName);
+  @tracked lockIcon = iconNode(this.iconName);
 
   api.createWidget('category-header-widget', {
       tagName: 'span',
@@ -54,13 +54,13 @@ export default apiInitializer((api) => {
                   
                   function ifParentProtected() {
                       if(category.parentCategory && category.parentCategory.read_restricted) {
-                          return lockIcon;
+                          return this.lockIcon;
                       }
                   }                  
 
                   function ifProtected() {
                       if(category.read_restricted) {
-                          return lockIcon;
+                          return this.lockIcon;
                       }
                   }
                   
