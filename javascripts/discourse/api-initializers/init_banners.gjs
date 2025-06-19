@@ -5,8 +5,10 @@ import { tracked } from "@glimmer/tracking";
 import MountWidget from "discourse/components/mount-widget";
 
 export default apiInitializer((api) => {
-  @tracked iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-  @tracked lockIcon = iconNode(this.iconName);
+  @tracked iconName;
+  this.iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
+  @tracked lockIcon;
+  this.lockIcon = iconNode(this.iconName);
 
   api.createWidget('category-header-widget', {
       tagName: 'span',
