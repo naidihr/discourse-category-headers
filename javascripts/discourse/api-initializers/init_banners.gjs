@@ -2,16 +2,15 @@ import { apiInitializer } from "discourse/lib/api";
 import { h }  from "virtual-dom";
 import { iconNode } from "discourse-common/lib/icon-library";
 import { tracked } from "@glimmer/tracking";
+import icon from "discourse/helpers/d-icon";
 import MountWidget from "discourse/components/mount-widget";
 
 export default apiInitializer((api) => {
-  @tracked iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-  @tracked lockIcon = iconNode(this.iconName);
-
   api.createWidget('category-header-widget', {
       tagName: 'span',
       html(attrs, state) {
-
+          const iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
+          const lockIcon = <template>{{icon this.iconName}}</template>
           const path = window.location.pathname;
           let category;
 
