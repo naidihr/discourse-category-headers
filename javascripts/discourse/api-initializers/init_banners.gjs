@@ -51,13 +51,13 @@ export default apiInitializer((api) => {
                   
                   function ifParentProtected() {
                       if(category.parentCategory && category.parentCategory.read_restricted) {
-                          return this.lockIcon;
+                          return lockIcon;
                       }
                   }                  
 
                   function ifProtected() {
                       if(category.read_restricted) {
-                          return this.lockIcon;
+                          return lockIcon;
                       }
                   }
                   
