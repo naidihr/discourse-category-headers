@@ -31,13 +31,15 @@ export default apiInitializer((api) => {
                   
                   function ifParentCategory(){
                     if (category.parentCategory) {
+                      /*
                       return new RenderGlimmer(
                         this,
                         "div"
                         hbs`<a class="parent-box-link" href="{{category.parentCategory.url}}"><h1>{{category.parentCategory.name}}: </h1></a>`,
                         {}
                       );
-                      // return h('a.parent-box-link',{"attributes" : {"href" : category.parentCategory.url}}, h('h1',category.parentCategory.name + ": "));
+                      */
+                      return h('a.parent-box-link',{"attributes" : {"href" : category.parentCategory.url}}, h('h1',category.parentCategory.name + ": "));
                     }
                   }
 
@@ -49,6 +51,7 @@ export default apiInitializer((api) => {
                   
                   function logoImg() {
                     if(settings.show_category_logo && category.uploaded_logo) {
+                      /*
                       let contents = [];
                       contents.push(
                         new RenderGlimmer(
@@ -57,8 +60,11 @@ export default apiInitializer((api) => {
                           {}
                         ),
                       );
-                      return contents; /*[h('img',{"attributes" : {"src" : category.uploaded_logo.url}})];*/
+                      return contents; 
+                      */
+                      return [h('img',{"attributes" : {"src" : category.uploaded_logo.url}})];
                     } else if (settings.show_category_logo && settings.show_parent_category_logo && category.parentCategory && category.parentCategory.uploaded_logo) {
+                      /*
                       let contents = [];
                       contents.push(
                         new RenderGlimmer(
@@ -67,8 +73,11 @@ export default apiInitializer((api) => {
                           {}
                         ),
                       );
-                      return contents; /*[h('img',{"attributes" : {"src" : category.parentCategory.uploaded_logo.url}})];*/
+                      return contents;
+                      */
+                      return [h('img',{"attributes" : {"src" : category.parentCategory.uploaded_logo.url}})];
                     } else if (settings.show_site_logo && siteSettings.logo_small) {
+                      /*
                       let contents = [];
                       contents.push(
                         new RenderGlimmer(
@@ -77,7 +86,9 @@ export default apiInitializer((api) => {
                           {}
                         ),
                       );
-                      return contents; /*[h('img',{"attributes" : {"src" : siteSettings.logo_small}})];*/
+                      return contents; 
+                      */
+                      return [h('img',{"attributes" : {"src" : siteSettings.logo_small}})];
                     }
                   }
                   
@@ -116,7 +127,7 @@ export default apiInitializer((api) => {
                       ]);
                     }
                   }
-
+                  /*
                   return new RenderGlimmer(
                     this,
                     "div",
@@ -136,7 +147,8 @@ export default apiInitializer((api) => {
                     `,
                     {}
                   );
-                  /*
+                  */
+                  
                   return h('div.category-title-header' + " .category-banner-" + category.slug, {
                       "attributes" : {
                           "style" : getHeaderStyle()
@@ -154,7 +166,7 @@ export default apiInitializer((api) => {
                     ]),
                     aboutTopicUrl()
                   ]);
-                  */
+                  
               }
           } else {
               document.body.classList.remove("category-header");
