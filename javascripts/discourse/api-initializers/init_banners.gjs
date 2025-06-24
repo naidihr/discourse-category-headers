@@ -8,7 +8,7 @@ export default apiInitializer((api) => {
       tagName: 'span',
       html(attrs, state) {
           const iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-          const lockIcon = <template>{{icon this.iconName}}</template>
+          const lockIcon = <template>{{icon iconName}}</template>;
           const path = window.location.pathname;
           let category;
 
