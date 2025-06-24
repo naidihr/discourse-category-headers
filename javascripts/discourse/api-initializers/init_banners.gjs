@@ -2,15 +2,16 @@ import { apiInitializer } from "discourse/lib/api";
 import { h }  from "virtual-dom";
 import { hbs } from "ember-cli-htmlbars";
 import RenderGlimmer from "discourse/widgets/render-glimmer";
-import icon from "discourse/helpers/d-icon";
+//import icon from "discourse/helpers/d-icon";
 import MountWidget from "discourse/components/mount-widget";
+import { iconNode } from "discourse/lib/icon-library";
 
 export default apiInitializer((api) => {
   api.createWidget('category-header-widget', {
       tagName: 'span',
       html(attrs, state) {
           const iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-          const lockIcon = <template>{{icon iconName}}</template>;
+          const lockIcon = iconNode(iconName);
           const path = window.location.pathname;
           let category;
 
