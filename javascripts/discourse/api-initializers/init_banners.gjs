@@ -132,7 +132,7 @@ export default apiInitializer((api) => {
                   return new RenderGlimmer(
                     this,
                     "div",
-                    hbs`<div class="category-title-header category-banner-{{category.slug}} style={{getHeaderStyle()}}>
+                    hbs"<div class="category-title-header category-banner-{{category.slug}} style={{getHeaderStyle()}}>
                     <div class="category-title-contents">
                       <div class="category-logo aspect-image">{{logoImg()}}</div>
                       <div class="category-title-name">
@@ -145,7 +145,7 @@ export default apiInitializer((api) => {
                     </div>
                     {{aboutTopicUrl()}}
                     </div>
-                    `,
+                    ",
                     {}
                   );
                   */
