@@ -1,8 +1,5 @@
 import { apiInitializer } from "discourse/lib/api";
 import { h }  from "virtual-dom";
-import { hbs } from "ember-cli-htmlbars";
-import RenderGlimmer from "discourse/widgets/render-glimmer";
-import icon from "discourse/helpers/d-icon";
 import MountWidget from "discourse/components/mount-widget";
 import { iconNode } from "discourse/lib/icon-library";
 
@@ -32,14 +29,6 @@ export default apiInitializer((api) => {
                   
                   function ifParentCategory(){
                     if (category.parentCategory) {
-                      /*
-                      return new RenderGlimmer(
-                        this,
-                        "div"
-                        hbs`<a class="parent-box-link" href="{{category.parentCategory.url}}"><h1>{{category.parentCategory.name}}: </h1></a>`,
-                        {}
-                      );
-                      */
                       return h('a.parent-box-link',{"attributes" : {"href" : category.parentCategory.url}}, h('h1',category.parentCategory.name + ": "));
                     }
                   }
@@ -51,44 +40,11 @@ export default apiInitializer((api) => {
                   }
                   
                   function logoImg() {
-                    if(settings.show_category_logo && category.uploaded_logo) {
-                      /*
-                      let contents = [];
-                      contents.push(
-                        new RenderGlimmer(
-                          this,
-                          hbs`<img src="{{category.uploaded_logo.url}}">`,
-                          {}
-                        ),
-                      );
-                      return contents; 
-                      */
+                    if (settings.show_category_logo && category.uploaded_logo) {
                       return [h('img',{"attributes" : {"src" : category.uploaded_logo.url}})];
                     } else if (settings.show_category_logo && settings.show_parent_category_logo && category.parentCategory && category.parentCategory.uploaded_logo) {
-                      /*
-                      let contents = [];
-                      contents.push(
-                        new RenderGlimmer(
-                          this,
-                          hbs`<img src="{{category.parentCategory.uploaded_logo.url}}">`,
-                          {}
-                        ),
-                      );
-                      return contents;
-                      */
                       return [h('img',{"attributes" : {"src" : category.parentCategory.uploaded_logo.url}})];
                     } else if (settings.show_site_logo && siteSettings.logo_small) {
-                      /*
-                      let contents = [];
-                      contents.push(
-                        new RenderGlimmer(
-                          this,
-                          hbs`<img src="{{siteSettings.logo_small}}">`,
-                          {}
-                        ),
-                      );
-                      return contents; 
-                      */
                       return [h('img',{"attributes" : {"src" : siteSettings.logo_small}})];
                     }
                   }
@@ -128,27 +84,6 @@ export default apiInitializer((api) => {
                       ]);
                     }
                   }
-                  /*
-                  return new RenderGlimmer(
-                    this,
-                    "div",
-                    hbs"<div class="category-title-header category-banner-{{category.slug}} style={{getHeaderStyle()}}>
-                    <div class="category-title-contents">
-                      <div class="category-logo aspect-image">{{logoImg()}}</div>
-                      <div class="category-title-name">
-                        {{ifParentProtected()}}
-                        {{ifParentCategory()}}
-                        {{ifProtected()}}
-                        <h1>{{category.name}}</h1>
-                      </div>
-                      <div class="category-title-description">{{catDesc()}}</div>
-                    </div>
-                    {{aboutTopicUrl()}}
-                    </div>
-                    ",
-                    {}
-                  );
-                  */
                   
                   return h('div.category-title-header' + " .category-banner-" + category.slug, {
                       "attributes" : {
