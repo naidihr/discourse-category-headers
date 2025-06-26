@@ -4,6 +4,8 @@ import CategoryHeader from "../../components/category-header";
 
 export default apiInitializer((api) => {
   api.renderInOutlet("above-main-container",
-  <CategoryHeader/>
+  <template>
+    <CategoryHeader/>
+  </template>
   );
 });
