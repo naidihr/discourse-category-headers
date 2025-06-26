@@ -58,11 +58,21 @@ export default class CategoryHeader extends Component {
     }
   }
 
+  get showHeader() {
+    const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
+    const hideMobile = !settings.show_mobile && this.site.mobileView;
+    const subCat = !settings.show_subcategory_header && category.parentCategory;
+    const noDesc = !settings.hide_if_no_category_description && !category.description_text;
+    return (/^\/c\//.test(path)
+      && !isException
+      && !noDesc
+      && !subCat
+      && !hideMobile
+    );
+  }
+
   if (/^\/c\//.test(path)) {
-      const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
-      const hideMobile = !settings.show_mobile && this.site.mobileView;
-      const subCat = !settings.show_subcategory_header && category.parentCategory;
-      const noDesc = !settings.hide_if_no_category_description && !category.description_text;
+
       
       if(!isException && !noDesc && !subCat && !hideMobile) {
           document.body.classList.add("category-header");
