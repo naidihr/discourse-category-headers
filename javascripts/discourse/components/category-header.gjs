@@ -102,7 +102,7 @@ export default class CategoryHeader extends Component {
   }
         
   <template>
-    {{# if this.showHeader}}
+    {{#if this.showHeader}}
       <div class="category-title-header category-banner-{{this.args.category.slug}} style={{getHeaderStyle()}}>
         <div class="category-title-contents">
           <div class="category-logo aspect-image">{{logoImg()}}</div>
