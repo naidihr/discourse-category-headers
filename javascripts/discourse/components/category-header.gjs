@@ -36,9 +36,9 @@ export default class CategoryHeader extends Component {
       return <template>
         <img src="{{this.args.category.parentCategory.uploaded_logo.url}}">
       </template>;
-    } else if (settings.show_site_logo && siteSettings.logo_small) {
+    } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return <template>
-        <img src="{{siteSettings.logo_small}}">
+        <img src="{{this.siteSettings.logo_small}}">
       </template>;
     }
   }
