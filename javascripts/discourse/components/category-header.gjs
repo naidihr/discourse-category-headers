@@ -58,6 +58,7 @@ export default class CategoryHeader extends Component {
   }
 
   get showHeader() {
+    console.log(this.args.category);
     const isException = this.args.category && settings.hide_category_exceptions.split("|").includes(this.args.category.name);
     const hideMobile = !settings.show_mobile && this.site.mobileView;
     const subCat = !settings.show_subcategory_header && this.args.category.parentCategory;
