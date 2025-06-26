@@ -87,11 +87,6 @@ export default class CategoryHeader extends Component {
   }
           
   get aboutTopicUrl() {
-    return h('div.category-about-url', [Add commentMore actions
-                        h('a', { "attributes": { "href": category.topic_url } }, settings.read_more_link_text)
-                      ]);
-                    }
-                  }
     if (settings.show_read_more_link && this.args.category.topic_url) {
       return <template>
         <div class="category-about-url">
