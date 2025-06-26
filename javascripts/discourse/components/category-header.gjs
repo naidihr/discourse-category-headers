@@ -18,7 +18,11 @@ export default class CategoryHeader extends Component {
 
   get catDesc() {
     if (settings.show_category_description) {
-      return <template><div class="cooked">{{this.args.category.description}}</div></template>;
+      return <template>
+        <div class="cooked">
+          {{this.args.category.description}}
+        </div>
+      </template>;
     }
   }
 
@@ -39,15 +43,17 @@ export default class CategoryHeader extends Component {
     }
   }
 
-  get  ifParentProtected() {
+  get ifParentProtected() {
+    const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.parentCategory && this.args.category.parentCategory.read_restricted) {
-      return true;
+      return <template>{{icon lockIcon}}</template>;
     }
   }
 
   get ifProtected() {
+    const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.read_restricted) {
-        return true;
+        return <template>{{icon lockIcon}}</template>;
     }
   }
 
@@ -81,30 +87,35 @@ export default class CategoryHeader extends Component {
   }
           
   get aboutTopicUrl() {
+    return h('div.category-about-url', [Add commentMore actions
+                        h('a', { "attributes": { "href": category.topic_url } }, settings.read_more_link_text)
+                      ]);
+                    }
+                  }
     if (settings.show_read_more_link && this.args.category.topic_url) {
-      return h('div.category-about-url', [
-        h('a', { "attributes": { "href": this.args.category.topic_url } }, settings.read_more_link_text)
-      ]);
+      return <template>
+        <div class="category-about-url">
+          <a href="{{this.args.category.topic_url}}">{{settings.read_more_link_text}}</a>
+        </div>
+      </template>;
     }
   }
         
-          <template>
-            <div class="category-title-header category-banner-{{category.slug}} style={{getHeaderStyle()}}>
-              <div class="category-title-contents">
-                <div class="category-logo aspect-image">{{logoImg()}}</div>
-                <div class="category-title-name">
-                  {{ifParentProtected()}}
-                  {{ifParentCategory()}}
-                  {{ifProtected()}}
-                  <h1>{{this.args.category.name}}</h1>
-                </div>
-                <div class="category-title-description">{{catDesc()}}</div>
-              </div>
-              {{aboutTopicUrl()}}
-            </div>
-          </template>          
-      }
-  } else {
-      document.body.classList.remove("category-header");
-  }
+  <template>
+    {{# if this.showHeader}}
+      <div class="category-title-header category-banner-{{this.args.category.slug}} style={{getHeaderStyle()}}>
+        <div class="category-title-contents">
+          <div class="category-logo aspect-image">{{logoImg()}}</div>
+          <div class="category-title-name">
+            {{this.ifParentProtected}}
+            {{this.ifParentCategory}}
+            {{this.ifProtected}}
+            <h1>{{this.args.category.name}}</h1>
+          </div>
+          <div class="category-title-description">{{this.catDesc}}</div>
+        </div>
+        {{aboutTopicUrl()}}
+      </div>
+    {{/if}}
+  </template>
 }
