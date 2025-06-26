@@ -5,19 +5,12 @@ import { inject as service } from "@ember/service";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
-  const iconName = settings.category_lock_icon || 'lock'; // Fallback to 'lock' if setting is not defined
-  const lockIcon = <template>{{icon iconName}}</template>;
-  const path = window.location.pathname;
-  let category;
-
-  const service = api.container.lookup('service:discovery');
-  category = service.get("category");
   
   get ifParentCategory() {
-    if (category.parentCategory) {
+    if (this.args.category.parentCategory) {
       return <template>
-        <a class="parent-box-link" href="{{category.parentCategory.url}}">
-          <h1>{{category.parentCategory.name}}: </h1>
+        <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
+          <h1>{{this.args.category.parentCategory.name}}: </h1>
         </a>
       </template>;
     }
@@ -25,19 +18,19 @@ export default class CategoryHeader extends Component {
 
   get catDesc() {
     if (settings.show_category_description) {
-      return <template><div class="cooked">{{category.description}}</div></template>;
+      return <template><div class="cooked">{{this.args.category.description}}</div></template>;
     }
   }
 
   get logoImg() {
-    if (settings.show_category_logo && category.uploaded_logo) {
+    if (settings.show_category_logo && this.args.category.uploaded_logo) {
       <template><img src=""></template>;
       return <template>
-        <img src="{{category.uploaded_logo.url}}">
+        <img src="{{this.args.category.uploaded_logo.url}}">
       </template>;
-    } else if (settings.show_category_logo && settings.show_parent_category_logo && category.parentCategory && category.parentCategory.uploaded_logo) {
+    } else if (settings.show_category_logo && settings.show_parent_category_logo && this.args.category.parentCategory && this.args.category.parentCategory.uploaded_logo) {
       return <template>
-        <img src="{{category.parentCategory.uploaded_logo.url}}">
+        <img src="{{this.args.category.parentCategory.uploaded_logo.url}}">
       </template>;
     } else if (settings.show_site_logo && siteSettings.logo_small) {
       return <template>
@@ -47,22 +40,22 @@ export default class CategoryHeader extends Component {
   }
 
   get  ifParentProtected() {
-    if (category.parentCategory && category.parentCategory.read_restricted) {
-      return lockIcon;
+    if (this.args.category.parentCategory && this.args.category.parentCategory.read_restricted) {
+      return true;
     }
   }
 
   get ifProtected() {
-    if (category.read_restricted) {
-        return lockIcon;
+    if (this.args.category.read_restricted) {
+        return true;
     }
   }
 
   get showHeader() {
-    const isException = category && settings.hide_category_exceptions.split("|").includes(category.name);
+    const isException = this.args.category && settings.hide_category_exceptions.split("|").includes(this.args.category.name);
     const hideMobile = !settings.show_mobile && this.site.mobileView;
-    const subCat = !settings.show_subcategory_header && category.parentCategory;
-    const noDesc = !settings.hide_if_no_category_description && !category.description_text;
+    const subCat = !settings.show_subcategory_header && this.args.category.parentCategory;
+    const noDesc = !settings.hide_if_no_category_description && !this.args.category.description_text;
     return (/^\/c\//.test(path)
       && !isException
       && !noDesc
@@ -71,36 +64,29 @@ export default class CategoryHeader extends Component {
     );
   }
 
-  if (/^\/c\//.test(path)) {
-
-      
-      if(!isException && !noDesc && !subCat && !hideMobile) {
-          document.body.classList.add("category-header");
-          //list-controls
+  get getHeaderStyle() {
+    let headerStyle = "";
+    if (settings.header_style == "box") {
+      headerStyle += "border-left: 6px solid #" + this.args.category.color + ";"
+    }
+    if (settings.header_style == "banner") {
+      headerStyle += "background-color: #" + this.args.category.color + "; color: #" + this.args.category.text_color + ";"
+    }
+    if (this.args.category.uploaded_background) {
+      if (settings.header_background_image != "outside"){
+        headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");" 
+      }
+    }
+    return headerStyle;
+  }
           
-          function getHeaderStyle() {
-            let headerStyle = "";
-            if(settings.header_style == "box"){
-              headerStyle += "border-left: 6px solid #" + category.color + ";"
-            }
-            if(settings.header_style == "banner"){
-              headerStyle += "background-color: #" + category.color + "; color: #" + category.text_color + ";"
-            }
-            if(category.uploaded_background){
-              if(settings.header_background_image != "outside"){
-                headerStyle += "background-image: url(" + category.uploaded_background.url + ");" 
-              }
-            }
-            return headerStyle;
-          }
-          
-          function aboutTopicUrl() {
-            if (settings.show_read_more_link && category.topic_url) {
-              return h('div.category-about-url', [
-                h('a', { "attributes": { "href": category.topic_url } }, settings.read_more_link_text)
-              ]);
-            }
-          }
+  get aboutTopicUrl() {
+    if (settings.show_read_more_link && this.args.category.topic_url) {
+      return h('div.category-about-url', [
+        h('a', { "attributes": { "href": this.args.category.topic_url } }, settings.read_more_link_text)
+      ]);
+    }
+  }
         
           <template>
             <div class="category-title-header category-banner-{{category.slug}} style={{getHeaderStyle()}}>
@@ -110,7 +96,7 @@ export default class CategoryHeader extends Component {
                   {{ifParentProtected()}}
                   {{ifParentCategory()}}
                   {{ifProtected()}}
-                  <h1>{{category.name}}</h1>
+                  <h1>{{this.args.category.name}}</h1>
                 </div>
                 <div class="category-title-description">{{catDesc()}}</div>
               </div>
