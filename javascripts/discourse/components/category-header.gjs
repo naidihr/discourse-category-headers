@@ -98,9 +98,9 @@ export default class CategoryHeader extends Component {
         
   <template>
     {{#if this.showHeader}}
-      <div class="category-title-header category-banner-{{this.args.category.slug}}" style="{{getHeaderStyle()}}">
+      <div class="category-title-header category-banner-{{this.args.category.slug}}" style="{{this.getHeaderStyle}}">
         <div class="category-title-contents">
-          <div class="category-logo aspect-image">{{logoImg()}}</div>
+          <div class="category-logo aspect-image">{{this.logoImg}}</div>
           <div class="category-title-name">
             {{this.ifParentProtected}}
             {{this.ifParentCategory}}
@@ -109,7 +109,7 @@ export default class CategoryHeader extends Component {
           </div>
           <div class="category-title-description">{{this.catDesc}}</div>
         </div>
-        {{aboutTopicUrl()}}
+        {{this.aboutTopicUrl}}
       </div>
     {{/if}}
   </template>
