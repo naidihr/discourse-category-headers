@@ -1,10 +1,13 @@
-<!--
 {{#if this.showHeader}}
   <div class="category-title-header category-banner-{{this.args.category.slug}}" style="{{this.getHeaderStyle}}">
     <div class="category-title-contents">
-      <div class="category-logo aspect-image">{{this.logoImg}}</div>
+      <div class="category-logo aspect-image">
+        <img src="{{this.logoImg}}">
+      </div>
       <div class="category-title-name">
-        {{this.ifParentProtected}}
+        {{#if this.ifParentProtected}}
+          {{icon this.lockIcon}}
+        {{/if}}
         {{#if this.ifParentCategory}}
           <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
             <h1>{{this.args.category.parentCategory.name}}: </h1>
@@ -24,4 +27,3 @@
     {{this.aboutTopicUrl}}
   </div>
 {{/if}}
--->
