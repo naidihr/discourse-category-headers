@@ -19,31 +19,25 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
-      return <template>
-        <img src="{{this.args.category.uploaded_logo.url}}">
-      </template>;
+      return this.args.category.uploaded_logo.url;
     } else if (settings.show_category_logo && settings.show_parent_category_logo && this.args.category.parentCategory && this.args.category.parentCategory.uploaded_logo) {
-      return <template>
-        <img src="{{this.args.category.parentCategory.uploaded_logo.url}}">
-      </template>;
+      return this.args.category.parentCategory.uploaded_logo.url;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
-      return <template>
-        <img src="{{this.siteSettings.logo_small}}">
-      </template>;
+      return this.siteSettings.logo_small;
     }
   }
 
   get ifParentProtected() {
     const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.parentCategory && this.args.category.parentCategory.read_restricted) {
-      return <template>{{icon lockIcon}}</template>;
+      return true;
     }
   }
 
   get ifProtected() {
     const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.read_restricted) {
-        return <template>{{icon lockIcon}}</template>;
+        return true;
     }
   }
 
