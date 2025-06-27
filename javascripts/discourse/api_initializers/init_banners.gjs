@@ -1,6 +1,9 @@
 import { apiInitializer } from "discourse/lib/api";
 // import CategoryHeader from "../components/category-header";
 import { tracked } from "@glimmer/tracking";
+import icon from "discourse/helpers/d-icon";
+import Component from "@glimmer/component";
+import { inject as service } from "@ember/service";
 
 export default apiInitializer((api) => {
   @tracked service = api.container.lookup("service:discovery");
