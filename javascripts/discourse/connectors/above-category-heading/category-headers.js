@@ -76,11 +76,7 @@ export default class CategoryHeader extends Component {
           
   get aboutTopicUrl() {
     if (settings.show_read_more_link && this.args.category.topic_url) {
-      return <template>
-        <div class="category-about-url">
-          <a href="{{this.args.category.topic_url}}">{{settings.read_more_link_text}}</a>
-        </div>
-      </template>;
+      return settings.read_more_link_text;
     }
   }
 }
