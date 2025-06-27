@@ -1,4 +1,4 @@
-@if($force_mobile_alignment == "true"){
+@if $force_mobile_alignment == "true" {
   .category-header div[class^="category-title-header"] {
     text-align: center;
    }
