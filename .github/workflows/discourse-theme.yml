@@ -3,7 +3,8 @@ name: Discourse Theme
 on:
   push:
     branches:
-      - main
+      - fix-compatibility-issues-new-new
+      - master
   pull_request:
 
 jobs:
