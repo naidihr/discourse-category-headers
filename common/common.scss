@@ -1,7 +1,8 @@
 div[class^="category-title-header"] {
     display: none;
+
 }
-    
+
 .category-header div[class^="category-title-header"] {
   box-sizing: border-box;
   display: block;
@@ -14,14 +15,14 @@ div[class^="category-title-header"] {
   @if $header_style == "box" {
     border: 2px solid $primary_low;
   } @else {
-    border: 0px !important;  
+    border: 0px !important;
   }
   
-  @if ($header_background_image == "cover") {
+  @if $header_background_image == "cover" {
       background-size: cover; 
-  } @else if ($header_background_image == "contain") {
+  } @else if $header_background_image == "contain" {
       background-size: contain;
-  } @else if ($header_background_image == "resize") {
+  } @else if $header_background_image == "resize" {
       background-size: 100% 100%;  
   } @else {
       background-image: none;
@@ -37,7 +38,7 @@ div[class^="category-title-header"] {
 
   }
   .category-title-name {
-      @if ($show_category_name == "false") {
+      @if $show_category_name == "false" {
         display:none;
       }
       a:link, a:visited {
@@ -45,35 +46,35 @@ div[class^="category-title-header"] {
       }
       h1 {
         display: inline;
-      }      
+      }
   }
   .category-title-description {
     padding-top: 0.5em;
-    @if ($description_text_size == "smaller") {
+    @if $description_text_size == "smaller" {
        font-size: $font-down-1;
-    } @else if($description_text_size == "normal") {
+    } @else if$description_text_size == "normal" {
         font-size: $font-0;
-    } @else if($description_text_size == "larger") {
+    } @else if$description_text_size == "larger" {
         font-size: $font-up-1;
-    } @else if($description_text_size == "largest") {
-        font-size: $font-up-2;          
+    } @else if$description_text_size == "largest" {
+        font-size: $font-up-2;
     }
     a,
     a:visited {
       /*color: inherit;*/
     }
-    @if ($show_category_description == "false") {
+    @if $show_category_description == "false" {
         display:none;
     }     
   }
   a.parent-box-link {
-      @if ($show_parent_category_name == "false") {
+      @if $show_parent_category_name == "false" {
         display: none;
       }
   }
 }
 
-@if ($header_background_image != "outside") {
+@if $header_background_image != "outside" {
     body {
         background-image: none !important;
     }
@@ -85,26 +86,26 @@ div[class^="category-title-header"] {
 }
 
 .category-header-widget svg.d-icon-lock{
-     @if ($show_lock_icon == "false") {
+     @if $show_lock_icon == "false" {
          display:none;
      }
 }
 
 .category-header-widget .category-logo.aspect-image, .category-header-widget .category-logo.aspect-image > img {
-    @if ($position_logo == "top") {
+    @if $position_logo == "top" {
         float: none;
         max-width: 100%;
         margin: 0 0 0.25em 0;
-    } @else if ($position_logo == "left") {
+    } @else if $position_logo == "left" {
         float: $position_logo;
         margin: 0 0.5em 0.25em 0;
-    } @else if ($position_logo == "right") {
+    } @else if $position_logo == "right" {
         float: $position_logo;
-        margin: 0 0 0.25em 0.5em;  
+        margin: 0 0 0.25em 0.5em;
     }
-    @if ($size_logo == "standard") {
+    @if $size_logo == "standard" {
         max-height: 150px;
-    } @else if ($size_logo == "small") {
+    } @else if $size_logo == "small" {
         max-height: 50px;
     } @else {
         max-height: 2000px;
@@ -113,7 +114,7 @@ div[class^="category-title-header"] {
 
 .category-header-widget .category-logo.aspect-image > img {
     width: auto;
-    height: auto;       
+    height: auto;
     display: inline-block;
 }
 
@@ -123,14 +124,14 @@ div[class^="category-title-header"] {
   padding: 0 20px 20px; // Add padding to match the rest of the component
   text-align: left;
 
-  @if ($description_text_size == "smaller") {
+  @if $description_text_size == "smaller" {
     font-size: $font-down-1;
-  } @else if ($description_text_size == "normal") {
+  } @else if $description_text_size == "normal" {
     font-size: $font-0;
-  } @else if ($description_text_size == "larger") {
+  } @else if $description_text_size == "larger" {
     font-size: $font-up-1;
-  } @else if ($description_text_size == "largest") {
-    font-size: $font-up-2;          
+  } @else if $description_text_size == "largest" {
+    font-size: $font-up-2;
   }
 }
 
