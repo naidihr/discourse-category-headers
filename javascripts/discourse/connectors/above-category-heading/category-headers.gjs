@@ -1,3 +1,4 @@
+/*
 import icon from "discourse/helpers/d-icon";
 import Component from "@glimmer/component";
 import { inject as service } from "@ember/service";
@@ -65,7 +66,6 @@ export default class CategoryHeader extends Component {
 
   get getHeaderStyle() {
     let headerStyle = "";
-    /*
     if (settings.header_style == "box") {
       headerStyle += "border-left: 6px solid #" + this.args.category.color + ";"
     }
@@ -77,7 +77,6 @@ export default class CategoryHeader extends Component {
         headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");" 
       }
     }
-    */
     return headerStyle;
   }
           
@@ -93,3 +92,4 @@ export default class CategoryHeader extends Component {
         
 
 }
+*/
