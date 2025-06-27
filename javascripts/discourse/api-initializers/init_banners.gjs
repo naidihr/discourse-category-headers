@@ -3,7 +3,7 @@ import icon from "discourse/helpers/d-icon";
 import CategoryHeader from "../components/category-header";
 
 export default apiInitializer((api) => {
-  api.renderInOutlet("above-main-container",
+  api.renderInOutlet("above-category-heading",
   <template>
     <CategoryHeader/>
   </template>
