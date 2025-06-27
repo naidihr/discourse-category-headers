@@ -7,11 +7,7 @@ export default class CategoryHeader extends Component {
   
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
-      return <template>
-        <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
-          <h1>{{this.args.category.parentCategory.name}}: </h1>
-        </a>
-      </template>;
+      return true;
     }
   }
 
