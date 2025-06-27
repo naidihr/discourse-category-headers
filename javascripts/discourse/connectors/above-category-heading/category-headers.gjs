@@ -19,7 +19,6 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
-      <template><img src=""></template>;
       return <template>
         <img src="{{this.args.category.uploaded_logo.url}}">
       </template>;
