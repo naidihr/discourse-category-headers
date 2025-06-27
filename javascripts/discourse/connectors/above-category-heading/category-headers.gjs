@@ -13,11 +13,7 @@ export default class CategoryHeader extends Component {
 
   get catDesc() {
     if (settings.show_category_description) {
-      return <template>
-        <div class="cooked">
-          {{this.args.category.description}}
-        </div>
-      </template>;
+      return true;
     }
   }
 
