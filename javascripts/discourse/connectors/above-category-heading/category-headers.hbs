@@ -4,7 +4,11 @@
       <div class="category-logo aspect-image">{{this.logoImg}}</div>
       <div class="category-title-name">
         {{this.ifParentProtected}}
-        {{this.ifParentCategory}}
+        {{#if this.ifParentCategory}}
+          <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
+            <h1>{{this.args.category.parentCategory.name}}: </h1>
+          </a>
+        {{/if}}
         {{this.ifProtected}}
         <h1>{{this.args.category.name}}</h1>
       </div>
