@@ -28,7 +28,6 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.outletArgs.category.uploaded_logo) {
-      <template><img src=""></template>;
       return <template>
         <img src="{{this.args.outletArgs.category.uploaded_logo.url}}">
       </template>;
@@ -59,6 +58,8 @@ export default class CategoryHeader extends Component {
 
   get showHeader() {
     console.log(this.args.outletArgs.category);
+    console.log(this.args.category);
+    console.log(this.category);
     const isException = this.args.outletArgs.category && settings.hide_category_exceptions.split("|").includes(this.args.outletArgs.category.name);
     const hideMobile = !settings.show_mobile && this.site.mobileView;
     const subCat = !settings.show_subcategory_header && this.args.outletArgs.category.parentCategory;
