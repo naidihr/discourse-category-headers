@@ -1,4 +1,3 @@
-/*
 import { apiInitializer } from "discourse/lib/api";
 import icon from "discourse/helpers/d-icon";
 import Component from "@glimmer/component";
@@ -117,4 +116,3 @@ export default class CategoryHeader extends Component {
     {{/if}}
   </template>
 }
-*/
