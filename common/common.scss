@@ -14,7 +14,7 @@ div[class^="category-title-header"] {
   @if $header_style == "box" {
     border: 2px solid $primary_low;
   } @else {
-    border: 0px !important;
+    border: 0 !important; // Stylelint complains if 0px is used
   }
   
   @if $header_background_image == "cover" {
