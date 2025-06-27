@@ -28,17 +28,19 @@ export default class CategoryHeader extends Component {
   }
 
   get ifParentProtected() {
-    const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.parentCategory && this.args.category.parentCategory.read_restricted) {
       return true;
     }
   }
 
   get ifProtected() {
-    const lockIcon = settings.category_lock_icon || 'lock';
     if (this.args.category.read_restricted) {
         return true;
     }
+  }
+
+  get lockIcon() {
+    return settings.category_lock_icon || 'lock';
   }
 
   get showHeader() {
