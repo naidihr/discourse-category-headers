@@ -6,14 +6,16 @@
       </div>
       <div class="category-title-name">
         {{#if this.ifParentProtected}}
-          {{icon this.lockIcon}}
+          {{icon "this.lockIcon"}}
         {{/if}}
         {{#if this.ifParentCategory}}
           <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
             <h1>{{this.args.category.parentCategory.name}}: </h1>
           </a>
         {{/if}}
-        {{this.ifProtected}}
+        {{#if this.ifProtected}}
+          {{icon "this.lockIcon"}}
+        {{/if}}
         <h1>{{this.args.category.name}}</h1>
       </div>
       <div class="category-title-description">
@@ -25,7 +27,7 @@
       </div>
     </div>
     <div class="category-about-url">
-      <a href="{{this.args.category.topic_url}}">{{this.aboutUrl}}</a>
+      <a href="{{this.args.category.topic_url}}">{{this.aboutTopicUrl}}</a>
     </div>
   </div>
 {{/if}}
