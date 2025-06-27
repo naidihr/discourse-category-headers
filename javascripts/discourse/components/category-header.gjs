@@ -74,7 +74,6 @@ export default class CategoryHeader extends Component {
 
   get getHeaderStyle() {
     let headerStyle = "";
-    /*
     if (settings.header_style == "box") {
       headerStyle += "border-left: 6px solid #" + this.category.color + ";"
     }
@@ -86,7 +85,6 @@ export default class CategoryHeader extends Component {
         headerStyle += "background-image: url(" + this.category.uploaded_background.url + ");" 
       }
     }
-    */
     return headerStyle;
   }
           
