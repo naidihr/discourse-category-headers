@@ -1,4 +1,3 @@
-/*
 import icon from "discourse/helpers/d-icon";
 import Component from "@glimmer/component";
 import { inject as service } from "@ember/service";
@@ -88,7 +87,4 @@ export default class CategoryHeader extends Component {
       </template>;
     }
   }
-        
-
 }
-*/
