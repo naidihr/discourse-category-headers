@@ -81,6 +81,38 @@ export default class CategoryHeader extends Component {
   }
 
   <template>
-    <h1>Hi</h1>
+    {{#if this.showHeader}}
+      <div class="category-title-header category-banner-{{this.args.category.slug}}" style="{{this.getHeaderStyle}}">
+        <div class="category-title-contents">
+          <div class="category-logo aspect-image">
+            <img src="{{this.logoImg}}">
+          </div>
+          <div class="category-title-name">
+            {{#if this.ifParentProtected}}
+              {{icon this.lockIcon}}
+            {{/if}}
+            {{#if this.ifParentCategory}}
+              <a class="parent-box-link" href="{{this.args.category.parentCategory.url}}">
+                <h1>{{this.args.category.parentCategory.name}}: </h1>
+              </a>
+            {{/if}}
+            {{#if this.ifProtected}}
+              {{icon this.lockIcon}}
+            {{/if}}
+            <h1>{{this.args.category.name}}</h1>
+          </div>
+          <div class="category-title-description">
+            {{#if this.catDesc}}
+              <div class="cooked">
+                {{this.args.category.description}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+        <div class="category-about-url">
+          <a href="{{this.args.category.topic_url}}">{{this.aboutTopicUrl}}</a>
+        </div>
+      </div>
+    {{/if}}
   </template>
 }
