@@ -1,6 +1,6 @@
-import icon from "discourse/helpers/d-icon";
 import Component from "@glimmer/component";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
+import icon from "discourse/helpers/d-icon";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
