@@ -8,11 +8,10 @@ import { inject as service } from "@ember/service";
 export default apiInitializer((api) => {
   @tracked service = api.container.lookup("service:discovery");
   @tracked category = service.get("category");
-  
-  api.renderInOutlet("above-main-container", 
+  @service siteSettings;
+  api.renderInOutlet(
+    "above-main-container", 
     class CategoryHeader extends Component {
-      @service siteSettings;
-      
       get ifParentCategory() {
         if (this.category.parentCategory) {
           return true;
@@ -92,5 +91,5 @@ export default apiInitializer((api) => {
         <h1>Hi</h1>
       </template>
     }
-  });
+  );
 });
