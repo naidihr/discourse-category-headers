@@ -12,7 +12,13 @@
         {{this.ifProtected}}
         <h1>{{this.args.category.name}}</h1>
       </div>
-      <div class="category-title-description">{{this.catDesc}}</div>
+      <div class="category-title-description">
+        {{#if this.catDesc}}
+          <div class="cooked">
+            {{this.args.category.description}}
+          </div>
+        {{/if}}
+      </div>
     </div>
     {{this.aboutTopicUrl}}
   </div>
