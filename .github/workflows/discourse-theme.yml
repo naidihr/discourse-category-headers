@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - fix-compatibility-issues-new-new
-      - master
   pull_request:
 
 jobs:
