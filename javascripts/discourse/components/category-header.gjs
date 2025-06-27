@@ -79,7 +79,6 @@ export default class CategoryHeader extends Component {
       return settings.read_more_link_text;
     }
   }
-}
 
   <template>
     {{#if this.showHeader}}
@@ -116,3 +115,4 @@ export default class CategoryHeader extends Component {
       </div>
     {{/if}}
   </template>
+}
