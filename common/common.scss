@@ -55,7 +55,6 @@ div[class^="category-title-header"] {
   }
 
   .category-title-description {
-    padding-top: 0.5em;
     padding: 0.5em 20px 0;
 
     @if $description_text_size == "smaller" {
