@@ -88,7 +88,9 @@ export default class CategoryHeader extends Component {
           </div>
           <div class="category-title-name">
             {{#if this.ifParentProtected}}
-              {{icon this.lockIcon}}
+              <span>
+                {{icon this.lockIcon}}
+              </span>
             {{/if}}
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
@@ -96,7 +98,9 @@ export default class CategoryHeader extends Component {
               </a>
             {{/if}}
             {{#if this.ifProtected}}
-              {{icon this.lockIcon}}
+              <span>
+                {{icon this.lockIcon}}
+              </span>
             {{/if}}
             <h1>{{@category.name}}</h1>
           </div>
