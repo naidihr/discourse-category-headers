@@ -48,9 +48,7 @@ export default class CategoryHeader extends Component {
   }
 
   get showHeader() {
-    console.log(settings.hide_category_exceptions.split("|").includes(this.args.category.id));
-    const isException = this.args.category && settings.hide_category_exceptions.split("|").includes(this.args.category.id);
-    console.log(isException);
+    const isException = this.args.category && settings.hide_category_exceptions.split("|").includes(String(this.args.category.id));
     const hideMobile = !settings.show_mobile && this.site.mobileView;
     const subCat = !settings.show_subcategory_header && this.args.category.parentCategory;
     const noDesc = !settings.hide_if_no_category_description && !this.args.category.description_text;
