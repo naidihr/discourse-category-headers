@@ -18,7 +18,7 @@ export default class CategoryHeader extends Component {
   }
 
   get catDesc() {
-    return this.args.category.description.replace("<p>", "").replace("</p>", "");
+    return this.args.category.description?.replace("<p>", "").replace("</p>", "");
   }
 
   get logoImg() {
