@@ -70,7 +70,7 @@ export default class CategoryHeader extends Component {
         headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
       }
     }
-    return headerStyle;
+    return headerStyle + " display: block;";
   }
 
   get aboutTopicUrl() {
