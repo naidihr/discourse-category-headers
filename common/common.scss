@@ -30,13 +30,6 @@ div[class^="category-title-header"] {
 
   .category-title-contents {
     padding: 20px;
-
-    svg {
-      height: 1.5em;
-      width: 1.1em;
-      margin-right: 0.25em;
-    }
-
   }
 
   .category-title-name {
@@ -52,6 +45,12 @@ div[class^="category-title-header"] {
       
     h1 {
       display: inline !important;
+    }
+
+    svg {
+      height: 1.5em;
+      width: 1.1em;
+      margin-right: 0.25em;
     }
   }
 
@@ -125,7 +124,7 @@ div[class^="category-title-header"] {
 }
 
 .category-title-contents .category-logo.aspect-image > img {
-  width: calc(var($max-height)*var($aspect-ratio));
+  // width: calc(var($max-height)*var($aspect-ratio));
   height: inherit;
   max-width: 100%;
   max-height: var($max-height)
