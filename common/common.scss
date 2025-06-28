@@ -1,5 +1,5 @@
 div[class^="category-title-header"] {
-    display: none;
+  display: none;
 }
 
 .category-header div[class^="category-title-header"] {
@@ -9,7 +9,8 @@ div[class^="category-title-header"] {
   text-align: $text_align;
   width: 100%;
   justify-content: center;
-  overflow: hidden;  
+  overflow: hidden;
+  border: 2px solid rgb(232.9, 232.9, 232.9);
   
   @if $header_style == "box" {
     border: 2px solid $primary_low;
@@ -18,13 +19,13 @@ div[class^="category-title-header"] {
   }
   
   @if $header_background_image == "cover" {
-      background-size: cover; 
+    background-size: cover; 
   } @else if $header_background_image == "contain" {
-      background-size: contain;
+    background-size: contain;
   } @else if $header_background_image == "resize" {
-      background-size: 100% 100%;  
+    background-size: 100% 100%;  
   } @else {
-      background-image: none;
+    background-image: none;
   }
 
   .category-title-contents {
@@ -39,94 +40,95 @@ div[class^="category-title-header"] {
   }
 
   .category-title-name {
-      padding: 0 20px 0;
+    padding: 0 20px 0;
       
-      @if $show_category_name == "false" {
-        display:none;
-      }
+    @if $show_category_name == "false" {
+      display:none;
+    }
       
-      a:link, a:visited {
-        color: inherit;
-      }
+    a:link, a:visited {
+      color: inherit;
+    }
       
-      h1 {
-        display: inline;
-      }
+    h1 {
+      display: inline !important;
+    }
   }
 
   .category-title-description {
-    padding: 0.5em 20px 0;
+    padding-top: 0.5em;
 
     @if $description_text_size == "smaller" {
-       font-size: $font-down-1;
+      font-size: $font-down-1;
     } @else if $description_text_size == "normal" {
-        font-size: $font-0;
+      font-size: $font-0;
     } @else if $description_text_size == "larger" {
-        font-size: $font-up-1;
+      font-size: $font-up-1;
     } @else if $description_text_size == "largest" {
-        font-size: $font-up-2;
+      font-size: $font-up-2;
     }
       
     a,
     a:visited {
-        // color: inherit;
+      // color: inherit;
     }
 
     @if $show_category_description == "false" {
-        display:none;
+      display:none;
     }     
   }
 
   a.parent-box-link {
-      @if $show_parent_category_name == "false" {
-        display: none;
-      }
+    @if $show_parent_category_name == "false" {
+      display: none;
+    }
   }
 }
 
 @if $header_background_image != "outside" {
-    body {
-        background-image: none !important;
-    }
+  body {
+    background-image: none !important;
+  }
 }
 
 // Hide the default Discourse category heading
 .category-heading {
-    display: none;
+  display: none;
 }
 
 .category-title-name svg.d-icon-lock{
-     @if $show_lock_icon == "false" {
-         display:none;
-     }
+  @if $show_lock_icon == "false" {
+    display:none;
+  }
 }
 
 .category-title-contents .category-logo.aspect-image, .category-title-contents .category-logo.aspect-image > img {
-    @if $position_logo == "top" {
-        float: none;
-        max-width: 100%;
-        margin: 0 0 0.25em 0;
-    } @else if $position_logo == "left" {
-        float: $position_logo;
-        margin: 0 0.5em 0.25em 0;
-    } @else if $position_logo == "right" {
-        float: $position_logo;
-        margin: 0 0 0.25em 0.5em;
-    }
+  @if $position_logo == "top" {
+    float: none;
+    max-width: 100%;
+    margin: 0 0 0.25em 0;
+  } @else if $position_logo == "left" {
+    float: $position_logo;
+    margin: 0 0.5em 0.25em 0;
+  } @else if $position_logo == "right" {
+    float: $position_logo;
+    margin: 0 0 0.25em 0.5em;
+  }
 
-    @if $size_logo == "standard" {
-        max-height: 150px;
-    } @else if $size_logo == "small" {
-        max-height: 50px;
-    } @else {
-        max-height: 2000px;
-    }    
+  @if $size_logo == "standard" {
+    max-height: 150px;
+  } @else if $size_logo == "small" {
+    max-height: 50px;
+  } @else {
+    max-height: 2000px;
+  }    
 }
 
 .category-title-contents .category-logo.aspect-image > img {
-    width: auto;
-    height: auto;
-    display: inline-block;
+  width: calc(var($max-height)*var($aspect-ratio));
+  height: inherit;
+  max-width: 100%;
+  max-height: var($max-height)
 }
 
 // Update the category-about-url rules
