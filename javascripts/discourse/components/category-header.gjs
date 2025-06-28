@@ -11,10 +11,14 @@ export default class CategoryHeader extends Component {
     }
   }
 
-  get catDesc() {
+  get showCatDesc() {
     if (settings.show_category_description) {
       return true;
     }
+  }
+
+  get catDesc() {
+    return this.args.category.description.replace("<p>", "").replace("</p>", "");
   }
 
   get logoImg() {
@@ -101,9 +105,9 @@ export default class CategoryHeader extends Component {
             <h1>{{@category.name}}</h1>
           </div>
           <div class="category-title-description">
-            {{#if this.catDesc}}
+            {{#if this.showCatDesc}}
               <div class="cooked">
-                {{@category.description}}
+                {{this.catDesc}}
               </div>
             {{/if}}
           </div>
