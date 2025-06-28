@@ -2,7 +2,7 @@ div[class^="category-title-header"] {
   display: none;
 }
 
-.category-header div[class^="category-title-header"] {
+.category-title-header {
   box-sizing: border-box;
   display: block !important;
   margin-bottom: 20px !important;
@@ -125,14 +125,14 @@ div[class^="category-title-header"] {
 
 .category-title-contents .category-logo.aspect-image > img {
   // width: calc(var($max-height)*var($aspect-ratio));
-  height: inherit;
-  max-width: 100%;
-  max-height: var($max-height)
+  height: auto;
+  width: auto;
+  display: inline-block;
 }
 
 // Update the category-about-url rules
 .category-about-url {
-  margin-top: 10px;
+  margin-top: 10px !important;
   padding: 0 20px 20px; // Add padding to match the rest of the component
   text-align: left;
 
