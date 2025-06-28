@@ -11,19 +11,19 @@ div[class^="category-title-header"] {
   justify-content: center;
   overflow: hidden;
   border: 2px solid rgb(232.9, 232.9, 232.9);
-  
+
   @if $header_style == "box" {
     border: 2px solid $primary_low;
   } @else {
     border: 0 !important; // Stylelint complains if 0px is used
   }
-  
+
   @if $header_background_image == "cover" {
-    background-size: cover; 
+    background-size: cover;
   } @else if $header_background_image == "contain" {
     background-size: contain;
   } @else if $header_background_image == "resize" {
-    background-size: 100% 100%;  
+    background-size: 100% 100%;
   } @else {
     background-image: none;
   }
@@ -34,15 +34,16 @@ div[class^="category-title-header"] {
 
   .category-title-name {
     padding: 0 20px 0;
-      
+
     @if $show_category_name == "false" {
-      display:none;
+      display: none;
     }
-      
-    a:link, a:visited {
+
+    a:link,
+    a:visited {
       color: inherit;
     }
-      
+
     h1 {
       display: inline !important;
     }
@@ -66,15 +67,15 @@ div[class^="category-title-header"] {
     } @else if $description_text_size == "largest" {
       font-size: $font-up-2;
     }
-      
+
     a,
     a:visited {
       // color: inherit;
     }
 
     @if $show_category_description == "false" {
-      display:none;
-    }     
+      display: none;
+    }
   }
 
   a.parent-box-link {
@@ -95,13 +96,14 @@ div[class^="category-title-header"] {
   display: none;
 }
 
-.category-title-name svg.d-icon-lock{
+.category-title-name svg.d-icon-lock {
   @if $show_lock_icon == "false" {
-    display:none;
+    display: none;
   }
 }
 
-.category-title-contents .category-logo.aspect-image, .category-title-contents .category-logo.aspect-image > img {
+.category-title-contents .category-logo.aspect-image,
+.category-title-contents .category-logo.aspect-image > img {
   @if $position_logo == "top" {
     float: none;
     max-width: 100%;
@@ -120,7 +122,7 @@ div[class^="category-title-header"] {
     max-height: 50px;
   } @else {
     max-height: 2000px;
-  }    
+  }
 }
 
 .category-title-contents .category-logo.aspect-image > img {
