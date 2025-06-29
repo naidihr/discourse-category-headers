@@ -69,9 +69,17 @@ export default class CategoryHeader extends Component {
     if (settings.header_style === "banner") {
       headerStyle += "background-color: #" + this.args.category.color + "; color: #" + this.args.category.text_color + ";";
     }
-    if (this.args.category.uploaded_background) {
-      if (settings.header_background_image !== "outside") {
-        headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
+    if (settings.show_parent_category_background_image) {
+      if (this.args.category.parentCategory.uploaded_background) {
+        if (settings.header_background_image !== "outside") {
+          headerStyle += "background-image: url(" + this.args.category.parentCategory.uploaded_background.url + ");";
+        }
+      }
+    } else {
+      if (this.args.category.uploaded_background) {
+        if (settings.header_background_image !== "outside") {
+          headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
+        }
       }
     }
     return headerStyle + " display: block; margin-bottom: 1em;";
