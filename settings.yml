@@ -104,6 +104,7 @@ show_parent_category_background_image:
   type: bool
   default: false
   description: "Show the background image of the parent category instead. Follows the setting in `header_background_image`.
+
 show_mobile: 
   type: bool
   default: true
