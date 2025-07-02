@@ -1,0 +1,11 @@
+name: Discourse Theme
+
+on:
+  push:
+    branches:
+      - fix-compatibility-issues-new-new
+  pull_request:
+
+jobs:
+  ci:
+    uses: discourse/.github/.github/workflows/discourse-theme.yml@v1

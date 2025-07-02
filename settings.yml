@@ -99,7 +99,12 @@ header_background_image:
   - resize
   - outside
   description: 'Applies if you have uploaded a category background image<br>Contain, cover and resize display the background within the header<br>Outside is the Discourse default displaying it outside the header.'
-  
+
+show_parent_category_background_image:
+  type: bool
+  default: false
+  description: "Show the background image of the parent category instead. Follows the setting in `header_background_image`."
+
 show_mobile: 
   type: bool
   default: true
@@ -118,6 +123,7 @@ hide_if_no_category_description:
 hide_category_exceptions:
   type: list
   default: '' 
+  list_type: category
   description: 'Headers will not show for these categories'
 
 show_read_more_link:
@@ -129,5 +135,3 @@ read_more_link_text:
   type: string
   default: 'Read more about this category…'
   description: 'Custom text for the "Read more" link'
-
-
