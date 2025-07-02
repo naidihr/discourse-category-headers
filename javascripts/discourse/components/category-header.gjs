@@ -75,6 +75,10 @@ export default class CategoryHeader extends Component {
         if (settings.header_background_image !== "outside" && this.args.category.parentCategory.uploaded_background) {
           headerStyle += "background-image: url(" + this.args.category.parentCategory.uploaded_background.url + ");";
         }
+      } else if (this.args.category.uploaded_background) {
+        if (settings.header_background_image !== "outside") {
+          headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
+        }
       }
     } else {
       if (this.args.category.uploaded_background) {
