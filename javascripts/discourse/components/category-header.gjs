@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import icon from "discourse/helpers/d-icon";
+import { htmlSafe } from "@ember/template";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -118,7 +119,7 @@ export default class CategoryHeader extends Component {
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
-                {{this.catDesc}}
+                {{htmlSafe this.catDesc}}
               </div>
             {{/if}}
           </div>
