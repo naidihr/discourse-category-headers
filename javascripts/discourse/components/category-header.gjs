@@ -71,8 +71,8 @@ export default class CategoryHeader extends Component {
       headerStyle += "background-color: #" + this.args.category.color + "; color: #" + this.args.category.text_color + ";";
     }
     if (settings.show_parent_category_background_image) {
-      if (this.args.category.parentCategory.uploaded_background) {
-        if (settings.header_background_image !== "outside") {
+      if (this.args.category.parentCategory) {
+        if (settings.header_background_image !== "outside" && this.args.category.parentCategory.uploaded_background) {
           headerStyle += "background-image: url(" + this.args.category.parentCategory.uploaded_background.url + ");";
         }
       }
