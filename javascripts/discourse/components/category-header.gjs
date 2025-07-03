@@ -136,6 +136,7 @@ export default class CategoryHeader extends Component {
 
   <template>
     {{#if this.showHeader}}
+      {{this.getFullCatDesc}}
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
