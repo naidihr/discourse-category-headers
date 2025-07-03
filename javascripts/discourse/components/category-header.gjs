@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
+import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
 export default class CategoryHeader extends Component {
@@ -19,9 +20,14 @@ export default class CategoryHeader extends Component {
   }
 
   get catDesc() {
-    return this.args.category.description
-      ?.replace("<p>", "")
-      .replace("</p>", "");
+    console.log(this.args.category.description);
+    return this.args.category.description;
+  }
+
+  async getFullCatDesc() {
+    let cd = await ajax(`/c/${this.args.category.id}/show.json`);
+    console.log(cd);
+    console.log(cd.category.description);
   }
 
   get logoImg() {
