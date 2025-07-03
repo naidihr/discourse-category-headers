@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
+import { htmlSafe } from "@ember/template";
 import { service } from "@ember/service";
 import icon from "discourse/helpers/d-icon";
-import { htmlSafe } from "@ember/template";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
