@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
-import { htmlSafe } from "@ember/template";
 import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 import icon from "discourse/helpers/d-icon";
 
 export default class CategoryHeader extends Component {
@@ -19,13 +19,20 @@ export default class CategoryHeader extends Component {
   }
 
   get catDesc() {
-    return this.args.category.description?.replace("<p>", "").replace("</p>", "");
+    return this.args.category.description
+      ?.replace("<p>", "")
+      .replace("</p>", "");
   }
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
       return this.args.category.uploaded_logo.url;
-    } else if (settings.show_category_logo && settings.show_parent_category_logo && this.args.category.parentCategory && this.args.category.parentCategory.uploaded_logo) {
+    } else if (
+      settings.show_category_logo &&
+      settings.show_parent_category_logo &&
+      this.args.category.parentCategory &&
+      this.args.category.parentCategory.uploaded_logo
+    ) {
       return this.args.category.parentCategory.uploaded_logo.url;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return this.siteSettings.logo_small;
@@ -33,57 +40,82 @@ export default class CategoryHeader extends Component {
   }
 
   get ifParentProtected() {
-    if (this.args.category.parentCategory && this.args.category.parentCategory.read_restricted) {
+    if (
+      this.args.category.parentCategory &&
+      this.args.category.parentCategory.read_restricted
+    ) {
       return true;
     }
   }
 
   get ifProtected() {
     if (this.args.category.read_restricted) {
-        return true;
+      return true;
     }
   }
 
   get lockIcon() {
-    return settings.category_lock_icon || 'lock';
+    return settings.category_lock_icon || "lock";
   }
 
   get showHeader() {
-    const isException = this.args.category && settings.hide_category_exceptions.split("|").includes(String(this.args.category.id));
+    const isException =
+      this.args.category &&
+      settings.hide_category_exceptions
+        .split("|")
+        .includes(String(this.args.category.id));
     const hideMobile = !settings.show_mobile && this.site.mobileView;
-    const subCat = !settings.show_subcategory_header && this.args.category.parentCategory;
-    const noDesc = !settings.hide_if_no_category_description && !this.args.category.description_text;
+    const subCat =
+      !settings.show_subcategory_header && this.args.category.parentCategory;
+    const noDesc =
+      !settings.hide_if_no_category_description &&
+      !this.args.category.description_text;
     const path = window.location.pathname;
-    return (/^\/c\//.test(path)
-      && !isException
-      && !noDesc
-      && !subCat
-      && !hideMobile
+    return (
+      /^\/c\//.test(path) && !isException && !noDesc && !subCat && !hideMobile
     );
   }
 
   get getHeaderStyle() {
     let headerStyle = "";
     if (settings.header_style === "box") {
-      headerStyle += "border-left: 6px solid #" + this.args.category.color + ";";
+      headerStyle +=
+        "border-left: 6px solid #" + this.args.category.color + ";";
     }
     if (settings.header_style === "banner") {
-      headerStyle += "background-color: #" + this.args.category.color + "; color: #" + this.args.category.text_color + ";";
+      headerStyle +=
+        "background-color: #" +
+        this.args.category.color +
+        "; color: #" +
+        this.args.category.text_color +
+        ";";
     }
     if (settings.show_parent_category_background_image) {
       if (this.args.category.parentCategory) {
-        if (settings.header_background_image !== "outside" && this.args.category.parentCategory.uploaded_background) {
-          headerStyle += "background-image: url(" + this.args.category.parentCategory.uploaded_background.url + ");";
+        if (
+          settings.header_background_image !== "outside" &&
+          this.args.category.parentCategory.uploaded_background
+        ) {
+          headerStyle +=
+            "background-image: url(" +
+            this.args.category.parentCategory.uploaded_background.url +
+            ");";
         }
       } else if (this.args.category.uploaded_background) {
         if (settings.header_background_image !== "outside") {
-          headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
+          headerStyle +=
+            "background-image: url(" +
+            this.args.category.uploaded_background.url +
+            ");";
         }
       }
     } else {
       if (this.args.category.uploaded_background) {
         if (settings.header_background_image !== "outside") {
-          headerStyle += "background-image: url(" + this.args.category.uploaded_background.url + ");";
+          headerStyle +=
+            "background-image: url(" +
+            this.args.category.uploaded_background.url +
+            ");";
         }
       }
     }
@@ -104,7 +136,7 @@ export default class CategoryHeader extends Component {
       >
         <div class="category-title-contents">
           <div class="category-logo aspect-image">
-            <img src={{this.logoImg}}>
+            <img src={{this.logoImg}} />
           </div>
           <div class="category-title-name">
             {{#if this.ifParentProtected}}
