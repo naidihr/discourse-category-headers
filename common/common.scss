@@ -61,7 +61,7 @@ div[class^="category-title-header"] {
     @if $description_text_size == "smallest" {
       font-size: $font-0;
     } @else if $description_text_size == "smaller" {
-      font-size: $font-up-2
+      font-size: $font-up-2;
     } @else if $description_text_size == "normal" {
       font-size: $font-up-3;
     } @else if $description_text_size == "larger" {
