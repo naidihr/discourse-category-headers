@@ -93,7 +93,7 @@ div[class^="category-title-header"] {
 
 // Hide the default Discourse category heading
 .category-heading {
-  display: none;
+  display: none !important;
 }
 
 .category-title-name svg.d-icon-lock {
