@@ -59,7 +59,7 @@ div[class^="category-title-header"] {
     padding-top: 0.5em;
 
     @if $description_text_size == "smallest" {
-      font-size: $font-up-0;
+      font-size: $font-0;
     } @else if $description_text_size == "smaller" {
       font-size: $font-up-2
     } @else if $description_text_size == "normal" {
