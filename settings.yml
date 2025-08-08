@@ -12,6 +12,7 @@ description_text_size:
   type: enum
   default: larger  
   choices:
+  - smallest
   - smaller
   - normal
   - larger    
