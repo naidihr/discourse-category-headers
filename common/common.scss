@@ -58,7 +58,9 @@ div[class^="category-title-header"] {
   .category-title-description {
     padding-top: 0.5em;
 
-    @if $description_text_size == "smaller" {
+    @if $description_text_size == "smallest" {
+      font-size: $font-0;
+    } @else if $description_text_size == "smaller" {
       font-size: $font-up-2;
     } @else if $description_text_size == "normal" {
       font-size: $font-up-3;
@@ -93,7 +95,7 @@ div[class^="category-title-header"] {
 
 // Hide the default Discourse category heading
 .category-heading {
-  display: none;
+  display: none !important;
 }
 
 .category-title-name svg.d-icon-lock {

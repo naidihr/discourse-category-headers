@@ -6,6 +6,7 @@ import icon from "discourse/helpers/d-icon";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
+  @service site;
 
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
