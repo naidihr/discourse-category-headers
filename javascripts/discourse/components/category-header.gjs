@@ -184,6 +184,7 @@ export default class CategoryHeader extends Component {
             {{/if}}
             <h1>{{@category.name}}</h1>
           </div>
+
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
@@ -195,7 +196,7 @@ export default class CategoryHeader extends Component {
                 {{/if}}
               </div>
             {{/if}}
-
+            {{this.showFullCatDesc}}
             {{#if this.showFullCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.full_category_description}}
