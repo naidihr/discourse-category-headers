@@ -37,7 +37,7 @@ export default class CategoryHeader extends Component {
 
   @action
   async getFullCatDesc() {
-    let cd = await ajax(`/c/${this.category.id}/show.json`);
+    let cd = await ajax(`${this.args.category.topic_url}.json`);
     console.log(cd);
     this.result = await cd.topic_url;
     console.log(this.result);
