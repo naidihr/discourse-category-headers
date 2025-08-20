@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
-import { tracked } from "@ember/tracking";
+import { tracked } from "@ember/tracked";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
@@ -9,6 +9,7 @@ export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
   @tracked category;
+  @tracked result;
 
   constructor() {
     super(...arguments);
