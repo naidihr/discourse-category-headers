@@ -192,7 +192,8 @@ export default class CategoryHeader extends Component {
                   </span>
                 {{/if}}
               </div>
-            {{else if this.showFullCatDesc}}
+            {{/if}}
+            {{#if this.showFullCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.full_category_description}}
                 {{#if this.inlineReadMore}}
