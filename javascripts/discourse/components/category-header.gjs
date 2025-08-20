@@ -180,7 +180,7 @@ export default class CategoryHeader extends Component {
             {{#if this.showCatDesc}}
               <div class="cooked">
                 {{#if this.showFullCategoryDescription}}
-                  {{this.getFullCatDesc}}
+                  {{this.getFullCatDesc()}}
                   {{htmlSafe this.full_category_description}}
                 {{else}}
                   {{htmlSafe this.catDesc}}
