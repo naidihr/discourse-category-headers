@@ -29,6 +29,8 @@ export default class CategoryHeader extends Component {
   }
 
   get showFullCatDesc() {
+    console.log(settings.show_category_description);
+    console.log(settings.show_full_category_description);
     if (settings.show_full_category_description) {
       return true;
     }
