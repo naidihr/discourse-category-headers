@@ -149,7 +149,7 @@ export default class CategoryHeader extends Component {
   }
 
   get showFullCategoryDescription() {
-    return (settings.show_full_category_description && !settings.show_category_description);
+    return (settings.show_full_category_description && settings.show_category_description);
   }
 
   <template>
