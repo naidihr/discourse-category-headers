@@ -9,10 +9,12 @@ import icon from "discourse/helpers/d-icon";
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
+  @tracked category;
   @tracked full_category_description;
 
   constructor() {
     super(...arguments);
+    this.category = this.args.category;
     this.getFullCatDesc();
   }
 
