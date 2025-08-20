@@ -25,7 +25,7 @@ export default class CategoryHeader extends Component {
     return this.args.category.description;
   }
 
-  async getFullCatDesc() {
+  async get getFullCatDesc() {
     let cd = await ajax(`/c/${this.args.category.id}/show.json`);
     console.log(cd.notification_level);
   }
