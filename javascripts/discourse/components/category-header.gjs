@@ -25,7 +25,15 @@ export default class CategoryHeader extends Component {
 
   get catDesc() {
     console.log(this.args.category.description);
-    return this.args.category.description;
+    if (settings.show_full_category_description) {
+      let cd = await ajax(`${this.args.category.topic_url}.json`);
+      console.log(cd.post_stream.posts[0].cooked)
+      this.full_category_description = cd.post_stream.posts[0].cooked;
+      console.log(this.full_category_description);
+      return cd.post_stream.posts[0].cooked;
+    } else {
+      return this.args.category.description;
+    }
   }
 
   @action
@@ -148,10 +156,6 @@ export default class CategoryHeader extends Component {
     return (settings.inline_read_more && settings.show_category_description && settings.show_read_more_link);
   }
 
-  get showFullCategoryDescription() {
-    return (settings.show_full_category_description && !settings.show_category_description);
-  }
-
   <template>
     {{#if this.showHeader}}
       <div
@@ -179,11 +183,7 @@ export default class CategoryHeader extends Component {
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
-                {{#if this.showFullCategoryDescription}}
-                  {{htmlSafe this.full_category_description}}
-                {{else}}
-                  {{htmlSafe this.catDesc}}
-                {{/if}}
+                {{htmlSafe this.catDesc}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
