@@ -132,6 +132,11 @@ show_read_more_link:
   default: true
   description: 'Show the "Read more" link at the bottom of the category header'
 
+inline_read_more:
+  type: bool
+  default: false
+  description: 'Put "Read more" link at the end of the category description'
+
 read_more_link_text:
   type: string
   default: 'Read more about this category…'
