@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
+
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
@@ -36,9 +37,7 @@ export default class CategoryHeader extends Component {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_category_description = cd.post_stream.posts[0].cooked;
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   }
 
   get showFullCatDesc() {
