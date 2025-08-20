@@ -29,24 +29,19 @@ export default class CategoryHeader extends Component {
   }
 
   get catDesc() {
-    console.log(this.args.category.description);
     return this.args.category.description;
   }
 
   async getFullCatDesc() {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
-      console.log(cd.post_stream.posts[0].cooked)
       this.full_category_description = cd.post_stream.posts[0].cooked;
-      console.log(this.full_category_description);
     } catch (error) {
       console.error(error);
     }
   }
 
   get showFullCatDesc() {
-    console.log(settings.show_category_description);
-    console.log(settings.show_full_category_description);
     if (settings.show_full_category_description) {
       return true;
     }
@@ -196,7 +191,7 @@ export default class CategoryHeader extends Component {
                 {{/if}}
               </div>
             {{/if}}
-            {{this.showFullCatDesc}}
+
             {{#if this.showFullCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.full_category_description}}
