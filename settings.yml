@@ -8,6 +8,11 @@ show_category_description:
   default: true
   description: 'Show the category description text<br>(The first paragraph of the "About this category" topic)'
 
+show_full_category_description:
+  type: bool
+  default: false
+  description: 'Show the full category description text<br>(The full text of the "About this category" topic)'
+
 description_text_size:
   type: enum
   default: larger  
