@@ -8,6 +8,11 @@ show_category_description:
   default: true
   description: 'Show the category description text<br>(The first paragraph of the "About this category" topic)'
 
+show_full_category_description:
+  type: bool
+  default: false
+  description: 'Show the full category description text<br>(The full text of the "About this category" topic)'
+
 description_text_size:
   type: enum
   default: larger  
@@ -131,6 +136,11 @@ show_read_more_link:
   type: bool
   default: true
   description: 'Show the "Read more" link at the bottom of the category header'
+
+inline_read_more:
+  type: bool
+  default: false
+  description: 'Put "Read more" link at the end of the category description'
 
 read_more_link_text:
   type: string

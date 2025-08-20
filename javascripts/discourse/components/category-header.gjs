@@ -1,11 +1,21 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
+
+import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
+
+  @tracked full_category_description;
+
+  constructor() {
+    super(...arguments);
+    this.getFullCatDesc();
+  }
 
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
@@ -20,9 +30,20 @@ export default class CategoryHeader extends Component {
   }
 
   get catDesc() {
-    return this.args.category.description
-      ?.replace("<p>", "")
-      .replace("</p>", "");
+    return this.args.category.description;
+  }
+
+  async getFullCatDesc() {
+    try {
+      let cd = await ajax(`${this.args.category.topic_url}.json`);
+      this.full_category_description = cd.post_stream.posts[0].cooked;
+    } catch {}
+  }
+
+  get showFullCatDesc() {
+    if (settings.show_full_category_description) {
+      return true;
+    }
   }
 
   get logoImg() {
@@ -129,6 +150,10 @@ export default class CategoryHeader extends Component {
     }
   }
 
+  get inlineReadMore() {
+    return (settings.inline_read_more && (settings.show_category_description || settings.show_full_category_description) && settings.show_read_more_link);
+  }
+
   <template>
     {{#if this.showHeader}}
       <div
@@ -153,17 +178,37 @@ export default class CategoryHeader extends Component {
             {{/if}}
             <h1>{{@category.name}}</h1>
           </div>
+
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.catDesc}}
+                {{#if this.inlineReadMore}}
+                  <span class="category-about-url">
+                    <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                  </span>
+                {{/if}}
+              </div>
+            {{/if}}
+
+            {{#if this.showFullCatDesc}}
+              <div class="cooked">
+                {{htmlSafe this.full_category_description}}
+                {{#if this.inlineReadMore}}
+                  <span class="category-about-url">
+                    <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                  </span>
+                {{/if}}
               </div>
             {{/if}}
           </div>
         </div>
-        <div class="category-about-url">
-          <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
-        </div>
+
+        {{#unless this.inlineReadMore}}
+          <div class="category-about-url">
+            <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+          </div>
+        {{/unless}}
       </div>
     {{/if}}
   </template>

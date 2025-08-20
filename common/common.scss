@@ -75,7 +75,7 @@ div[class^="category-title-header"] {
       // color: inherit;
     }
 
-    @if $show_category_description == "false" {
+    @if $show_category_description == "false" and $show_full_category_description == "false" {
       display: none;
     }
   }
@@ -136,18 +136,22 @@ div[class^="category-title-header"] {
 
 // Update the category-about-url rules
 .category-about-url {
-  margin-top: 10px !important;
-  padding: 0 20px 20px; // Add padding to match the rest of the component
-  text-align: $text-align;
+  @if $inline_read_more == "false" {
+    margin-top: 10px !important;
+    padding: 0 20px 20px; // Add padding to match the rest of the component
+    text-align: $text-align;
 
-  @if $description_text_size == "smaller" {
-    font-size: $font-up-2;
-  } @else if $description_text_size == "normal" {
-    font-size: $font-up-3;
-  } @else if $description_text_size == "larger" {
-    font-size: $font-up-4;
-  } @else if $description_text_size == "largest" {
-    font-size: $font-up-5;
+    @if $description_text_size == "smallest" {
+      font-size: $font-0;
+    } @else if $description_text_size == "smaller" {
+      font-size: $font-up-2;
+    } @else if $description_text_size == "normal" {
+      font-size: $font-up-3;
+    } @else if $description_text_size == "larger" {
+      font-size: $font-up-4;
+    } @else if $description_text_size == "largest" {
+      font-size: $font-up-5;
+    }
   }
 }
 
