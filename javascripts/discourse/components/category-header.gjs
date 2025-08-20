@@ -9,12 +9,10 @@ import icon from "discourse/helpers/d-icon";
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
-  @tracked category;
-  @tracked result;
+  @tracked full_category_description;
 
   constructor() {
     super(...arguments);
-    this.category = this.args.category;
     this.getFullCatDesc();
   }
 
@@ -38,9 +36,7 @@ export default class CategoryHeader extends Component {
   @action
   async getFullCatDesc() {
     let cd = await ajax(`${this.args.category.topic_url}.json`);
-    console.log(cd);
-    this.result = cd.post_stream.posts[0].cooked;
-    console.log(this.result);
+    this.full_category_description = cd.post_stream.posts[0].cooked;
   }
 
   get logoImg() {
@@ -151,6 +147,10 @@ export default class CategoryHeader extends Component {
     return (settings.inline_read_more && settings.show_category_description && settings.show_read_more_link);
   }
 
+  get showFullCategoryDescription() {
+    return (settings.show_full_category_description && !settings.show_category_description);
+  }
+
   <template>
     {{#if this.showHeader}}
       <div
@@ -178,7 +178,7 @@ export default class CategoryHeader extends Component {
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
-                {{htmlSafe this.catDesc}}
+                {{htmlSafe {{if (this.showFullCategoryDescription) this.full_category_description this.catDesc}} }}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
