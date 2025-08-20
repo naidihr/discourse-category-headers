@@ -36,7 +36,9 @@ export default class CategoryHeader extends Component {
   @action
   async getFullCatDesc() {
     let cd = await ajax(`${this.args.category.topic_url}.json`);
+    console.log(cd.post_stream.posts[0].cooked)
     this.full_category_description = cd.post_stream.posts[0].cooked;
+    console.log(this.full_category_description);
   }
 
   get logoImg() {
