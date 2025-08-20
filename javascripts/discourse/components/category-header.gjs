@@ -183,18 +183,17 @@ export default class CategoryHeader extends Component {
           <div class="category-title-description">
             {{#if this.showCatDesc}}
               <div class="cooked">
-                {{#if this.showFullCategoryDescription}}
-                  {{htmlSafe this.full_category_description}}
-                {{else}}
-                  {{htmlSafe this.catDesc}}
-                {{/if}}
+                {{htmlSafe this.catDesc}}
+            {{else if this.showFullCategoryDescription}}
+              <div class="cooked">
+                {{htmlSafe this.full_category_description}}
+            {{/if}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
                   </span>
                 {{/if}}
               </div>
-            {{/if}}
           </div>
         </div>
         {{#unless this.inlineReadMore}}
