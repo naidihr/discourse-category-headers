@@ -40,6 +40,7 @@ export default class CategoryHeader extends Component {
     let cd = await ajax(`/c/${this.category.id}/show.json`);
     console.log(cd);
     this.result = await cd.topic_url;
+    console.log(this.result);
   }
 
   get logoImg() {
