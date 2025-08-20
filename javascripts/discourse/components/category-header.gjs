@@ -179,11 +179,9 @@ export default class CategoryHeader extends Component {
           </div>
           <div class="category-title-description">
             {{#if this.showCatDesc}}
-              <div
-                class="cooked"
-                {{on "load" this.getFullCatDesc}}
-              >
+              <div class="cooked">
                 {{#if this.showFullCategoryDescription}}
+                  {{this.getFullCatDesc}}
                   {{htmlSafe this.full_category_description}}
                 {{else}}
                   {{htmlSafe this.catDesc}}
