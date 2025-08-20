@@ -28,14 +28,6 @@ export default class CategoryHeader extends Component {
     }
   }
 
-  get showFullCatDesc() {
-    console.log(settings.show_category_description);
-    console.log(settings.show_full_category_description);
-    if (settings.show_full_category_description) {
-      return true;
-    }
-  }
-
   get catDesc() {
     console.log(this.args.category.description);
     return this.args.category.description;
@@ -49,6 +41,14 @@ export default class CategoryHeader extends Component {
       console.log(this.full_category_description);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  get showFullCatDesc() {
+    console.log(settings.show_category_description);
+    console.log(settings.show_full_category_description);
+    if (settings.show_full_category_description) {
+      return true;
     }
   }
 
