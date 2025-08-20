@@ -39,7 +39,7 @@ export default class CategoryHeader extends Component {
   async getFullCatDesc() {
     let cd = await ajax(`${this.args.category.topic_url}.json`);
     console.log(cd);
-    this.result = await cd.topic_url;
+    this.result = cd.post_stream.posts[0].cooked;
     console.log(this.result);
   }
 
