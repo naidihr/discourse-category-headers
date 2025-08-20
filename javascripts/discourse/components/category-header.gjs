@@ -11,6 +11,11 @@ export default class CategoryHeader extends Component {
   @service site;
   @tracked full_category_description;
 
+  constructor() {
+    super(...arguments);
+    this.getFullCatDesc();
+  }
+
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
       return true;
@@ -28,7 +33,6 @@ export default class CategoryHeader extends Component {
     return this.args.category.description;
   }
 
-  @action
   async getFullCatDesc() {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
@@ -180,7 +184,6 @@ export default class CategoryHeader extends Component {
             {{#if this.showCatDesc}}
               <div class="cooked">
                 {{#if this.showFullCategoryDescription}}
-                  {{this.getFullCatDesc}}
                   {{htmlSafe this.full_category_description}}
                 {{else}}
                   {{htmlSafe this.catDesc}}
