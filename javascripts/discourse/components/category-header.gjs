@@ -28,6 +28,12 @@ export default class CategoryHeader extends Component {
     }
   }
 
+  get showFullCatDesc() {
+    if (settings.show_full_category_description) {
+      return true;
+    }
+  }
+
   get catDesc() {
     console.log(this.args.category.description);
     return this.args.category.description;
@@ -149,11 +155,7 @@ export default class CategoryHeader extends Component {
   }
 
   get inlineReadMore() {
-    return (settings.inline_read_more && settings.show_category_description && settings.show_read_more_link);
-  }
-
-  get showFullCategoryDescription() {
-    return settings.show_full_category_description;
+    return (settings.inline_read_more && (settings.show_category_description || settings.show_full_category_description) && settings.show_read_more_link);
   }
 
   <template>
@@ -190,7 +192,7 @@ export default class CategoryHeader extends Component {
                   </span>
                 {{/if}}
               </div>
-            {{else if this.showFullCategoryDescription}}
+            {{else if this.showFullCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.full_category_description}}
                 {{#if this.inlineReadMore}}
