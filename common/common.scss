@@ -75,7 +75,7 @@ div[class^="category-title-header"] {
       // color: inherit;
     }
 
-    @if $show_category_description == "false" {
+    @if $show_category_description == "false" and $show_full_category_description {
       display: none;
     }
   }
