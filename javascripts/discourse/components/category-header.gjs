@@ -12,7 +12,10 @@ export default class CategoryHeader extends Component {
 
   constructor() {
     super(...arguments);
-    this.getFullCatDesc();
+    let cd = await ajax(`${this.category.topic_url}.json`);
+    console.log(cd.post_stream.posts[0].cooked)
+    this.full_category_description = cd.post_stream.posts[0].cooked;
+    console.log(this.full_category_description);
   }
 
   get ifParentCategory() {
@@ -30,14 +33,6 @@ export default class CategoryHeader extends Component {
   get catDesc() {
     console.log(this.args.category.description);
     return this.args.category.description;
-  }
-
-  @action
-  async getFullCatDesc() {
-    let cd = await ajax(`${this.category.topic_url}.json`);
-    console.log(cd.post_stream.posts[0].cooked)
-    this.full_category_description = cd.post_stream.posts[0].cooked;
-    console.log(this.full_category_description);
   }
 
   get logoImg() {
