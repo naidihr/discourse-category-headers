@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import { on } from "@ember/modifier";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
@@ -178,9 +179,8 @@ export default class CategoryHeader extends Component {
           </div>
           <div class="category-title-description">
             {{#if this.showCatDesc}}
-              <div class="cooked">
+              <div class="cooked" {{on "load" this.getFullCatDesc}}>
                 {{#if this.showFullCategoryDescription}}
-                  {{this.getFullCatDesc()}}
                   {{htmlSafe this.full_category_description}}
                 {{else}}
                   {{htmlSafe this.catDesc}}
