@@ -136,9 +136,11 @@ div[class^="category-title-header"] {
 
 // Update the category-about-url rules
 .category-about-url {
-  margin-top: 10px !important;
-  padding: 0 20px 20px; // Add padding to match the rest of the component
-  text-align: $text-align;
+  @if $inline_read_more == "false" {
+    margin-top: 10px !important;
+    padding: 0 20px 20px; // Add padding to match the rest of the component
+    text-align: $text-align;
+  }
 
   @if $description_text_size == "smaller" {
     font-size: $font-up-2;
