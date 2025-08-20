@@ -9,14 +9,7 @@ import icon from "discourse/helpers/d-icon";
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
-
-  constructor() {
-    super(...arguments);
-    let cd = await ajax(`${this.category.topic_url}.json`);
-    console.log(cd.post_stream.posts[0].cooked)
-    this.full_category_description = cd.post_stream.posts[0].cooked;
-    console.log(this.full_category_description);
-  }
+  @tracked full_category_description;
 
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
@@ -33,6 +26,18 @@ export default class CategoryHeader extends Component {
   get catDesc() {
     console.log(this.args.category.description);
     return this.args.category.description;
+  }
+
+  @action
+  async getFullCatDesc() {
+    try {
+      let cd = await ajax(`${this.args.category.topic_url}.json`);
+      console.log(cd.post_stream.posts[0].cooked)
+      this.full_category_description = cd.post_stream.posts[0].cooked;
+      console.log(this.full_category_description);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   get logoImg() {
