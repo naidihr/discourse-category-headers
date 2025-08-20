@@ -135,6 +135,10 @@ export default class CategoryHeader extends Component {
     }
   }
 
+  get inlineReadMore() {
+    return (settings.inline_read_more && settings.show_category_description && settings.show_read_more_link);
+  }
+
   <template>
     {{#if this.showHeader}}
       {{this.getFullCatDesc}}
@@ -164,13 +168,20 @@ export default class CategoryHeader extends Component {
             {{#if this.showCatDesc}}
               <div class="cooked">
                 {{htmlSafe this.catDesc}}
+                {{#if this.inlineReadMore}}
+                  <span class="category-about-url">
+                    <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                  </span>
+                {{/if}}
               </div>
             {{/if}}
           </div>
         </div>
-        <div class="category-about-url">
-          <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
-        </div>
+        {{#unless this.inlineReadMore}}
+          <div class="category-about-url">
+            <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+          </div>
+        {{/unless}}
       </div>
     {{/if}}
   </template>
