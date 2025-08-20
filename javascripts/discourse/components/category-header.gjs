@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
+import { tracked } from "@ember/tracking";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
@@ -7,6 +8,13 @@ import icon from "discourse/helpers/d-icon";
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
+  @tracked category;
+
+  constructor() {
+    super(...arguments);
+    this.category = this.args.category;
+    this.getFullCatDesc();
+  }
 
   get ifParentCategory() {
     if (this.args.category.parentCategory) {
@@ -25,8 +33,9 @@ export default class CategoryHeader extends Component {
     return this.args.category.description;
   }
 
-  get getFullCatDesc() {
-    let cd = ajax(`/c/${this.args.category.id}/show.json`);
+  @action
+  async getFullCatDesc() {
+    let cd = await ajax(`/c/${this.category.id}/show.json`);
     console.log(cd);
   }
 
@@ -140,7 +149,6 @@ export default class CategoryHeader extends Component {
 
   <template>
     {{#if this.showHeader}}
-      {{this.getFullCatDesc}}
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
