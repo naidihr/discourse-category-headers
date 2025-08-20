@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
 import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
