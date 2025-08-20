@@ -28,7 +28,6 @@ export default class CategoryHeader extends Component {
   async getFullCatDesc() {
     let cd = await ajax(`/c/${this.args.category.id}/show.json`);
     console.log(cd);
-    console.log(cd.category.description);
   }
 
   get logoImg() {
@@ -141,7 +140,6 @@ export default class CategoryHeader extends Component {
 
   <template>
     {{#if this.showHeader}}
-      {{this.getFullCatDesc}}
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
