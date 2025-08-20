@@ -37,7 +37,7 @@ export default class CategoryHeader extends Component {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_category_description = cd.post_stream.posts[0].cooked;
-    } catch (error) {}
+    } catch {}
   }
 
   get showFullCatDesc() {
