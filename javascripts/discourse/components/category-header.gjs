@@ -65,7 +65,7 @@ export default class CategoryHeader extends Component {
     console.log(this.args.category);
     if (
       this.args.category.parentCategory &&
-      this.args.category.parentCategory.read_restricted
+      this.args.category.parentCategory.permission
     ) {
       return true;
     }
@@ -73,7 +73,7 @@ export default class CategoryHeader extends Component {
 
   get ifProtected() {
     console.log("Cat protect: " + this.args.category.read_restricted === undefined ? true : false);
-    if (this.args.category.read_restricted) {
+    if (this.args.category.permission) {
       return true;
     }
   }
