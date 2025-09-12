@@ -62,7 +62,7 @@ export default class CategoryHeader extends Component {
   }
 
   get ifParentProtected() {
-    console.log("Parent cat protect: " + this.args.category.parentCategory.read_restricted);
+    console.log("Parent cat protect: " + this.args.category.parentCategory.read_restricted === undefined ? true : false);
     if (
       this.args.category.parentCategory &&
       this.args.category.parentCategory.read_restricted
