@@ -65,15 +65,15 @@ export default class CategoryHeader extends Component {
     console.log(this.args.category);
     if (
       this.args.category.parentCategory &&
-      this.args.category.parentCategory.permission === 1
+      this.args.category.parentCategory.permission === null
     ) {
       return true;
     }
   }
 
   get ifProtected() {
-    console.log("Cat protect: " + this.args.category.permission === 1);
-    if (this.args.category.permission === 1) {
+    console.log("Cat protect: " + this.args.category.permission === null);
+    if (this.args.category.permission === null) {
       return true;
     }
   }
