@@ -72,7 +72,7 @@ export default class CategoryHeader extends Component {
   }
 
   get ifProtected() {
-    console.log("Cat protect: " + this.args.category.read_restricted === undefined ? true : false);
+    console.log("Cat protect: " + this.args.category.permission?);
     if (this.args.category.permission) {
       return true;
     }
