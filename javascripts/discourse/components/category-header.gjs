@@ -66,7 +66,6 @@ export default class CategoryHeader extends Component {
   }
 
   get ifParentProtected() {
-    console.log(this.args.category);
     if (
       this.args.category.parentCategory &&
       (
