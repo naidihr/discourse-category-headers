@@ -6,6 +6,8 @@ import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
+import { not } from "truth-helpers";
+
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
@@ -58,20 +60,28 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo.url;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return this.siteSettings.logo_small;
+    } else {
+      return false;
     }
   }
 
   get ifParentProtected() {
     if (
       this.args.category.parentCategory &&
-      this.args.category.parentCategory.read_restricted
+      (
+        this.args.category.parentCategory.permission === null ||
+        this.args.category.parentCategory.read_restricted
+      )
     ) {
       return true;
     }
   }
 
   get ifProtected() {
-    if (this.args.category.read_restricted) {
+    if (
+      this.args.category.permission === null ||
+      this.args.category.read_restricted
+    ) {
       return true;
     }
   }
@@ -161,10 +171,12 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          <div class="category-logo aspect-image">
-            <img src={{this.logoImg}} />
-          </div>
-          <div class="category-title-name">
+          {{#if this.logoImg}}
+            <div class="category-logo aspect-image">
+              <img src={{this.logoImg}} />
+            </div>
+          {{/if}}
+          <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentProtected}}
               {{icon this.lockIcon}}
             {{/if}}
