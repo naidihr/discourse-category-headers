@@ -62,6 +62,7 @@ export default class CategoryHeader extends Component {
   }
 
   get ifParentProtected() {
+    console.log("Parent cat protect: " + this.args.category.parentCategory.read_restricted);
     if (
       this.args.category.parentCategory &&
       this.args.category.parentCategory.read_restricted
@@ -71,12 +72,14 @@ export default class CategoryHeader extends Component {
   }
 
   get ifProtected() {
+    console.log("Cat protect: " + this.args.category.read_restricted);
     if (this.args.category.read_restricted) {
       return true;
     }
   }
 
   get lockIcon() {
+    console.log("Lock icon: " + settings.category_lock_icon);
     return settings.category_lock_icon || "lock";
   }
 
