@@ -58,6 +58,8 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo.url;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return this.siteSettings.logo_small;
+    } else {
+      return false;
     }
   }
 
@@ -168,9 +170,11 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          <div class="category-logo aspect-image">
-            <img src={{this.logoImg}} />
-          </div>
+          {{#if this.logoImg}}
+            <div class="category-logo aspect-image">
+              <img src={{this.logoImg}} />
+            </div>
+          {{/if}}
           <div class="category-title-name">
             {{#if this.ifParentProtected}}
               {{icon this.lockIcon}}
