@@ -6,6 +6,8 @@ import { htmlSafe } from "@ember/template";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
+import { not } from "truth-helpers";
+
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
@@ -175,7 +177,7 @@ export default class CategoryHeader extends Component {
               <img src={{this.logoImg}} />
             </div>
           {{/if}}
-          <div class="category-title-name">
+          <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentProtected}}
               {{icon this.lockIcon}}
             {{/if}}
