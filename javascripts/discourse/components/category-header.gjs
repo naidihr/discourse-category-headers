@@ -65,21 +65,25 @@ export default class CategoryHeader extends Component {
     console.log(this.args.category);
     if (
       this.args.category.parentCategory &&
-      this.args.category.parentCategory.permission === null
+      (
+        this.args.category.parentCategory.permission === null ||
+        this.args.category.parentCategory.read_restricted
+      )
     ) {
       return true;
     }
   }
 
   get ifProtected() {
-    console.log("Cat protect: " + this.args.category.permission === null);
-    if (this.args.category.permission === null) {
+    if (
+      this.args.category.permission === null ||
+      this.args.category.read_restricted
+    ) {
       return true;
     }
   }
 
   get lockIcon() {
-    console.log("Lock icon: " + settings.category_lock_icon);
     return settings.category_lock_icon || "lock";
   }
 
