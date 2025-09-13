@@ -178,10 +178,10 @@ export default class CategoryHeader extends Component {
           {{/if}}
           <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentCategory}}
-              {{#if this.ifParentProtected}}
-                {{icon this.lockIcon}}
-              {{/if}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
+                {{#if this.ifParentProtected}}
+                  {{icon this.lockIcon}}
+                {{/if}}
                 <h1>{{@category.parentCategory.name}}: </h1>
               </a>
             {{/if}}
