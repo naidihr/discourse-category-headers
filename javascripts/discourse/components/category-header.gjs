@@ -7,7 +7,7 @@ import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
-import { not } from "truth-helpers";
+import { or, not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -64,6 +64,23 @@ export default class CategoryHeader extends Component {
     } else {
       return false;
     }
+  }
+
+  get darkLogoImg() {
+    if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark.url) {
+      return this.args.category.uploaded_logo.url;
+    } else if (
+      settings.show_dark_mode_category_logo &&
+      settings.show_parent_category_dark_mode_logo &&
+      this.args.category.parentCategory &&
+      this.args.category.parentCategory.uploaded_logo_dark
+    ) {
+      return this.args.category.parentCategory.uploaded_logo_dark.url;
+    } else if (settings.show_site_logo && this.siteSettings.logo_small) {
+      return this.siteSettings.logo_small;
+    } else {
+      return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
+    } 
   }
 
   get ifParentProtected() {
@@ -172,9 +189,12 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          {{#if this.logoImg}}
+          {{#if (or this.logoImg this.darkLogoImg)}}
             <div class="category-logo aspect-image">
-              <img src={{this.logoImg}} />
+              <LightDarkImg
+                @lightImg={{this.logoImg}}
+                @darkImg={{this.darkLogoImg}}
+              />
             </div>
           {{/if}}
           <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
