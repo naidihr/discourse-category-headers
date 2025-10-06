@@ -56,6 +56,11 @@ show_category_logo:
   type: bool
   default: true
   description: 'Show the category logo image within the header'
+
+show_dark_mode_category_logo:
+  type: bool
+  default: false
+  description: 'Show the dark mode category logo instead of the normal category logo. If checked, it will override the `show_category_logo` setting above.'
   
 show_parent_category_logo:
   type: bool
