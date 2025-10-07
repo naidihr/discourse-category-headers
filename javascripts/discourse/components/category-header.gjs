@@ -3,7 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 
-import LightDarkImg from "./light-dark-img";
+import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
