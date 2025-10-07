@@ -64,7 +64,9 @@ export default class CategoryHeader extends Component {
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       console.log(3);
       console.log(this.siteSettings.logo_small);
-      return this.siteSettings.logo_small;
+      let map = {};
+      map[url] = this.siteSettings.logo_small
+      return map;
     } else {
       console.log(4);
       return false;
@@ -86,7 +88,9 @@ export default class CategoryHeader extends Component {
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       console.log(33);
       console.log(this.siteSettings.logo_small);
-      return this.siteSettings.logo_small;
+      let map = {};
+      map[url] = this.siteSettings.logo_small
+      return map;
     } else {
       console.log(44);
       return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
