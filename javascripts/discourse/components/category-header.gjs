@@ -7,7 +7,7 @@ import LightDarkImg from "./light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
-import { or, not } from "truth-helpers";
+import { and, not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -191,7 +191,7 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          {{#if (or this.logoImg this.darkLogoImg)}}
+          {{#if (and this.logoImg this.darkLogoImg)}}
             <div class="category-logo aspect-image">
               <LightDarkImg
                 @lightImg={{this.logoImg}}
