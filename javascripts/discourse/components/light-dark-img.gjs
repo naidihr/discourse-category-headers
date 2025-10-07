@@ -8,6 +8,10 @@ export default class LightDarkImg extends Component {
   @service interfaceColor;
 
   get isDarkImageAvailable() {
+    console.log(this.args.lightImg?.url);
+    console.log(this.args.darkImg?.url);
+    console.log(this.session.defaultColorSchemeIsDark);
+    console.log(this.session.darkModeAvailable);
     return (
       this.args.lightImg?.url && // the light image must be present
       this.args.darkImg?.url &&
@@ -26,10 +30,13 @@ export default class LightDarkImg extends Component {
   }
 
   get darkImgCdnSrc() {
+    console.log("CDN: " + getURLWithCDN(this.args.darkImg.url));
     return getURLWithCDN(this.args.darkImg.url);
   }
 
   get darkMediaQuery() {
+    console.log(this.interfaceColor.lightModeForced);
+    console.log(this.interfaceColor.darkModeForced);
     if (this.interfaceColor.darkModeForced) {
       return "all";
     } else if (this.interfaceColor.lightModeForced) {
