@@ -5,9 +5,9 @@ import { htmlSafe } from "@ember/template";
 
 import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
-import icon from "discourse/helpers/d-icon";
+// import icon from "discourse/helpers/d-icon";
 
-import { not } from "truth-helpers";
+// import { not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -203,7 +203,7 @@ export default class CategoryHeader extends Component {
             </div>
           {{/if}}
           -->
-          <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
+          <div class="category-title-name" style={{!if (not (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
                 {{#if this.ifParentProtected}}
@@ -213,7 +213,7 @@ export default class CategoryHeader extends Component {
               </a>
             {{/if}}
             {{#if this.ifProtected}}
-              {{icon this.lockIcon}}
+              {{!icon this.lockIcon}}
             {{/if}}
             <h1>{{@category.name}}</h1>
           </div>
