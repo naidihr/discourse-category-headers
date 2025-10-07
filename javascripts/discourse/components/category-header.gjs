@@ -51,7 +51,6 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
-      console.log(this.args.category.uploaded_logo.url);
       return this.args.category.uploaded_logo;
     } else if (
       settings.show_category_logo &&
@@ -59,23 +58,18 @@ export default class CategoryHeader extends Component {
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo
     ) {
-      console.log(2);
       return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
-      console.log(3);
-      console.log(this.siteSettings.logo_small);
       let map = {};
       map['url'] = this.siteSettings.logo_small
       return map;
     } else {
-      console.log(4);
       return false;
     }
   }
 
   get darkLogoImg() {
     if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark) {
-      console.log(this.args.category.uploaded_logo_dark.url);
       return this.args.category.uploaded_logo_dark;
     } else if (
       settings.show_dark_mode_category_logo &&
@@ -83,16 +77,12 @@ export default class CategoryHeader extends Component {
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo_dark
     ) {
-      console.log(22);
       return this.args.category.parentCategory.uploaded_logo_dark;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
-      console.log(33);
-      console.log(this.siteSettings.logo_small);
       let map = {};
       map['url'] = this.siteSettings.logo_small
       return map;
     } else {
-      console.log(44);
       return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
     } 
   }
@@ -203,8 +193,6 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          {{this.logoImg.url}}
-          {{this.darkLogoImg.url}}
           {{#if (and this.logoImg this.darkLogoImg)}}
             <div class="category-logo aspect-image">
               <LightDarkImg
