@@ -193,7 +193,7 @@ export default class CategoryHeader extends Component {
         <div class="category-title-contents">
           {{this.logoImg.url}}
           {{this.darkLogoImg.url}}
-          {{#if (and this.logoImg this.darkLogoImg)}}
+          {{#if this.logoImg}}
             <div class="category-logo aspect-image">
               <!--
                 <LightDarkImg
