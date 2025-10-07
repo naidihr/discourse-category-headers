@@ -63,6 +63,7 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       console.log(3);
+      console.log(this.siteSettings.logo_small);
       return this.siteSettings.logo_small;
     } else {
       console.log(4);
@@ -84,6 +85,7 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo_dark;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       console.log(33);
+      console.log(this.siteSettings.logo_small);
       return this.siteSettings.logo_small;
     } else {
       console.log(44);
