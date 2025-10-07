@@ -203,7 +203,10 @@ export default class CategoryHeader extends Component {
             </div>
           {{/if}}
           -->
-          <div class="category-title-name" <!--style={{if (not (this.logoImg)) "padding: 0 !important;"}}-->>
+          <!--
+          <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
+          -->
+          <div class="category-title-name" style={{if (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
                 {{#if this.ifParentProtected}}
@@ -213,7 +216,7 @@ export default class CategoryHeader extends Component {
               </a>
             {{/if}}
             {{#if this.ifProtected}}
-              <!--{{icon this.lockIcon}}-->
+              <!-- {{icon this.lockIcon}} -->
             {{/if}}
             <h1>{{@category.name}}</h1>
           </div>
