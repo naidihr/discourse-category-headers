@@ -68,7 +68,7 @@ export default class CategoryHeader extends Component {
   }
 
   get darkLogoImg() {
-    if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark.url) {
+    if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark) {
       console.log(this.args.category.uploaded_logo_dark.url);
       return this.args.category.uploaded_logo_dark;
     } else if (
