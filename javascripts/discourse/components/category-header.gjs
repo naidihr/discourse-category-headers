@@ -191,12 +191,16 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
+          {{this.logoImg.url}}
+          {{this.darkLogoImg.url}}
           {{#if (and this.logoImg this.darkLogoImg)}}
             <div class="category-logo aspect-image">
-              <LightDarkImg
-                @lightImg={{this.logoImg}}
-                @darkImg={{this.darkLogoImg}}
-              />
+              <!--
+                <LightDarkImg
+                  @lightImg={{this.logoImg}}
+                  @darkImg={{this.darkLogoImg}}
+                />
+              -->
             </div>
           {{/if}}
           <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
