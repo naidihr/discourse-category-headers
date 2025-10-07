@@ -52,14 +52,14 @@ export default class CategoryHeader extends Component {
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
       console.log(this.args.category.uploaded_logo.url);
-      return this.args.category.uploaded_logo.url;
+      return this.args.category.uploaded_logo;
     } else if (
       settings.show_category_logo &&
       settings.show_parent_category_logo &&
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo
     ) {
-      return this.args.category.parentCategory.uploaded_logo.url;
+      return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return this.siteSettings.logo_small;
     } else {
@@ -70,14 +70,14 @@ export default class CategoryHeader extends Component {
   get darkLogoImg() {
     if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark.url) {
       console.log(this.args.category.uploaded_logo_dark.url);
-      return this.args.category.uploaded_logo_dark.url;
+      return this.args.category.uploaded_logo_dark;
     } else if (
       settings.show_dark_mode_category_logo &&
       settings.show_parent_category_dark_mode_logo &&
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo_dark
     ) {
-      return this.args.category.parentCategory.uploaded_logo_dark.url;
+      return this.args.category.parentCategory.uploaded_logo_dark;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       return this.siteSettings.logo_small;
     } else {
