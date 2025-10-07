@@ -51,6 +51,7 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
+      console.log(this.args.category.uploaded_logo.url);
       return this.args.category.uploaded_logo.url;
     } else if (
       settings.show_category_logo &&
@@ -68,7 +69,8 @@ export default class CategoryHeader extends Component {
 
   get darkLogoImg() {
     if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark.url) {
-      return this.args.category.uploaded_logo.url;
+      console.log(this.args.category.uploaded_logo_dark.url);
+      return this.args.category.uploaded_logo_dark.url;
     } else if (
       settings.show_dark_mode_category_logo &&
       settings.show_parent_category_dark_mode_logo &&
