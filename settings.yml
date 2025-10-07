@@ -67,9 +67,9 @@ show_parent_category_logo:
   default: true
   description: 'Show the parent category logo when a subcategory logo is not set'
 
-show_dar_mode_parent_category_logo:
+show_dark_mode_parent_category_logo:
   type: bool
-  default: true
+  default: false
   description: "Show the parent category's dark mode logo when a subcategory logo is not set."
   
 show_site_logo:
