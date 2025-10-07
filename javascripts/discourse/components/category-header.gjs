@@ -193,16 +193,16 @@ export default class CategoryHeader extends Component {
         <div class="category-title-contents">
           {{this.logoImg.url}}
           {{this.darkLogoImg.url}}
+          <!--
           {{#if this.logoImg}}
             <div class="category-logo aspect-image">
-              <!--
-                <LightDarkImg
-                  @lightImg={{this.logoImg}}
-                  @darkImg={{this.darkLogoImg}}
-                />
-              -->
+              <LightDarkImg
+                @lightImg={{this.logoImg}}
+                @darkImg={{this.darkLogoImg}}
+              />
             </div>
           {{/if}}
+          -->
           <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
