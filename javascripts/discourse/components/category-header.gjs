@@ -59,10 +59,13 @@ export default class CategoryHeader extends Component {
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo
     ) {
+      console.log(2);
       return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
+      console.log(3);
       return this.siteSettings.logo_small;
     } else {
+      console.log(4);
       return false;
     }
   }
@@ -77,10 +80,13 @@ export default class CategoryHeader extends Component {
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo_dark
     ) {
+      console.log(22);
       return this.args.category.parentCategory.uploaded_logo_dark;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
+      console.log(33);
       return this.siteSettings.logo_small;
     } else {
+      console.log(44);
       return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
     } 
   }
