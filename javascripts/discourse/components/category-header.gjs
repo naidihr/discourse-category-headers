@@ -7,7 +7,7 @@ import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
-import { and, not } from "truth-helpers";
+import { not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
