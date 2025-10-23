@@ -3,10 +3,11 @@ import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 
+import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
-import { not } from "truth-helpers";
+import { and, not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -50,19 +51,40 @@ export default class CategoryHeader extends Component {
 
   get logoImg() {
     if (settings.show_category_logo && this.args.category.uploaded_logo) {
-      return this.args.category.uploaded_logo.url;
+      return this.args.category.uploaded_logo;
     } else if (
       settings.show_category_logo &&
       settings.show_parent_category_logo &&
       this.args.category.parentCategory &&
       this.args.category.parentCategory.uploaded_logo
     ) {
-      return this.args.category.parentCategory.uploaded_logo.url;
+      return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
-      return this.siteSettings.logo_small;
+      let map = {};
+      map['url'] = this.siteSettings.logo_small
+      return map;
     } else {
       return false;
     }
+  }
+
+  get darkLogoImg() {
+    if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark) {
+      return this.args.category.uploaded_logo_dark;
+    } else if (
+      settings.show_dark_mode_category_logo &&
+      settings.show_dark_mode_parent_category_logo &&
+      this.args.category.parentCategory &&
+      this.args.category.parentCategory.uploaded_logo_dark
+    ) {
+      return this.args.category.parentCategory.uploaded_logo_dark;
+    } else if (settings.show_site_logo && this.siteSettings.logo_small) {
+      let map = {};
+      map['url'] = this.siteSettings.logo_small
+      return map;
+    } else {
+      return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
+    } 
   }
 
   get ifParentProtected() {
@@ -171,12 +193,15 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          {{#if this.logoImg}}
+          {{#if (and this.logoImg this.darkLogoImg)}}
             <div class="category-logo aspect-image">
-              <img src={{this.logoImg}} />
+              <LightDarkImg
+                @lightImg={{this.logoImg}}
+                @darkImg={{this.darkLogoImg}}
+              />
             </div>
           {{/if}}
-          <div class="category-title-name" style={{if (not (this.logoImg)) "padding: 0 !important;"}}>
+          <div class="category-title-name" style={{if (not this.logoImg) "padding: 0 !important;"}}>
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
                 {{#if this.ifParentProtected}}
