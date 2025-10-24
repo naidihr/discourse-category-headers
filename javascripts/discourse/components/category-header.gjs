@@ -33,6 +33,9 @@ export default class CategoryHeader extends Component {
   }
 
   async _onPageChanged(transition) {
+    // Make descriptions collapsed
+    this.isCatDescExpanded = false;
+
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_cat_desc = cd.post_stream.posts[0].cooked;
