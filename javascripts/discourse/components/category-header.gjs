@@ -21,7 +21,7 @@ export default class CategoryHeader extends Component {
 
   constructor() {
     super(...arguments);
-    // this.getFullCatDesc();
+    this.getFullCatDesc();
   }
 
   get ifParentCategory() {
@@ -43,6 +43,7 @@ export default class CategoryHeader extends Component {
   async getFullCatDesc() {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
+      console.log(cd);
       this.args.full_category_description = cd.post_stream.posts[0].cooked;
     } catch (e) {
       // eslink-disable-next-line no-console
