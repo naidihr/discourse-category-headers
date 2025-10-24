@@ -201,16 +201,17 @@ export default class CategoryHeader extends Component {
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       // readMoreLink.href = "";
       const fullCategoryDescription = this.full_category_description;
-      console.log(fullCategoryDescription);
       if (fullCategoryDescription) {
         if (this.isCatDescExpanded === true) {
           // Collapse it
           categoryDescriptionElement.innerHTML = this.args.category.description;
           readMoreLink.textContent = this.aboutTopicUrl;
+          this.isCatDescExpanded = false;
         } else {
           // Expand it
           categoryDescriptionElement.innerHTML = fullCategoryDescription;
           readMoreLink.textContent = this.aboutTopicUrl;
+          this.isCatDescExpanded = true;
         }
       }
     }
