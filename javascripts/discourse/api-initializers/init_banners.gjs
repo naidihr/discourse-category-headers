@@ -12,6 +12,7 @@ export default apiInitializer((api) => {
     try {
       const cd = await ajax(`${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
       if (cd) {
+        console.log(cd);
         full_description = cd.post_stream.posts[0].cooked;
       }
     } catch (e) {
