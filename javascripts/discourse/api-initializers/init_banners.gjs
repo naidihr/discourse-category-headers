@@ -10,12 +10,11 @@ export default apiInitializer((api) => {
   let full_description = "";
   api.onPageChange(async function(url) {
     try {
-      console.log(url);
-      console.log(url.split("/c/")[1].split("/")[1].split("?")[0]);
-      const cd = await ajax(`/c/${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
-      if (cd) {
-        console.log(cd);
-        full_description = cd.topic_list.topics[0].cooked;
+      const category = await ajax(`/c/${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
+      if (category) {
+        const about_topic_id = category.topic_list.topics[0].id;
+        const about_topic = ajax(`/t/${about_topic_id}.json`);
+        console.log
       }
     } catch (e) {
       // eslink-disable-next-line no-console
