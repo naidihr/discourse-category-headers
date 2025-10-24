@@ -15,6 +15,7 @@ import { and, or, not } from "truth-helpers";
 export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
+  @service router;
 
   @tracked full_cat_desc;
   @tracked isCatDescExpanded = false;
@@ -22,6 +23,23 @@ export default class CategoryHeader extends Component {
   constructor() {
     super(...arguments);
     this.getFullCatDesc();
+    this._onPageChanged = this._onPageChanged.bind(this);
+    this.router.on("routeDidChange", this._onPageChanged);
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.router.off("routeDidChange", this._onPageChanged);
+  }
+
+  _onPageChanged(transition) {
+    try {
+      let cd = await ajax(`${this.args.category.topic_url}.json`);
+      this.full_cat_desc = cd.post_stream.posts[0].cooked;
+    } catch (e) {
+      // eslink-disable-next-line no-console
+      console.error(e);
+    }
   }
 
   get ifParentCategory() {
@@ -43,7 +61,6 @@ export default class CategoryHeader extends Component {
   async getFullCatDesc() {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
-      console.log(cd);
       this.full_cat_desc = cd.post_stream.posts[0].cooked;
     } catch (e) {
       // eslink-disable-next-line no-console
