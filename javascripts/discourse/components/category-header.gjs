@@ -260,7 +260,7 @@ export default class CategoryHeader extends Component {
 
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
-            {{#if settings.expand_and_collapse_category_description}}
+            {{#if (and settings.expand_and_collapse_category_description (not this.showFullCatDesc))}}
               <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{else}}
               <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
