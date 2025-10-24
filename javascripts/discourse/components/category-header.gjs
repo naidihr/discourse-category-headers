@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 
-import { on } from "@ember/modifiers";
+import { on } from "@ember/modifier";
 import { action } from "@ember/action";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
