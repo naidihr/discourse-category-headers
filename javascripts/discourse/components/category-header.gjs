@@ -266,7 +266,7 @@ export default class CategoryHeader extends Component {
                 
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    {{#if (and settings.expand_and_collapse_category_description (not this.showFullCatDesc))}}
+                    {{#if (and settings.expand_and_collapse_category_description this.showCatDesc (not this.showFullCatDesc))}}
                       <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                     {{else}}
                       <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
@@ -280,7 +280,7 @@ export default class CategoryHeader extends Component {
 
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
-            {{#if (and settings.expand_and_collapse_category_description (not this.showFullCatDesc))}}
+            {{#if (and settings.expand_and_collapse_category_description this.showCatDesc (not this.showFullCatDesc))}}
               <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{else}}
               <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
