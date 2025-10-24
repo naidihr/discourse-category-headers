@@ -5,7 +5,7 @@ import CategoryHeader from "../components/category-header";
 
 export default apiInitializer((api) => {
   api.onPageChange((url) => {
-    console.log(url);
+    console.log(url.spliit("/c/")[1].split("/")[1]);
   });
   api.renderInOutlet("above-category-heading", CategoryHeader);
 });
