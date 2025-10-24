@@ -1,5 +1,8 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+
+import { on } from "@ember/modifiers";
+import { action } from "@ember/action";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 
@@ -14,6 +17,7 @@ export default class CategoryHeader extends Component {
   @service site;
 
   @tracked full_category_description;
+  @tracked isCatDescExpanded = false;
 
   constructor() {
     super(...arguments);
@@ -178,12 +182,28 @@ export default class CategoryHeader extends Component {
 
   get aboutTopicUrl() {
     if (settings.show_read_more_link && this.args.category.topic_url) {
-      return settings.read_more_link_text;
+      return (this.isCatDescExpanded) ? settings.read_less_link_text : settings.read_more_link_text;
     }
   }
 
   get inlineReadMore() {
     return (settings.inline_read_more && (settings.show_category_description || settings.show_full_category_description) && settings.show_read_more_link);
+  }
+
+  @action
+  expandCategoryDescription() {
+    const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0].children[0];
+    const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
+    const fullCategoryDescription = this.getFullCatDesc;
+    if (this.isCatDescExpanded === true) {
+      // Collapse it
+      categoryDescriptionElement.innerHTML = this.args.category.description;
+      readMoreLink.textContent = this.aboutTopicUrl;
+    } else {
+      // Expand it
+      categoryDescriptionElement.innerHTML = fullCategoryDescription;
+      readMoreLink.textContent = this.aboutTopicUrl;
+    }
   }
 
   <template>
