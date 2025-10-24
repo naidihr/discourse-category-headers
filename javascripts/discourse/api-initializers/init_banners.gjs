@@ -6,7 +6,7 @@ import CategoryHeader from "../components/category-header";
 
 export default apiInitializer((api) => {
   let full_description = "";
-  api.onPageChange((url) => {
+  api.onPageChange(async function(url) {
     console.log(url.split("/c/")[1].split("/")[1].split("?")[0]);
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
