@@ -10,8 +10,10 @@ export default apiInitializer((api) => {
   let full_description = "";
   api.onPageChange(async function(url) {
     try {
-      let cd = await ajax(`${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
-      full_description = cd.post_stream.posts[0].cooked;
+      const cd = await ajax(`${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
+      if (cd) {
+        full_description = cd.post_stream.posts[0].cooked;
+      }
     } catch (e) {
       // eslink-disable-next-line no-console
       console.error(e);
