@@ -193,7 +193,7 @@ export default class CategoryHeader extends Component {
   @action
   expandCategoryDescription() {
     if (settings.expand_and_collapse_category_description) {
-      const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0].children[0];
+      const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       const fullCategoryDescription = this.getFullCatDesc;
       if (this.isCatDescExpanded === true) {
