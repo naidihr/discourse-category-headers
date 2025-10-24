@@ -7,9 +7,8 @@ import CategoryHeader from "../components/category-header";
 export default apiInitializer((api) => {
   let full_description = "";
   api.onPageChange(async function(url) {
-    console.log(url.split("/c/")[1].split("/")[1].split("?")[0]);
     try {
-      let cd = await ajax(`${this.args.category.topic_url}.json`);
+      let cd = await ajax(`${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
       full_description = cd.post_stream.posts[0].cooked;
     } catch (e) {
       // eslink-disable-next-line no-console
