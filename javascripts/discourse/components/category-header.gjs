@@ -32,7 +32,7 @@ export default class CategoryHeader extends Component {
     this.router.off("routeDidChange", this._onPageChanged);
   }
 
-  _onPageChanged(transition) {
+  async _onPageChanged(transition) {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_cat_desc = cd.post_stream.posts[0].cooked;
