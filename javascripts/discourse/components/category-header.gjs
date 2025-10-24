@@ -245,7 +245,7 @@ export default class CategoryHeader extends Component {
           {{/if}}
           <div
             class="category-title-name"
-            style={{if (not this.logoImg) "padding: 0 !important;"}}
+            style={{unless this.logoImg "padding: 0 !important;"}}
           >
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
@@ -283,6 +283,7 @@ export default class CategoryHeader extends Component {
                         (not this.showFullCatDesc)
                       )
                     }}
+                      {{! template-lint-disable no-invalid-interactive}}
                       <a
                         {{on "click" this.expandCategoryDescription}}
                       >{{this.aboutTopicUrl}}</a>
@@ -305,6 +306,7 @@ export default class CategoryHeader extends Component {
                 (not this.showFullCatDesc)
               )
             }}
+              {{! template-lint-disable no-invalid-interactive}}
               <a
                 {{on "click" this.expandCategoryDescription}}
               >{{this.aboutTopicUrl}}</a>
