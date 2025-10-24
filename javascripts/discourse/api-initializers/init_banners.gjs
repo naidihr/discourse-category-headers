@@ -21,6 +21,7 @@ export default apiInitializer((api) => {
       <template>
         <CategoryHeader
           @full_category_description={{full_description}}
+          @category={{this.args.category}}
         />
       </template>
     }
