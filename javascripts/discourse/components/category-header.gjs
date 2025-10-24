@@ -192,17 +192,19 @@ export default class CategoryHeader extends Component {
 
   @action
   expandCategoryDescription() {
-    const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0].children[0];
-    const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
-    const fullCategoryDescription = this.getFullCatDesc;
-    if (this.isCatDescExpanded === true) {
-      // Collapse it
-      categoryDescriptionElement.innerHTML = this.args.category.description;
-      readMoreLink.textContent = this.aboutTopicUrl;
-    } else {
-      // Expand it
-      categoryDescriptionElement.innerHTML = fullCategoryDescription;
-      readMoreLink.textContent = this.aboutTopicUrl;
+    if (settings.expand_and_collapse_category_description) {
+      const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0].children[0];
+      const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
+      const fullCategoryDescription = this.getFullCatDesc;
+      if (this.isCatDescExpanded === true) {
+        // Collapse it
+        categoryDescriptionElement.innerHTML = this.args.category.description;
+        readMoreLink.textContent = this.aboutTopicUrl;
+      } else {
+        // Expand it
+        categoryDescriptionElement.innerHTML = fullCategoryDescription;
+        readMoreLink.textContent = this.aboutTopicUrl;
+      }
     }
   }
 
@@ -242,7 +244,7 @@ export default class CategoryHeader extends Component {
                 {{htmlSafe this.catDesc}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                    <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                   </span>
                 {{/if}}
               </div>
@@ -253,7 +255,7 @@ export default class CategoryHeader extends Component {
                 {{htmlSafe this.full_category_description}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                    <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                   </span>
                 {{/if}}
               </div>
@@ -263,7 +265,7 @@ export default class CategoryHeader extends Component {
 
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
-            <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+            <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
           </div>
         {{/unless}}
       </div>
