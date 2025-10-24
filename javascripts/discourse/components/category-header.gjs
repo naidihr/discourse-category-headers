@@ -246,7 +246,11 @@ export default class CategoryHeader extends Component {
                 {{htmlSafe this.catDesc}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{#if settings.expand_and_collapse_category_description}}
+                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{else}}
+                      <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{/if}}
                   </span>
                 {{/if}}
               </div>
@@ -257,7 +261,11 @@ export default class CategoryHeader extends Component {
                 {{htmlSafe this.full_category_description}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{#if settings.expand_and_collapse_category_description}}
+                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{else}}
+                      <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{/if}}
                   </span>
                 {{/if}}
               </div>
@@ -267,7 +275,11 @@ export default class CategoryHeader extends Component {
 
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
-            <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+            {{#if settings.expand_and_collapse_category_description}}
+              <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+            {{else}}
+              <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+            {{/if}}
           </div>
         {{/unless}}
       </div>
