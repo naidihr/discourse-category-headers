@@ -16,7 +16,7 @@ export default class CategoryHeader extends Component {
   @service siteSettings;
   @service site;
 
-  @tracked full_category_description;
+  @tracked full_cat_desc;
   @tracked isCatDescExpanded = false;
 
   constructor() {
@@ -44,7 +44,7 @@ export default class CategoryHeader extends Component {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       console.log(cd);
-      this.args.full_category_description = cd.post_stream.posts[0].cooked;
+      this.full_cat_desc = cd.post_stream.posts[0].cooked;
     } catch (e) {
       // eslink-disable-next-line no-console
       console.error(e);
@@ -201,11 +201,11 @@ export default class CategoryHeader extends Component {
       const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       // readMoreLink.href = "";
-      const fullCategoryDescription = this.args.full_category_description;
+      const fullCategoryDescription = this.full_cat_desc;
       if (fullCategoryDescription) {
         if (this.isCatDescExpanded === true) {
           // Collapse it
-          categoryDescriptionElement.innerHTML = this.args.category.description;
+          categoryDescriptionElement.innerHTML = this.full_cat_desc;
           readMoreLink.textContent = this.aboutTopicUrl;
           this.isCatDescExpanded = false;
         } else {
@@ -266,7 +266,7 @@ export default class CategoryHeader extends Component {
 
             {{#if this.showFullCatDesc}}
               <div class="cooked">
-                {{htmlSafe this.args.full_category_description}}
+                {{htmlSafe this.full_cat_desc}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     {{#if settings.expand_and_collapse_category_description}}
