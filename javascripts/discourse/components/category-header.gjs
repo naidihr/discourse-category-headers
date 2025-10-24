@@ -186,7 +186,7 @@ export default class CategoryHeader extends Component {
 
   get aboutTopicUrl() {
     if (settings.show_read_more_link && this.args.category.topic_url) {
-      return (this.isCatDescExpanded) ? settings.read_less_link_text : settings.read_more_link_text;
+      return (this.isCatDescExpanded && settings.expand_and_collapse_category_description) ? settings.read_less_link_text : settings.read_more_link_text;
     }
   }
 
