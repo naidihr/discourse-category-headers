@@ -1,16 +1,13 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
-
+import { and, not, or } from "truth-helpers";
 import LightDarkImg from "discourse/components/light-dark-img";
-import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
-
-import { and, or, not } from "truth-helpers";
+import { ajax } from "discourse/lib/ajax";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -32,6 +29,7 @@ export default class CategoryHeader extends Component {
     this.router.off("routeDidChange", this._onPageChanged);
   }
 
+  // eslint-disable-next-line no-unused-vars
   async _onPageChanged(transition) {
     // Make descriptions collapsed
     this.isCatDescExpanded = false;
@@ -40,7 +38,7 @@ export default class CategoryHeader extends Component {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_cat_desc = cd.post_stream.posts[0].cooked;
     } catch (e) {
-      // eslink-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.error(e);
     }
   }
@@ -66,7 +64,7 @@ export default class CategoryHeader extends Component {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_cat_desc = cd.post_stream.posts[0].cooked;
     } catch (e) {
-      // eslink-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.error(e);
     }
   }
@@ -89,7 +87,7 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       let map = {};
-      map['url'] = this.siteSettings.logo_small
+      map["url"] = this.siteSettings.logo_small;
       return map;
     } else {
       return false;
@@ -97,7 +95,10 @@ export default class CategoryHeader extends Component {
   }
 
   get darkLogoImg() {
-    if (settings.show_dark_mode_category_logo && this.args.category.uploaded_logo_dark) {
+    if (
+      settings.show_dark_mode_category_logo &&
+      this.args.category.uploaded_logo_dark
+    ) {
       return this.args.category.uploaded_logo_dark;
     } else if (
       settings.show_dark_mode_category_logo &&
@@ -108,20 +109,18 @@ export default class CategoryHeader extends Component {
       return this.args.category.parentCategory.uploaded_logo_dark;
     } else if (settings.show_site_logo && this.siteSettings.logo_small) {
       let map = {};
-      map['url'] = this.siteSettings.logo_small
+      map["url"] = this.siteSettings.logo_small;
       return map;
     } else {
       return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
-    } 
+    }
   }
 
   get ifParentProtected() {
     if (
       this.args.category.parentCategory &&
-      (
-        this.args.category.parentCategory.permission === null ||
-        this.args.category.parentCategory.read_restricted
-      )
+      (this.args.category.parentCategory.permission === null ||
+        this.args.category.parentCategory.read_restricted)
     ) {
       return true;
     }
@@ -206,16 +205,24 @@ export default class CategoryHeader extends Component {
 
   get aboutTopicUrl() {
     if (settings.show_read_more_link && this.args.category.topic_url) {
-      return (this.isCatDescExpanded && settings.expand_and_collapse_category_description) ? settings.read_less_link_text : settings.read_more_link_text;
+      return this.isCatDescExpanded &&
+        settings.expand_and_collapse_category_description
+        ? settings.read_less_link_text
+        : settings.read_more_link_text;
     }
   }
 
   get inlineReadMore() {
-    return (settings.inline_read_more && (settings.show_category_description || settings.show_full_category_description) && settings.show_read_more_link);
+    return (
+      settings.inline_read_more &&
+      (settings.show_category_description ||
+        settings.show_full_category_description) &&
+      settings.show_read_more_link
+    );
   }
 
   @action
-  async expandCategoryDescription(e) {
+  async expandCategoryDescription() {
     if (settings.expand_and_collapse_category_description) {
       this.isCatDescExpanded = !this.isCatDescExpanded;
     }
@@ -236,7 +243,10 @@ export default class CategoryHeader extends Component {
               />
             </div>
           {{/if}}
-          <div class="category-title-name" style={{if (not this.logoImg) "padding: 0 !important;"}}>
+          <div
+            class="category-title-name"
+            style={{if (not this.logoImg) "padding: 0 !important;"}}
+          >
             {{#if this.ifParentCategory}}
               <a class="parent-box-link" href={{@category.parentCategory.url}}>
                 {{#if this.ifParentProtected}}
@@ -263,11 +273,19 @@ export default class CategoryHeader extends Component {
                     {{htmlSafe this.catDesc}}
                   {{/if}}
                 {{/if}}
-                
+
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    {{#if (and settings.expand_and_collapse_category_description this.showCatDesc (not this.showFullCatDesc))}}
-                      <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{#if
+                      (and
+                        settings.expand_and_collapse_category_description
+                        this.showCatDesc
+                        (not this.showFullCatDesc)
+                      )
+                    }}
+                      <a
+                        {{on "click" this.expandCategoryDescription}}
+                      >{{this.aboutTopicUrl}}</a>
                     {{else}}
                       <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
                     {{/if}}
@@ -280,8 +298,16 @@ export default class CategoryHeader extends Component {
 
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
-            {{#if (and settings.expand_and_collapse_category_description this.showCatDesc (not this.showFullCatDesc))}}
-              <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+            {{#if
+              (and
+                settings.expand_and_collapse_category_description
+                this.showCatDesc
+                (not this.showFullCatDesc)
+              )
+            }}
+              <a
+                {{on "click" this.expandCategoryDescription}}
+              >{{this.aboutTopicUrl}}</a>
             {{else}}
               <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
             {{/if}}
