@@ -228,7 +228,7 @@ export default class CategoryHeader extends Component {
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
-        {{did-update this.categoryChanged @category}}
+        {{didUpdate this.categoryChanged @category}}
       >
         <div class="category-title-contents">
           {{#if (and this.logoImg this.darkLogoImg)}}
