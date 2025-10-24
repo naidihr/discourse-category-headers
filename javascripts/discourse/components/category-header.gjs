@@ -191,13 +191,13 @@ export default class CategoryHeader extends Component {
   }
 
   @action
-  expandCategoryDescription(e) {
+  async expandCategoryDescription(e) {
     if (settings.expand_and_collapse_category_description) {
       e.preventDefault();
       const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       readMoreLink.href = "";
-      const fullCategoryDescription = this.getFullCatDesc();
+      const fullCategoryDescription = await this.getFullCatDesc();
       if (this.isCatDescExpanded === true) {
         // Collapse it
         categoryDescriptionElement.innerHTML = this.args.category.description;
@@ -276,7 +276,7 @@ export default class CategoryHeader extends Component {
         {{#unless this.inlineReadMore}}
           <div class="category-about-url">
             {{#if settings.expand_and_collapse_category_description}}
-              <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+              <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{else}}
               <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{/if}}
