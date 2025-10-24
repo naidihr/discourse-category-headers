@@ -200,7 +200,7 @@ export default class CategoryHeader extends Component {
       const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       // readMoreLink.href = "";
-      const fullCategoryDescription = await this.getFullCatDesc();
+      const fullCategoryDescription = this.full_category_description;
       console.log(fullCategoryDescription);
       if (fullCategoryDescription) {
         if (this.isCatDescExpanded === true) {
