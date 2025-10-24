@@ -220,10 +220,10 @@ export default class CategoryHeader extends Component {
 
   <template>
     {{#if this.showHeader}}
-      {{this.getFullCatDesc()}}
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
+        {{on 'load' this.getFullCatDesc}}
       >
         <div class="category-title-contents">
           {{#if (and this.logoImg this.darkLogoImg)}}
