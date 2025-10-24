@@ -152,7 +152,17 @@ inline_read_more:
   default: false
   description: 'Put "Read more" link at the end of the category description'
 
+expand_and_collapse_category_description:
+  type: bool
+  default: false
+  description: 'Expand/collapse the category description when the Read more/Read less links are clicked'
+
 read_more_link_text:
   type: string
   default: 'Read more about this category…'
   description: 'Custom text for the "Read more" link'
+
+read_less_link_text:
+  type: string
+  default: 'Read less…'
+  description: 'Custom text for the "Read less" link'
