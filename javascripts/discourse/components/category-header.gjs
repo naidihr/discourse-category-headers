@@ -44,7 +44,10 @@ export default class CategoryHeader extends Component {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
       this.full_category_description = cd.post_stream.posts[0].cooked;
-    } catch {}
+    } catch (e) {
+      // eslink-disable-next-line no-console
+      console.error(e);
+    }
   }
 
   get showFullCatDesc() {
@@ -196,17 +199,19 @@ export default class CategoryHeader extends Component {
       e.preventDefault();
       const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
-      readMoreLink.href = "";
+      // readMoreLink.href = "";
       const fullCategoryDescription = await this.getFullCatDesc();
       console.log(fullCategoryDescription);
-      if (this.isCatDescExpanded === true) {
-        // Collapse it
-        categoryDescriptionElement.innerHTML = this.args.category.description;
-        readMoreLink.textContent = this.aboutTopicUrl;
-      } else {
-        // Expand it
-        categoryDescriptionElement.innerHTML = fullCategoryDescription;
-        readMoreLink.textContent = this.aboutTopicUrl;
+      if (fullCategoryDescription) {
+        if (this.isCatDescExpanded === true) {
+          // Collapse it
+          categoryDescriptionElement.innerHTML = this.args.category.description;
+          readMoreLink.textContent = this.aboutTopicUrl;
+        } else {
+          // Expand it
+          categoryDescriptionElement.innerHTML = fullCategoryDescription;
+          readMoreLink.textContent = this.aboutTopicUrl;
+        }
       }
     }
   }
