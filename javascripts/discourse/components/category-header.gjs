@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 
-import { on } from "@ember/modifier";
+import { didUpdate, on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
@@ -195,6 +195,11 @@ export default class CategoryHeader extends Component {
   }
 
   @action
+  categoryChanged() {
+    this.getFullCatDesc();
+  }
+
+  @action
   async expandCategoryDescription(e) {
     if (settings.expand_and_collapse_category_description) {
       e.preventDefault();
@@ -223,7 +228,7 @@ export default class CategoryHeader extends Component {
       <div
         class="category-title-header category-banner-{{@category.slug}}"
         style={{this.getHeaderStyle}}
-        {{on 'load' this.getFullCatDesc}}
+        {{did-update this.categoryChanged @category}}
       >
         <div class="category-title-contents">
           {{#if (and this.logoImg this.darkLogoImg)}}
