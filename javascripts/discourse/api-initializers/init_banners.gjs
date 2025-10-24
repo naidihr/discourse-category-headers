@@ -10,7 +10,9 @@ export default apiInitializer((api) => {
   let full_description = "";
   api.onPageChange(async function(url) {
     try {
-      const cd = await ajax(`/c/${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
+      console.log(url);
+      console.log(url.split("/c/")[1].split("/")[1].split("?")[0]);
+      const cd = await ajax(`${url.split("/c/")[1].split("/")[1].split("?")[0]}.json`);
       if (cd) {
         console.log(cd);
         full_description = cd.topic_list.topics[0].cooked;
