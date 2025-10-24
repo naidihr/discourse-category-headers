@@ -10,7 +10,7 @@ import LightDarkImg from "discourse/components/light-dark-img";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 
-import { and, not } from "truth-helpers";
+import { and, or, not } from "truth-helpers";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -232,7 +232,7 @@ export default class CategoryHeader extends Component {
           </div>
 
           <div class="category-title-description">
-            {{#if this.showCatDesc}}
+            {{#if (or this.showCatDesc this.showFullCatDesc)}}
               <div class="cooked">
                 {{#if this.showFullCatDesc}}
                   {{htmlSafe this.full_cat_desc}}
@@ -246,7 +246,7 @@ export default class CategoryHeader extends Component {
                 
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
-                    {{#if settings.expand_and_collapse_category_description}}
+                    {{#if (and settings.expand_and_collapse_category_description (not this.showFullCatDesc))}}
                       <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                     {{else}}
                       <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
