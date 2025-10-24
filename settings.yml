@@ -1,9 +1,9 @@
 show_category_name:
   type: bool
   default: true
-  description: 'Show the category name in the header'
-  
-show_category_description: 
+  description: "Show the category name in the header"
+
+show_category_description:
   type: bool
   default: true
   description: 'Show the category description text<br>(The first paragraph of the "About this category" topic)'
@@ -15,132 +15,132 @@ show_full_category_description:
 
 description_text_size:
   type: enum
-  default: larger  
+  default: larger
   choices:
-  - smallest
-  - smaller
-  - normal
-  - larger    
-  - largest      
-  description: 'Size of text within the category description'  
+    - smallest
+    - smaller
+    - normal
+    - larger
+    - largest
+  description: "Size of text within the category description"
 
 text_align:
   type: enum
-  default: left  
+  default: left
   choices:
-  - left
-  - center
-  - right     
-  description: 'Alignment of the text within the category header'  
-  
-show_subcategory_header: 
+    - left
+    - center
+    - right
+  description: "Alignment of the text within the category header"
+
+show_subcategory_header:
   type: bool
   default: true
-  description: 'Show header for subcategories'  
-  
-show_parent_category_name: 
+  description: "Show header for subcategories"
+
+show_parent_category_name:
   type: bool
   default: true
-  description: 'Prefix the parent category name on the subcategory headers'   
+  description: "Prefix the parent category name on the subcategory headers"
 
 show_lock_icon:
   type: bool
   default: true
-  description: 'Show the lock icon on categories protected by permissions' 
+  description: "Show the lock icon on categories protected by permissions"
 
 category_lock_icon:
   default: ""
-  description: 'Enter the name of a FontAwesome 5 icon to display instead of the lock icon next to private categories'
-  
+  description: "Enter the name of a FontAwesome 5 icon to display instead of the lock icon next to private categories"
+
 show_category_logo:
   type: bool
   default: true
-  description: 'Show the category logo image within the header'
+  description: "Show the category logo image within the header"
 
 show_dark_mode_category_logo:
   type: bool
   default: false
-  description: 'Show the dark mode category logo instead of the normal category logo.'
-  
+  description: "Show the dark mode category logo instead of the normal category logo."
+
 show_parent_category_logo:
   type: bool
   default: true
-  description: 'Show the parent category logo when a subcategory logo is not set'
+  description: "Show the parent category logo when a subcategory logo is not set"
 
 show_dark_mode_parent_category_logo:
   type: bool
   default: false
   description: "Show the parent category's dark mode logo when a subcategory logo is not set."
-  
+
 show_site_logo:
   type: bool
   default: true
-  description: 'Show the small site logo if a category logo is not set'  
-  
+  description: "Show the small site logo if a category logo is not set"
+
 position_logo:
   type: enum
-  default: left  
+  default: left
   choices:
-  - left
-  - right
-  - top
-  description: 'Position of the logo within the header. Left and right display the logo inline with the text<br>Top displays the logo above aligned with the text'  
-  
+    - left
+    - right
+    - top
+  description: "Position of the logo within the header. Left and right display the logo inline with the text<br>Top displays the logo above aligned with the text"
+
 size_logo:
   type: enum
-  default: standard  
+  default: standard
   choices:
-  - standard
-  - small  
-  - original
-  description: 'Position of the logo within the header.<br>Small is 40px high similar to a sub
-  category box logo<br>Standard is 150px high<br>Original is the size of the image uploaded'    
-  
+    - standard
+    - small
+    - original
+  description:
+    "Position of the logo within the header.<br>Small is 40px high similar to a sub
+    category box logo<br>Standard is 150px high<br>Original is the size of the image uploaded"
+
 header_style:
   type: enum
-  default: box  
+  default: box
   choices:
-  - box
-  - banner
-  - none
-  description: 'Set the header style to either:<br>Box, style as a box with the category background color as the left border<br>Banner, set the header background to the category background color and text to the forground color<br>None, no styling<'
-   
+    - box
+    - banner
+    - none
+  description: "Set the header style to either:<br>Box, style as a box with the category background color as the left border<br>Banner, set the header background to the category background color and text to the forground color<br>None, no styling<"
 
 header_background_image:
   type: enum
-  default: contain  
+  default: contain
   choices:
-  - contain  
-  - cover
-  - resize
-  - outside
-  description: 'Applies if you have uploaded a category background image<br>Contain, cover and resize display the background within the header<br>Outside is the Discourse default displaying it outside the header.'
+    - contain
+    - cover
+    - resize
+    - outside
+  description: "Applies if you have uploaded a category background image<br>Contain, cover and resize display the background within the header<br>Outside is the Discourse default displaying it outside the header."
 
 show_parent_category_background_image:
   type: bool
   default: false
   description: "Show the background image of the parent category instead. Follows the setting in `header_background_image`."
 
-show_mobile: 
+show_mobile:
   type: bool
   default: true
-  description: 'Show category header on mobile devices'
-  
-force_mobile_alignment:  
+  description: "Show category header on mobile devices"
+
+force_mobile_alignment:
   type: bool
   default: true
-  description: 'Force mobile alignment of logo-text to the top-centre of the header'
-  
-hide_if_no_category_description: 
+  description: "Force mobile alignment of logo-text to the top-centre of the header"
+
+hide_if_no_category_description:
   type: bool
   default: true
-  description: 'Hide header if category description is not set'    
+  description: "Hide header if category description is not set"
 
 hide_category_exceptions:
   type: list
-  default: '' 
+  default: ""
   list_type: category
-  description: 'Headers will not show for these categories'
+  description: "Headers will not show for these categories"
 
 show_read_more_link:
   type: bool
@@ -152,7 +152,17 @@ inline_read_more:
   default: false
   description: 'Put "Read more" link at the end of the category description'
 
+expand_and_collapse_category_description:
+  type: bool
+  default: false
+  description: "Expand/collapse the category description when the Read more/Read less links are clicked"
+
 read_more_link_text:
   type: string
-  default: 'Read more about this category…'
+  default: "Read more about this category…"
   description: 'Custom text for the "Read more" link'
+
+read_less_link_text:
+  type: string
+  default: "Read less…"
+  description: 'Custom text for the "Read less" link'
