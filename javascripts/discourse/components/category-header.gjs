@@ -198,6 +198,7 @@ export default class CategoryHeader extends Component {
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       readMoreLink.href = "";
       const fullCategoryDescription = await this.getFullCatDesc();
+      console.log(fullCategoryDescription);
       if (this.isCatDescExpanded === true) {
         // Collapse it
         categoryDescriptionElement.innerHTML = this.args.category.description;
@@ -247,9 +248,9 @@ export default class CategoryHeader extends Component {
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     {{#if settings.expand_and_collapse_category_description}}
-                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
-                    {{else}}
                       <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{else}}
+                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                     {{/if}}
                   </span>
                 {{/if}}
@@ -262,9 +263,9 @@ export default class CategoryHeader extends Component {
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     {{#if settings.expand_and_collapse_category_description}}
-                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
-                    {{else}}
                       <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+                    {{else}}
+                      <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
                     {{/if}}
                   </span>
                 {{/if}}
@@ -278,7 +279,7 @@ export default class CategoryHeader extends Component {
             {{#if settings.expand_and_collapse_category_description}}
               <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{else}}
-              <a {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
+              <a href={{@category.topic_url}} {{on 'click' this.expandCategoryDescription}}>{{this.aboutTopicUrl}}</a>
             {{/if}}
           </div>
         {{/unless}}
