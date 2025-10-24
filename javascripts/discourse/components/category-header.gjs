@@ -21,7 +21,7 @@ export default class CategoryHeader extends Component {
 
   constructor() {
     super(...arguments);
-    this.getFullCatDesc();
+    // this.getFullCatDesc();
   }
 
   get ifParentCategory() {
@@ -43,7 +43,7 @@ export default class CategoryHeader extends Component {
   async getFullCatDesc() {
     try {
       let cd = await ajax(`${this.args.category.topic_url}.json`);
-      this.full_category_description = cd.post_stream.posts[0].cooked;
+      this.args.full_category_description = cd.post_stream.posts[0].cooked;
     } catch (e) {
       // eslink-disable-next-line no-console
       console.error(e);
@@ -200,7 +200,7 @@ export default class CategoryHeader extends Component {
       const categoryDescriptionElement = document.getElementsByClassName("category-title-description")[0].children[0];
       const readMoreLink = document.getElementsByClassName("category-about-url")[0].children[0];   
       // readMoreLink.href = "";
-      const fullCategoryDescription = this.full_category_description;
+      const fullCategoryDescription = this.args.full_category_description;
       if (fullCategoryDescription) {
         if (this.isCatDescExpanded === true) {
           // Collapse it
@@ -265,7 +265,7 @@ export default class CategoryHeader extends Component {
 
             {{#if this.showFullCatDesc}}
               <div class="cooked">
-                {{htmlSafe this.full_category_description}}
+                {{htmlSafe this.args.full_category_description}}
                 {{#if this.inlineReadMore}}
                   <span class="category-about-url">
                     {{#if settings.expand_and_collapse_category_description}}
