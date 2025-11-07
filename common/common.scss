@@ -3,17 +3,26 @@ div[class^="category-title-header"] {
 }
 
 .category-title-header {
+  // Adopt Discourse core CSS variables for category headers
+  --category-header-logo-size: #{if($size_logo == "standard", 3rem, if($size_logo == "small", 2rem, auto))};
+  --category-description-width: 760px;
+  --category-header-border: 1px solid var(--content-border-color);
+
   box-sizing: border-box;
   display: block !important;
-  margin-bottom: 20px !important;
+  margin-bottom: var(--space-6) !important;
   text-align: $text_align;
   width: 100%;
   justify-content: center;
   overflow: hidden;
-  border: 2px solid rgb(232.9, 232.9, 232.9);
 
   @if $header_style == "box" {
-    border: 2px solid $primary_low;
+    border: var(--category-header-border);
+    border-left: 6px solid var(--category-color, var(--primary-medium));
+  } @else if $header_style == "banner" {
+    border: 0 !important;
+    background-color: var(--category-color, var(--primary-low));
+    color: var(--category-text-color, var(--primary));
   } @else {
     border: 0 !important; // Stylelint complains if 0px is used
   }
@@ -24,17 +33,56 @@ div[class^="category-title-header"] {
     background-size: contain;
   } @else if $header_background_image == "resize" {
     background-size: 100% 100%;
-  } @else {
-    background-image: none;
   }
 
   .category-title-contents {
-    padding: 20px;
+    padding: var(--space-4);
+
+    @if $position_logo == "top" {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    } @else if $position_logo == "right" {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      column-gap: var(--space-4);
+    } @else {
+      // default: left
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: start;
+      column-gap: var(--space-4);
+    }
+  }
+
+  // Text wrapper groups title and description together
+  .category-title-text-wrapper {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    @if $position_logo == "right" {
+      grid-column: 1;
+    } @else if $position_logo == "top" {
+      // no grid in top mode
+    } @else {
+      grid-column: 2;
+    }
+  }
+
+  .category-title-name,
+  .category-title-description {
+min-width: 0;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-2);
+    justify-content: space-between;
   }
 
   .category-title-name {
-    padding: 0 20px 0;
-
     @if $show_category_name == "false" {
       display: none;
     }
@@ -46,6 +94,17 @@ div[class^="category-title-header"] {
 
     h1 {
       display: inline !important;
+
+      @if $title_text_size == "smallest" {
+        font-size: $font-up-1;
+      } @else if $title_text_size == "smaller" {
+        font-size: $font-up-2;
+      } @else if $title_text_size == "larger" {
+        font-size: $font-up-4;
+      } @else if $title_text_size == "largest" {
+        font-size: $font-up-5;
+      }
+      // For "normal": no font-size override -> preserves core default
     }
 
     svg {
@@ -56,7 +115,7 @@ div[class^="category-title-header"] {
   }
 
   .category-title-description {
-    padding-top: 0.5em;
+    max-width: var(--category-description-width);
 
     @if $description_text_size == "smallest" {
       font-size: $font-0;
@@ -80,6 +139,23 @@ div[class^="category-title-header"] {
       $show_full_category_description ==
       "false"
     {
+      display: none;
+    }
+
+    // Excerpt and full description blocks
+    .category-description__excerpt {
+      // Excerpt is always visible when not in "always show full" mode
+      display: block;
+    }
+
+    .category-description__full {
+      // Full description appended below excerpt when expanded
+      display: block;
+      margin-top: var(--space-2);
+    }
+
+    // Hide excerpt when full description is shown
+    .category-description__excerpt:has(+ .category-description__full) {
       display: none;
     }
   }
@@ -108,58 +184,185 @@ div[class^="category-title-header"] {
   }
 }
 
-.category-title-contents .category-logo.aspect-image,
-.category-title-contents .category-logo.aspect-image > img {
+// Logo container - grid placement
+.category-title-contents .category-logo.aspect-image {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+
   @if $position_logo == "top" {
-    float: none;
-    max-width: 100%;
-    margin: 0 0 0.25em 0;
-  } @else if $position_logo == "left" {
-    float: $position_logo;
-    margin: 0 0.5em 0.25em 0;
+    // stacked mode uses flex on parent; no grid placement
   } @else if $position_logo == "right" {
-    float: $position_logo;
-    margin: 0 0 0.25em 0.5em;
-  }
-
-  @if $size_logo == "standard" {
-    max-height: 150px;
-  } @else if $size_logo == "small" {
-    max-height: 50px;
+    grid-column: 2;
   } @else {
-    max-height: 2000px;
+    // default: left
+    grid-column: 1;
   }
 }
 
-.category-title-contents .category-logo.aspect-image > img {
-  // width: calc(var($max-height)*var($aspect-ratio));
-  height: auto;
+// Logo sizing using Discourse core aspect-image pattern
+.category-title-contents .category-logo.aspect-image {
+  height: var(--category-header-logo-size);
   width: auto;
-  display: inline-block;
+
+  > img {
+    display: block;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: var(--category-header-logo-size);
+    object-fit: contain;
+  }
 }
 
-// Update the category-about-url rules
-.category-about-url {
-  @if $inline_read_more == "false" {
-    margin-top: 10px !important;
-    padding: 0 20px 20px; // Add padding to match the rest of the component
-    text-align: $text-align;
-
-    @if $description_text_size == "smallest" {
-      font-size: $font-0;
-    } @else if $description_text_size == "smaller" {
-      font-size: $font-up-2;
-    } @else if $description_text_size == "normal" {
-      font-size: $font-up-3;
-    } @else if $description_text_size == "larger" {
-      font-size: $font-up-4;
-    } @else if $description_text_size == "largest" {
-      font-size: $font-up-5;
+// Support for CSS custom properties with aspect-ratio
+@supports (--custom: property) {
+  .category-title-contents .category-logo.aspect-image {
+    @if $size_logo == "standard" {
+      --max-height: 3rem;
+    } @else if $size_logo == "small" {
+      --max-height: 2rem;
+    } @else {
+      --max-height: auto;
     }
+
+    height: auto;
+
+    > img {
+      width: calc(var(--max-height) * var(--aspect-ratio, 1));
+      max-height: var(--max-height);
+    }
+  }
+}
+
+// Category about URL styling (now always inside .category-title-text-wrapper)
+.category-title-text-wrapper .category-about-url {
+  display: block;
+  width: 100%;
+  text-align: $text_align;
+
+  @if $description_text_size == "smallest" {
+    font-size: $font-0;
+  } @else if $description_text_size == "smaller" {
+    font-size: $font-up-2;
+  } @else if $description_text_size == "normal" {
+    font-size: $font-up-3;
+  } @else if $description_text_size == "larger" {
+    font-size: $font-up-4;
+  } @else if $description_text_size == "largest" {
+    font-size: $font-up-5;
   }
 }
 
 // Remove the color override to use the default link color
 .category-about-url a {
   text-decoration: none;
+}
+
+
+// Category bell placement: style and fallback hide rules
+.category-title-name .category-notifications-wrap {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--space-2);
+
+  // Ensure icon is visible and properly sized
+  .d-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+
+  // Restore visible color for icon-only button (core .btn.no-text may set color: transparent)
+  .btn.no-text {
+    color: inherit !important;
+    opacity: 1; // ensure not dimmed away
+  }
+
+  // Counteract core .btn.no-text font-size:0 collapsing em-sized icons
+  .btn.no-text .d-icon {
+    font-size: var(--font-0, 1rem);
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  // Ensure the FloatKit trigger we inject has explicit sizing so its SVG icon renders
+  .category-header-notifications-trigger {
+    color: inherit !important;
+    font-size: var(--font-0, 1rem);
+    padding: 0;
+    min-height: 1.75em;
+    min-width: 1.75em;
+    border: 0;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .d-icon {
+      display: inline-flex;
+      width: 1.25em;
+      height: 1.25em;
+      color: inherit;
+      margin: 0;
+    }
+
+    &:focus-visible {
+      outline: var(--focus-outline, 2px solid var(--tertiary));
+      outline-offset: 2px;
+    }
+  }
+
+  // Hide chevron/caret icon (DMenu dropdown indicator)
+  .d-menu__caret,
+  [class*="caret"],
+  svg[class*="chevron"] {
+    display: none !important;
+  }
+}
+
+// Chevron toggle styling (icon-only button next to the bell)
+.category-title-name {
+  .category-desc-toggle {
+    display: inline-flex;
+    align-items: center;
+    margin-left: var(--space-2);
+  }
+
+  .category-desc-toggle__btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.75em;
+    min-width: 1.75em;
+
+    .d-icon {
+      width: 1.25em;
+      height: 1.25em;
+    }
+
+    &:focus-visible {
+      outline: var(--focus-outline, 2px solid var(--tertiary));
+      outline-offset: 2px;
+    }
+  }
+}
+
+
+// Hide the default category notification button when our custom header is active
+body.ch-bell-relocated {
+  // Hide in default category heading (already hidden by this theme, but be explicit)
+  .category-heading [class*="category-notifications"] {
+    display: none !important;
+  }
+
+  // Hide the select-kit button that appears in the default position
+  .category-title-before .category-notifications-button,
+  .category-title-before [class*="category-notifications"] {
+    display: none !important;
+  }
 }

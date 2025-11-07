@@ -2,5 +2,8 @@
   "name": "Category Headers theme component",
   "about_url": "https://meta.discourse.org/t/discourse-category-headers-theme-component/148682",
   "license_url": "https://github.com/naidihr/discourse-category-headers/blob/master/LICENSE",
-  "component": true
+  "component": true,
+  "minimum_discourse_version": "3.5.0",
+  "theme_version": "2.3.0",
+  "authors": "naidihr"
 }

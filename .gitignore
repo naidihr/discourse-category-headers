@@ -1,2 +1,4 @@
 node_modules
 .discourse-site
+.augment
+.DS_Store

@@ -1,0 +1,6 @@
+en:
+  js:
+    category_headers:
+      desc_toggle_expand: "Expand category description"
+      desc_toggle_collapse: "Collapse category description"
+

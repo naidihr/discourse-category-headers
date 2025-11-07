@@ -8,6 +8,10 @@ import { and, not, or } from "truth-helpers";
 import LightDarkImg from "discourse/components/light-dark-img";
 import icon from "discourse/helpers/d-icon";
 import { ajax } from "discourse/lib/ajax";
+import CategoryNotificationsWrapper from "./category-notifications-wrapper";
+
+// Cache for full category descriptions (keyed by category ID)
+const descriptionCache = new Map();
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -16,10 +20,17 @@ export default class CategoryHeader extends Component {
 
   @tracked full_cat_desc;
   @tracked isCatDescExpanded = false;
+  @tracked isLoadingFullDesc = false;
+
+  currentCategoryId = null;
+  loadingCategoryId = null;
 
   constructor() {
     super(...arguments);
-    this.getFullCatDesc();
+    this.syncCategoryDescriptionState();
+    if (settings.show_full_category_description) {
+      this.getFullCatDesc();
+    }
     this._onPageChanged = this._onPageChanged.bind(this);
     this.router.on("routeDidChange", this._onPageChanged);
   }
@@ -31,15 +42,11 @@ export default class CategoryHeader extends Component {
 
   // eslint-disable-next-line no-unused-vars
   async _onPageChanged(transition) {
-    // Make descriptions collapsed
-    this.isCatDescExpanded = false;
+    this.syncCategoryDescriptionState({ collapse: true });
 
-    try {
-      let cd = await ajax(`${this.args.category.topic_url}.json`);
-      this.full_cat_desc = cd.post_stream.posts[0].cooked;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+    // Only fetch if show_full_category_description is enabled
+    if (settings.show_full_category_description) {
+      await this.getFullCatDesc();
     }
   }
 
@@ -60,12 +67,43 @@ export default class CategoryHeader extends Component {
   }
 
   async getFullCatDesc() {
+    if (!this.args.category?.topic_url) {
+      return;
+    }
+
+    const categoryId = this.args.category.id;
+
+    // Check cache first
+    if (descriptionCache.has(categoryId)) {
+      this.full_cat_desc = descriptionCache.get(categoryId);
+      return;
+    }
+
+    // Prevent duplicate requests for the same category
+    if (this.isLoadingFullDesc && this.loadingCategoryId === categoryId) {
+      return;
+    }
+
+    this.loadingCategoryId = categoryId;
+    this.isLoadingFullDesc = true;
+
     try {
-      let cd = await ajax(`${this.args.category.topic_url}.json`);
-      this.full_cat_desc = cd.post_stream.posts[0].cooked;
+      const cd = await ajax(`${this.args.category.topic_url}.json`);
+      const fullDesc = cd.post_stream.posts[0].cooked;
+
+      // Cache the result
+      descriptionCache.set(categoryId, fullDesc);
+      if (this.currentCategoryId === categoryId) {
+        this.full_cat_desc = fullDesc;
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error(e);
+      console.error("Failed to load full category description:", e);
+    } finally {
+      if (this.loadingCategoryId === categoryId) {
+        this.isLoadingFullDesc = false;
+        this.loadingCategoryId = null;
+      }
     }
   }
 
@@ -148,59 +186,53 @@ export default class CategoryHeader extends Component {
     const hideMobile = !settings.show_mobile && this.site.mobileView;
     const subCat =
       !settings.show_subcategory_header && this.args.category.parentCategory;
-    const noDesc =
-      !settings.hide_if_no_category_description &&
+    // Fixed: Correct logic for hiding when description is missing
+    const hideNoDesc =
+      settings.hide_if_no_category_description &&
       !this.args.category.description_text;
-    const path = window.location.pathname;
+    const path = this.router.currentURL || window.location.pathname;
     return (
-      /^\/c\//.test(path) && !isException && !noDesc && !subCat && !hideMobile
+      /^\/c\//.test(path) &&
+      !isException &&
+      !hideNoDesc &&
+      !subCat &&
+      !hideMobile
     );
   }
 
   get getHeaderStyle() {
-    let headerStyle = "";
-    if (settings.header_style === "box") {
-      headerStyle +=
-        "border-left: 6px solid #" + this.args.category.color + ";";
+    const styles = [];
+
+    // Set CSS custom properties for dynamic values
+    if (this.args.category.color) {
+      styles.push(`--category-color: #${this.args.category.color}`);
     }
-    if (settings.header_style === "banner") {
-      headerStyle +=
-        "background-color: #" +
-        this.args.category.color +
-        "; color: #" +
-        this.args.category.text_color +
-        ";";
+    if (this.args.category.text_color) {
+      styles.push(`--category-text-color: #${this.args.category.text_color}`);
     }
-    if (settings.show_parent_category_background_image) {
-      if (this.args.category.parentCategory) {
+
+    // Background image handling
+    let bgImageUrl = null;
+    if (settings.header_background_image !== "outside") {
+      if (settings.show_parent_category_background_image) {
         if (
-          settings.header_background_image !== "outside" &&
-          this.args.category.parentCategory.uploaded_background
+          this.args.category.parentCategory?.uploaded_background?.url
         ) {
-          headerStyle +=
-            "background-image: url(" +
-            this.args.category.parentCategory.uploaded_background.url +
-            ");";
+          bgImageUrl =
+            this.args.category.parentCategory.uploaded_background.url;
+        } else if (this.args.category.uploaded_background?.url) {
+          bgImageUrl = this.args.category.uploaded_background.url;
         }
-      } else if (this.args.category.uploaded_background) {
-        if (settings.header_background_image !== "outside") {
-          headerStyle +=
-            "background-image: url(" +
-            this.args.category.uploaded_background.url +
-            ");";
-        }
-      }
-    } else {
-      if (this.args.category.uploaded_background) {
-        if (settings.header_background_image !== "outside") {
-          headerStyle +=
-            "background-image: url(" +
-            this.args.category.uploaded_background.url +
-            ");";
-        }
+      } else if (this.args.category.uploaded_background?.url) {
+        bgImageUrl = this.args.category.uploaded_background.url;
       }
     }
-    return headerStyle + " display: block; margin-bottom: 1em;";
+
+    if (bgImageUrl) {
+      styles.push(`--category-bg-image: url(${bgImageUrl})`);
+    }
+
+    return styles.length > 0 ? htmlSafe(styles.join("; ")) : null;
   }
 
   get aboutTopicUrl() {
@@ -221,10 +253,71 @@ export default class CategoryHeader extends Component {
     );
   }
 
+  get showChevronToggle() {
+    const ui = settings.category_description_toggle_ui;
+    return ui === "chevron_only" || ui === "both";
+  }
+
+  get showReadMoreUI() {
+    const ui = settings.category_description_toggle_ui;
+    return ui === "read_more_only" || ui === "both";
+  }
+
+  get fullCatDescRemainder() {
+    if (!this.full_cat_desc || !this.catDesc) {
+      return null;
+    }
+    const full = this.full_cat_desc.trim();
+    const excerpt = this.catDesc.trim();
+    if (full.startsWith(excerpt)) {
+      return full.slice(excerpt.length).trim();
+    }
+    return null;
+  }
+
   @action
-  async expandCategoryDescription() {
+  async expandCategoryDescription(event) {
     if (settings.expand_and_collapse_category_description) {
+      event?.preventDefault?.();
+      this.syncCategoryDescriptionState();
+
+      // If expanding and we don't have the full description yet, fetch it
+      if (!this.isCatDescExpanded && !this.full_cat_desc) {
+        await this.getFullCatDesc();
+      }
+
       this.isCatDescExpanded = !this.isCatDescExpanded;
+    }
+  }
+
+  syncCategoryDescriptionState({ collapse = false } = {}) {
+    const categoryId = this.args.category?.id ?? null;
+    const categoryChanged = this.currentCategoryId !== categoryId;
+
+    if (categoryChanged) {
+      this.currentCategoryId = categoryId;
+      this.full_cat_desc = categoryId
+        ? descriptionCache.get(categoryId) ?? null
+        : null;
+    } else if (
+      categoryId &&
+      !this.full_cat_desc &&
+      descriptionCache.has(categoryId)
+    ) {
+      this.full_cat_desc = descriptionCache.get(categoryId);
+    }
+
+    if (collapse || categoryChanged) {
+      this.isCatDescExpanded = false;
+    }
+  }
+
+  @action
+  handleToggleKeydown(event) {
+    // Support Enter and Space for keyboard accessibility
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this.expandCategoryDescription(event);
     }
   }
 
@@ -243,78 +336,123 @@ export default class CategoryHeader extends Component {
               />
             </div>
           {{/if}}
-          <div
-            class="category-title-name"
-            style={{unless this.logoImg "padding: 0 !important;"}}
-          >
-            {{#if this.ifParentCategory}}
-              <a class="parent-box-link" href={{@category.parentCategory.url}}>
-                {{#if this.ifParentProtected}}
-                  {{icon this.lockIcon}}
-                {{/if}}
-                <h1>{{@category.parentCategory.name}}: </h1>
-              </a>
-            {{/if}}
-            {{#if this.ifProtected}}
-              {{icon this.lockIcon}}
-            {{/if}}
-            <h1>{{@category.name}}</h1>
-          </div>
 
-          <div class="category-title-description">
-            {{#if (or this.showCatDesc this.showFullCatDesc)}}
-              <div class="cooked">
-                {{#if this.showFullCatDesc}}
-                  {{htmlSafe this.full_cat_desc}}
-                {{else}}
-                  {{#if this.isCatDescExpanded}}
+          <div class="category-title-text-wrapper">
+            <div
+              class="category-title-name"
+              style={{unless this.logoImg "padding: 0 !important;"}}
+            >
+              {{#if this.ifParentCategory}}
+                <a class="parent-box-link" href={{@category.parentCategory.url}}>
+                  {{#if this.ifParentProtected}}
+                    {{icon this.lockIcon}}
+                  {{/if}}
+                  <h1>{{@category.parentCategory.name}}: </h1>
+                </a>
+              {{/if}}
+              {{#if this.ifProtected}}
+                {{icon this.lockIcon}}
+              {{/if}}
+              <h1>{{@category.name}}</h1>
+
+              {{#if settings.show_category_follow_button}}
+                <span class="category-notifications-wrap">
+                  <CategoryNotificationsWrapper @category={{@category}} />
+                </span>
+              {{/if}}
+
+              {{#if (and
+                settings.expand_and_collapse_category_description
+                this.showCatDesc
+                (not this.showFullCatDesc)
+                this.showChevronToggle
+              )}}
+                <span class="category-desc-toggle">
+                  <button
+                    class="category-desc-toggle__btn"
+                    type="button"
+                    aria-expanded={{if this.isCatDescExpanded "true" "false"}}
+                    aria-controls="category-description-{{@category.id}}"
+                    {{on "click" this.expandCategoryDescription}}
+                    {{on "keydown" this.handleToggleKeydown}}
+                  >
+                    {{icon (if this.isCatDescExpanded "chevron-up" "chevron-down")}}
+                  </button>
+                </span>
+              {{/if}}
+            </div>
+
+            <div class="category-title-description">
+              {{#if (or this.showCatDesc this.showFullCatDesc)}}
+                <div
+                  class="cooked"
+                  id="category-description-{{@category.id}}"
+                >
+                  {{#if this.showFullCatDesc}}
                     {{htmlSafe this.full_cat_desc}}
                   {{else}}
-                    {{htmlSafe this.catDesc}}
-                  {{/if}}
-                {{/if}}
-
-                {{#if this.inlineReadMore}}
-                  <span class="category-about-url">
-                    {{#if
-                      (and
-                        settings.expand_and_collapse_category_description
-                        this.showCatDesc
-                        (not this.showFullCatDesc)
-                      )
-                    }}
-                      {{! template-lint-disable no-invalid-interactive}}
-                      <a
-                        {{on "click" this.expandCategoryDescription}}
-                      >{{this.aboutTopicUrl}}</a>
-                    {{else}}
-                      <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                    <div class="category-description__excerpt">
+                      {{htmlSafe this.catDesc}}
+                    </div>
+                    {{#if this.isCatDescExpanded}}
+                      <div class="category-description__full">
+                        {{htmlSafe (or this.fullCatDescRemainder this.full_cat_desc)}}
+                      </div>
                     {{/if}}
-                  </span>
+                  {{/if}}
+
+                  {{#if (and this.inlineReadMore this.showReadMoreUI)}}
+                    <span class="category-about-url">
+                      {{#if
+                        (and
+                          settings.expand_and_collapse_category_description
+                          this.showCatDesc
+                          (not this.showFullCatDesc)
+                        )
+                      }}
+                        {{! template-lint-disable no-invalid-interactive}}
+                        <a
+                          href="#"
+                          role="button"
+                          aria-expanded={{if this.isCatDescExpanded "true" "false"}}
+                          aria-controls="category-description-{{@category.id}}"
+                          {{on "click" this.expandCategoryDescription}}
+                          {{on "keydown" this.handleToggleKeydown}}
+                        >{{this.aboutTopicUrl}}</a>
+                      {{else}}
+                        <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
+                      {{/if}}
+                    </span>
+                  {{/if}}
+                </div>
+              {{/if}}
+            </div>
+
+            {{#if (and (not this.inlineReadMore) this.showReadMoreUI)}}
+              <div class="category-about-url">
+                {{#if
+                  (and
+                    settings.expand_and_collapse_category_description
+                    this.showCatDesc
+                    (not this.showFullCatDesc)
+                  )
+                }}
+                  {{! template-lint-disable no-invalid-interactive}}
+                  <a
+                    href="#"
+                    role="button"
+                    aria-expanded={{if this.isCatDescExpanded "true" "false"}}
+                    aria-controls="category-description-{{@category.id}}"
+                    {{on "click" this.expandCategoryDescription}}
+                    {{on "keydown" this.handleToggleKeydown}}
+                  >{{this.aboutTopicUrl}}</a>
+                {{else}}
+                  <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
                 {{/if}}
               </div>
             {{/if}}
           </div>
         </div>
-
-        {{#unless this.inlineReadMore}}
-          <div class="category-about-url">
-            {{#if
-              (and
-                settings.expand_and_collapse_category_description
-                this.showCatDesc
-                (not this.showFullCatDesc)
-              )
-            }}
-              {{! template-lint-disable no-invalid-interactive}}
-              <a
-                {{on "click" this.expandCategoryDescription}}
-              >{{this.aboutTopicUrl}}</a>
-            {{else}}
-              <a href={{@category.topic_url}}>{{this.aboutTopicUrl}}</a>
-            {{/if}}
-          </div>
-        {{/unless}}
       </div>
     {{/if}}
   </template>

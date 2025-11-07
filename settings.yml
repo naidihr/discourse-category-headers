@@ -13,6 +13,17 @@ show_full_category_description:
   default: false
   description: 'Show the full category description text<br>(The full text of the "About this category" topic)'
 
+title_text_size:
+  type: enum
+  default: normal
+  choices:
+    - smallest
+    - smaller
+    - normal
+    - larger
+    - largest
+  description: "Size of the category title (H1)"
+
 description_text_size:
   type: enum
   default: larger
@@ -128,8 +139,8 @@ show_mobile:
 
 force_mobile_alignment:
   type: bool
-  default: true
-  description: "Force mobile alignment of logo-text to the top-centre of the header"
+  default: false
+  description: "Force mobile alignment of logo-text to the top-centre of the header (when false, maintains left-right layout on mobile)"
 
 hide_if_no_category_description:
   type: bool
@@ -166,3 +177,20 @@ read_less_link_text:
   type: string
   default: "Read less…"
   description: 'Custom text for the "Read less" link'
+
+show_category_follow_button:
+  type: bool
+  default: true
+  description: "Show the category follow/notification button inside the custom category header"
+
+
+# UI control for category description toggling
+category_description_toggle_ui:
+  type: enum
+  default: "read_more_only"
+  choices:
+    - chevron_only
+    - read_more_only
+    - both
+    - none
+  description: "Choose how users can expand/collapse category descriptions: chevron icon, read-more link, both, or none"

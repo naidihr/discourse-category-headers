@@ -1,12 +1,43 @@
-@if $force_mobile_alignment == "true" {
-  .category-header div[class^="category-title-header"] {
-    text-align: center;
+// Mobile: scale logo size responsively while maintaining left-right layout
+.category-title-header {
+  @media (max-width: 768px) {
+    --category-header-logo-size: clamp(48px, 18vw, 96px);
+  }
+}
+
+// Mobile: ensure d-menu modal renders properly (not clipped by header overflow)
+@media (max-width: 768px) {
+  // Ensure d-menu modal has proper z-index and positioning
+  .d-modal.fk-d-menu-modal {
+    // Match core modal stacking so content stays above backdrop (z=1200)
+    z-index: 1300;
   }
 
-  .category-header-widget .category-logo.aspect-image,
-  .category-header-widget .category-logo.aspect-image > img {
-    float: none;
-    max-width: 100%;
-    margin: 0 0 0.25em 0;
+  .fk-d-menu[data-identifier="notifications-tracking"] {
+    z-index: 1000;
+  }
+}
+
+// Optional: force stacked/centered layout on mobile (disabled by default)
+@if $force_mobile_alignment == "true" {
+  .category-title-header {
+    text-align: center;
+
+    .category-title-contents {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .category-logo.aspect-image {
+      margin: 0 0 var(--space-2) 0;
+    }
+
+    .category-title-text-wrapper {
+      align-items: center;
+    }
+
+    .category-title-name {
+      text-align: center;
+    }
   }
 }
