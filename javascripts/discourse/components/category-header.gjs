@@ -6,7 +6,9 @@ import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { and, not, or } from "truth-helpers";
 import LightDarkImg from "discourse/components/light-dark-img";
+import PluginOutlet from "discourse/components/plugin-outlet";
 import icon from "discourse/helpers/d-icon";
+import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 
 export default class CategoryHeader extends Component {
@@ -295,6 +297,10 @@ export default class CategoryHeader extends Component {
               </div>
             {{/if}}
           </div>
+          <PluginOutlet
+            @name="category-header-after-category-title-description"
+            @outletArgs={{lazyHash category=@category}}
+          />
         </div>
 
         {{#unless this.inlineReadMore}}
