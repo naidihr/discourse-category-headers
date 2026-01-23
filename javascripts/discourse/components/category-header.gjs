@@ -6,8 +6,11 @@ import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { and, not, or } from "truth-helpers";
 import LightDarkImg from "discourse/components/light-dark-img";
+import PluginOutlet from "discourse/components/plugin-outlet";
 import icon from "discourse/helpers/d-icon";
+import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
+import { getURLWithCDN } from "discourse/lib/get-url";
 
 export default class CategoryHeader extends Component {
   @service siteSettings;
@@ -179,14 +182,14 @@ export default class CategoryHeader extends Component {
         ) {
           headerStyle +=
             "background-image: url(" +
-            this.args.category.parentCategory.uploaded_background.url +
+            getURLWithCDN(this.args.category.parentCategory.uploaded_background.url) +
             ");";
         }
       } else if (this.args.category.uploaded_background) {
         if (settings.header_background_image !== "outside") {
           headerStyle +=
             "background-image: url(" +
-            this.args.category.uploaded_background.url +
+            getURLWithCDN(this.args.category.uploaded_background.url) +
             ");";
         }
       }
@@ -195,7 +198,7 @@ export default class CategoryHeader extends Component {
         if (settings.header_background_image !== "outside") {
           headerStyle +=
             "background-image: url(" +
-            this.args.category.uploaded_background.url +
+            getURLWithCDN(this.args.category.uploaded_background.url) +
             ");";
         }
       }
@@ -295,6 +298,10 @@ export default class CategoryHeader extends Component {
               </div>
             {{/if}}
           </div>
+          <PluginOutlet
+            @name="category-header-after-category-title-description"
+            @outletArgs={{lazyHash category=@category}}
+          />
         </div>
 
         {{#unless this.inlineReadMore}}
