@@ -5,6 +5,7 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { and, not, or } from "truth-helpers";
+import CdnImg from "discourse/components/cdn-img";
 import LightDarkImg from "discourse/components/light-dark-img";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import icon from "discourse/helpers/d-icon";
@@ -110,13 +111,9 @@ export default class CategoryHeader extends Component {
       this.args.category.parentCategory.uploaded_logo_dark
     ) {
       return this.args.category.parentCategory.uploaded_logo_dark;
-    } else if (settings.show_site_logo && this.siteSettings.logo_small) {
-      let map = {};
-      map["url"] = this.siteSettings.logo_small;
-      return map;
-    } else {
-      return this.args.category.uploaded_logo; // If no dark mode logo is uploaded, use the normal logo
     }
+
+    return null;
   }
 
   get ifParentProtected() {
@@ -238,14 +235,22 @@ export default class CategoryHeader extends Component {
         style={{this.getHeaderStyle}}
       >
         <div class="category-title-contents">
-          {{#if (and this.logoImg this.darkLogoImg)}}
-            <div class="category-logo aspect-image">
-              <LightDarkImg
-                @lightImg={{this.logoImg}}
-                @darkImg={{this.darkLogoImg}}
+          <div class="category-logo aspect-image">
+            {{#if this.darkLogoImg}}
+              {{#if (and this.logoImg this.darkLogoImg)}}
+                <LightDarkImg
+                  @lightImg={{this.logoImg}}
+                  @darkImg={{this.darkLogoImg}}
+                />
+              {{/if}}
+            {{else if this.logoImg}}
+              <CdnImg
+                @src={{this.logoImg.url}}
+                @width={{this.logoImg.width}}
+                @height={{this.logoImg.height}}
               />
-            </div>
-          {{/if}}
+            {{/if}}
+          </div>
           <div
             class="category-title-name"
             style={{unless this.logoImg "padding: 0 !important;"}}
